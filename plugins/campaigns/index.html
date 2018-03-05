@@ -1,0 +1,1350 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="admin-themes-lab">
+        <meta name="author" content="themes-lab">
+        <link rel="shortcut icon" href="assets/global/images/logo/wizad.png" type="image/png">
+        <title>WIZAD</title>
+        <link href="assets/global/css/style.css" rel="stylesheet">
+        <link href="assets/global/css/theme.css" rel="stylesheet">
+        <link href="assets/global/css/ui.css" rel="stylesheet">
+        <link href="assets/global/plugins/metrojs/metrojs.min.css" rel="stylesheet">
+        <link href="assets/global/plugins/maps-amcharts/ammap/ammap.css" rel="stylesheet">
+        <link href="assets/global/plugins/slick/slick.css" rel="stylesheet">
+        <link href="assets/global/plugins/icheck/skins/all.css" rel="stylesheet">
+        <link href="assets/global/plugins/bootstrap-tags-input/bootstrap-tagsinput.css" rel="stylesheet" />
+        <link href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+        <link href="assets/global/plugins/rateit/rateit.css" rel="stylesheet" />
+        <link href="assets/global/plugins/colorpicker/spectrum.css" rel="stylesheet" />
+        <link href="assets/global/plugins/step-form-wizard/css/step-form-wizard.css" rel="stylesheet" />
+        <link href="assets/global/plugins/step-form-wizard/plugins/parsley/parsley.css" rel="stylesheet" />
+        <link href="assets/global/plugins/ion-slider/style.min.css" rel="stylesheet" />
+        <link href="assets/global/plugins/bootstrap-loading/lada.min.css" rel="stylesheet" />
+        <link href="assets/global/plugins/cke-editor/skins/bootstrapck/editor.css" rel="stylesheet" />
+        <link href="assets/global/plugins/summernote/summernote.css" rel="stylesheet" />
+        <link href="assets/global/plugins/cropper/cropper.css" rel="stylesheet" />
+        <link href="assets/global/plugins/magnific/magnific-popup.css" rel="stylesheet" />
+        <link href="assets/global/plugins/hover-effects/hover-effects.min.css" rel="stylesheet">
+        <link href="assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" />
+        <link href="assets/global/plugins/prettify/prettify.css" rel="stylesheet" />
+        <link href="assets/global/plugins/jstree/dist/themes/default/style.css" rel="stylesheet" />
+        <link href="assets/global/plugins/datatables/dataTables.min.css" rel="stylesheet" />
+        <link href="assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet" />
+        <link href="assets/global/plugins/input-text/style.min.css" rel="stylesheet" />
+        <link href="assets/global/plugins/font-awesome-animation/font-awesome-animation.min.css" rel="stylesheet" />
+		<link href="colorpicker.css" rel="stylesheet" />
+        <!-- BEGIN ANGULARJS STYLE -->
+        <link href="css/angular-theme.css" rel="stylesheet">
+        <!-- END ANGULARJS STYLE -->
+        <!-- BEGIN LAYOUT STYLE -->
+        <link href="assets/admin/layout1/css/layout.css" rel="stylesheet">
+        <!-- END LAYOUT STYLE -->
+        <script src="assets/global/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body ng-app="newApp" ng-class="indexClass" ng-controller="mainCtrl">
+        <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- BEGIN PAGE SPINNER -->
+        <div ng-spinner-loader class="page-spinner-loader">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+        <!-- END PAGE SPINNER -->
+		<!-- INITIALIZE APPLICATION AFTER LOGIN SECTION -->
+	
+        <section ng-show="!showLoggin">
+		
+		
+            <!-- BEGIN SIDEBAR -->
+            <div class="sidebar">
+                <div class="logopanel">
+                    <h1>
+                        <img src="assets/global/images/logo/wizad.png" height="210px" width="50px">
+                    </h1>
+                </div>
+                <div class="sidebar-inner">
+                    <div class="sidebar-top">
+                        <form action="search-result.html" method="post" class="searchform" id="search-results">
+                            <input type="text" class="form-control" name="keyword" placeholder="Buscar...">
+                        </form>
+                        <div class="userlogged clearfix">
+                            <i class="icon icons-faces-users-01"></i>
+                            <div class="user-details">
+								<h6>Bienvenido,<h6>
+                                <h4>{{currentUser.name}}</h4>
+                                <div class="dropdown user-login">
+                                    <button class="btn btn-xs dropdown-toggle btn-rounded" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-delay="300">
+                                    <i class="online"></i><span>Conectado</span><i class="fa fa-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"><i class="busy"></i><span>Ocupado</span></a></li>
+                                        <li><a href="#"><i class="turquoise"></i><span>Invisible</span></a></li>
+                                        <li><a href="#"><i class="away"></i><span>Fuera</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-title">
+                        Menú
+                        <div class="pull-right menu-settings">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-delay="300">
+                            <i class="icon-settings"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" id="reorder-menu" class="reorder-menu">Reordenar menú</a></li>
+                                <li><a href="#" id="remove-menu" class="remove-menu">Quitar elementos</a></li>
+                                <li><a href="#" id="hide-top-sidebar" class="hide-top-sidebar">Ocultar búsqueda</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="nav nav-sidebar">
+                        <li ng-class="{ active  : isActive('/')}"><a href="#/"><i class="icon-home"></i><span>Dashboard</span></a></li>
+						<!-- <li ng-class="{ active  : isActive('/newcampaign')}"><a href="#newcampaign"><i class="fa fa-check"></i><span>Nueva Campaña</span></a></li> -->
+						<li ng-class="{ active  : isActive('/mycampaigns')}"><a href="#/mycampaigns"><i class="fa fa-flag"></i><span>Campañas</span></a></li>
+						<li ng-class="{ active  : isActive('/design-campaign')}"><a href="#/design-campaign"><i class="fa fa-flag"></i><span>Campañas Diseñador</span></a></li>
+						<li ng-class="{ active  : isActive('/new-user')}"><a href="#/new-user"><i class="fa fa-user"></i><span>Mis Usuarios</span></a></li>
+						<li ng-class="{ active  : isActive('/campana')}"><a href="#/campana"><i class="fa fa-flag"></i><span>Crear campaña</span></a></li>
+						<!-- <li ng-class="{ active  : isActive('/pages-contact')}"><a href="#/pages-contact"><i class="fa fa-building"></i><span>Nueva Empresa</span></a></li> -->
+						<li ng-class="{ active  : isActive('/pages-contact')}"><a href="#/pages-contact"><i class="fa fa-user"></i><span>Contacto</span></a></li>
+						<li ng-class="{ active  : isActive('/medias-croping')}"><a href="#/design-campaign"><i class="fa fa-edit"></i><span>Diseño I</span></a></li>
+						<li ng-class="{ active  : isActive('/medias-hover')}"><a href="#/medias-hover"><i class="fa fa-magic"></i><span>Diseño II</span></a></li>
+						<li ng-class="{ active  : isActive('/ecom-pricingTable')}"><a href="#/ecom-pricingTable"><i class="fa fa-table"></i><span>Subscripciones</span></a></li>
+					<!-- 	<li ng-class="{ active  : isActive('/header')}"><a href="#/header"><i class="fa fa-table"></i><span>header</span></a></li>
+						<li ng-class="{ active  : isActive('/canvas')}"><a href="#/canvas"><i class="fa fa-table"></i><span>canvas</span></a></li>
+						<li ng-class="{ active  : isActive('/stickers')}"><a href="#/stickers"><i class="fa fa-table"></i><span>stickers</span></a></li>
+						<li ng-class="{ active  : isActive('/photos')}"><a href="#/photos"><i class="fa fa-table"></i><span>photos</span></a></li> -->
+                        <!-- <li class="nav-parent" >
+                            <a href="#"><i class="icon-bulb"></i><span>Mailbox</span> <span class="fa arrow"></span></a>
+                            <ul class="children collapse">
+                                <li ng-class="{ active  : isActive('mailbox.html')}"><a href="mailbox.html"> Inbox</a></li>
+                                <li ng-class="{ active  : isActive('mailbox.html/#send')}"><a href="mailbox.html#/send"> Send Email</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent">
+                            <a href=""><i class="icon-screen-desktop"></i><span>UI Elements</span><span class="fa arrow"></span></a>
+                            <ul class="children collapse">
+                                <li ng-class="{ active  : isActive('/ui-buttons')}"><a href="#ui-buttons"> Buttons</a></li>
+                                <li ng-class="{ active  : isActive('/ui-components')}"><a href="#ui-components"> Components</a></li>
+                                <li ng-class="{ active  : isActive('/ui-tabs')}"><a href="#ui-tabs"> Tabs</a></li>
+                                <li ng-class="{ active  : isActive('/ui-animations')}"><a href="#ui-animations"> Animations CSS3</a></li>
+                                <li ng-class="{ active  : isActive('/ui-icons')}"><a href="#ui-icons"> Icons</a></li>
+                                <li ng-class="{ active  : isActive('/ui-portlets')}"><a href="#ui-portlets"> Portlets</a></li>
+                                <li ng-class="{ active  : isActive('/ui-nestableList')}"><a href="#ui-nestableList"> Nestable List</a></li>
+                                <li ng-class="{ active  : isActive('/ui-treeView')}"><a href="#ui-treeView"> Tree View</a></li>
+                                <li ng-class="{ active  : isActive('/ui-modals')}"><a href="#ui-modals"> Modals</a></li>
+                                <li ng-class="{ active  : isActive('/ui-notifications')}"><a href="#ui-notifications"> Notifications</a></li>
+                                <li ng-class="{ active  : isActive('/ui-typography')}"><a href="#ui-typography"> Typography</a></li>
+                                <li ng-class="{ active  : isActive('/ui-helperClasses')}"><a href="#ui-helperClasses"> Helper Classes</a></li>
+                            </ul>
+                        </li>
+                        <li ng-class="{ active  : isActive('/layout-api')}"><a href="#layout-api"><i class="icon-layers"></i><span>Layouts</span></a></li>
+                        <li class="nav-parent">
+                            <a href=""><i class="icon-note"></i><span>Forms </span><span class="fa arrow"></span></a>
+                            <ul class="children collapse">
+                                <li ng-class="{ active  : isActive('/forms-elements')}"><a href="#forms-elements"> Forms Elements</a></li>
+                                <li ng-class="{ active  : isActive('/forms-validation')}"><a href="#forms-validation"> Forms Validation</a></li>
+                                <li ng-class="{ active  : isActive('/forms-plugins')}"><a href="#forms-plugins"> Advanced Plugins</a></li>
+                                <li ng-class="{ active  : isActive('/forms-wizard')}"><a href="#forms-wizard"> <span class="pull-right badge badge-danger">low</span> 
+                                    <span>Form Wizard</span></a>
+                                </li>
+                                <li ng-class="{ active  : isActive('/forms-sliders')}"><a href="#forms-sliders"> Sliders</a></li>
+                                <li ng-class="{ active  : isActive('/forms-editors')}"><a href="#forms-editors"> Text Editors</a></li>
+                                <li ng-class="{ active  : isActive('/forms-input-masks')}"><a href="#forms-input-masks"> Input Masks</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent">
+                            <a href=""><i class="fa fa-table"></i><span>Tables</span><span class="fa arrow"></span></a>
+                            <ul class="children collapse">
+                                <li ng-class="{ active  : isActive('/tables-styling')}"><a href="#tables-styling"> Tables Styling</a></li>
+                                <li ng-class="{ active  : isActive('/tables-dynamic')}"><a href="#tables-dynamic"> Tables Dynamic</a></li>
+                                <li ng-class="{ active  : isActive('/tables-filter')}"><a href="#tables-filter"> Tables Filter</a></li>
+                                <li ng-class="{ active  : isActive('/tables-editable')}"><a href="#tables-editable"> Tables Editable</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent">
+                            <a href=""><i class="icon-bar-chart"></i><span>Charts </span><span class="fa arrow"></span></a>
+                            <ul class="children collapse">
+                                <li ng-class="{ active  : isActive('/charts')}"><a href="#/charts"> Charts</a></li>
+                                <li ng-class="{ active  : isActive('/financial-charts')}"><a href="#/financial-charts"> Financial Charts</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent">
+                            <a href=""><i class="icon-picture"></i><span>Medias</span><span class="fa arrow"></span></a>
+                            <ul class="children collapse">
+                                <li ng-class="{ active  : isActive('/medias-croping')}"><a href="#medias-croping"> Images Croping</a></li>
+                                <li ng-class="{ active  : isActive('/medias-sortable')}"><a href="#medias-sortable"> Gallery Sortable</a></li>
+                                <li ng-class="{ active  : isActive('/medias-hover')}"><a href="#medias-hover"> <span class="pull-right badge badge-primary">12</span> Hover Effects</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent">
+                            <a href=""><i class="icon-docs"></i><span>Pages </span><span class="fa arrow"></span></a>
+                            <ul class="children collapse">
+                                <li ng-class="{ active  : isActive('/pages-timeline')}"><a href="#pages-timeline"> Timeline</a></li>
+                                <li ng-class="{ active  : isActive('/pages-blank')}"><a href="#pages-blank"> Blank Page</a></li>
+                                <li ng-class="{ active  : isActive('/pages-contact')}"><a href="#pages-contact"> Contact</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent">
+                            <a href=""><i class="icon-user"></i><span>User </span><span class="fa arrow"></span></a>
+                            <ul class="children collapse">
+                                <li ng-class="{ active  : isActive('/user-profile')}"><a href="#user-profile"> <span class="pull-right badge badge-danger">Hot</span> Profile</a></li>
+                                <li ng-class="{ active  : isActive('/user-sessionTimeout')}"><a href="#user-sessionTimeout"> Session Timeout</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent">
+                            <a href=""><i class="icon-basket"></i><span>eCommerce </span><span class="fa arrow"></span></a>
+                            <ul class="children collapse">
+                                <li ng-class="{ active  : isActive('/ecom-cart')}"><a href="#ecom-cart"> Shopping Cart</a></li>
+                                <li ng-class="{ active  : isActive('/ecom-invoice')}"><a href="#ecom-invoice"> Invoice</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent">
+                            <a href=""><i class="icon-cup"></i><span>Extra </span><span class="fa arrow"></span></a>
+                            <ul class="children collapse">
+                                <li ng-class="{ active  : isActive('/extra-fullCalendar')}"><a href="#extra-fullCalendar"><span class="pull-right badge badge-primary">New</span> Fullcalendar</a></li>
+                                <li ng-class="{ active  : isActive('/extra-widgets')}"><a href="#extra-widgets"> Widgets</a></li>
+                                <li ng-class="{ active  : isActive('/extra-slider')}"><a href="#extra-slider"> Sliders</a></li>
+                                <li ng-class="{ active  : isActive('/extra-google')}"><a href="#extra-google"> Google Maps</a></li>
+                                <li ng-class="{ active  : isActive('/extra-vector')}"><a href="#extra-vector"> Vector Maps</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="sidebar-widgets">
+                        <p class="menu-title widget-title">Folders <span class="pull-right"><a href="#" class="new-folder"> <i class="icon-plus"></i></a></span></p>
+                        <ul class="folders">
+                            <li>
+                                <a href="#"><i class="icon-doc c-primary"></i>My documents</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-picture"></i>My images</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-lock"></i>Secure data</a>
+                            </li>
+                            <li class="add-folder">
+                                <input type="text" placeholder="Folder's name..." class="form-control input-sm">
+                            </li>
+                        </ul>
+                    </div> -->
+                    <div class="sidebar-footer clearfix">
+                        <a class="pull-left footer-settings" data-target="#" data-rel="tooltip" data-placement="top" data-original-title="Settings">
+                        <i class="icon-settings"></i>
+                        </a>
+                        <a class="pull-left toggle_fullscreen" data-target="#" data-rel="tooltip" data-placement="top" data-original-title="Fullscreen">
+                        <i class="icon-size-fullscreen"></i>
+                        </a>
+                        <a class="pull-left" href="../../user-lockscreen.html" data-rel="tooltip" data-placement="top" data-original-title="Lockscreen">
+                        <i class="icon-lock"></i>
+                        </a>
+                        <a class="pull-left btn-effect" href="../../user-login-v1.html" data-modal="modal-1" data-rel="tooltip" data-placement="top" data-original-title="Logout">
+                        <i class="icon-power"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- END SIDEBAR -->
+            <div class="main-content">
+                <!-- BEGIN TOPBAR -->
+                <div class="topbar">
+                    <div class="header-left">
+                        <div class="topnav">
+                            <a class="menutoggle" href="#" data-toggle="sidebar-collapsed"><span class="menu__handle"><span>Menu</span></span></a>
+                            <ul class="nav nav-icons">
+                                <li><a href="#" class="toggle-sidebar-top"><span class="icon-user-following"></span></a></li>
+                                <li><a href="mailbox.html"><span class="octicon octicon-mail-read"></span></a></li>
+                                <!-- <li><a href="#"><span class="octicon octicon-flame"></span></a></li> -->
+                                <!-- <li><a href="builder-page.html"><span class="octicon octicon-rocket"></span></a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <ul class="header-menu nav navbar-nav">
+                            <!-- BEGIN USER DROPDOWN -->
+                            <!-- <li class="dropdown" id="language-header">
+                                <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <i class="icon-globe"></i>
+                                <span data-translate="Language">Language</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a data-target="#" data-lang="en"><img src="assets/global/images/flags/usa.png" alt="flag-english"> <span>English</span></a>
+                                    </li>
+                                    <li>
+                                        <a data-target="#" data-lang="es"><img src="assets/global/images/flags/spanish.png" alt="flag-english"> <span>Español</span></a>
+                                    </li>
+                                    <li>
+                                        <a data-target="#" data-lang="fr"><img src="assets/global/images/flags/french.png" alt="flag-english"> <span>Français</span></a>
+                                    </li>
+                                </ul>
+                            </li> -->
+                            <!-- END USER DROPDOWN -->
+                            <!-- BEGIN NOTIFICATION DROPDOWN -->
+                            <li class="dropdown" id="notifications-header">
+                                <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <i class="icon-bell"></i>
+                                <span class="badge badge-danger badge-header">6</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header clearfix">
+                                        <p class="pull-left">12 Notificaciones</p>
+                                    </li>
+                                    <li>
+                                        <ul class="dropdown-menu-list withScroll" data-height="220">
+                                            <li>
+                                                <a href="#">
+                                                <i class="fa fa-star p-r-10 f-18 c-orange"></i>
+                                                JESUS PI&Ntilde;A acaba de iniciar una campa&ntilde;a.
+                                                <span class="dropdown-time">Hace un momento</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                <i class="fa fa-heart p-r-10 f-18 c-red"></i>
+                                                PABLO BARRERA añadi&oacute; una campa&ntilde;a a favoritos.
+                                                <span class="dropdown-time">15 mins</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                <i class="fa fa-file-text p-r-10 f-18"></i>
+                                                Nueva campa&ntilde;a disponible.
+                                                <span class="dropdown-time">22 mins</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                <i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
+                                                Nuevos materiales agregados.
+                                                <span class="dropdown-time">40 mins</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                <i class="fa fa-bell p-r-10 f-18 c-orange"></i>
+                                                Se descarg&oacute; una campa&ntilde;a.
+                                                <span class="dropdown-time">1 hr</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                <i class="fa fa-bell p-r-10 f-18"></i>
+                                                Mensaje General
+                                                <span class="dropdown-time">2 hrs</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                <i class="fa fa-comment p-r-10 f-18 c-gray"></i>
+                                                JESUS PI&Ntilde;A hizo una sugerencia a una campa&ntilde;a
+                                                <span class="dropdown-time">3 hrs</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                <i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
+                                                Nuevas im&aacute;genes agregadas.
+                                                <span class="dropdown-time">2 d&iacute;as</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-footer clearfix">
+                                        <a data-target="#" class="pull-left">Ver todas las notificaciones.</a>
+                                        <a data-target="#" class="pull-right">
+                                        <i class="icon-settings"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- END NOTIFICATION DROPDOWN -->
+                            <!-- BEGIN MESSAGES DROPDOWN -->
+                            <!-- <li class="dropdown" id="messages-header">
+                                <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <i class="icon-paper-plane"></i>
+                                <span class="badge badge-primary badge-header">
+                                8
+                                </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header clearfix">
+                                        <p class="pull-left">
+                                            You have 8 Messages
+                                        </p>
+                                    </li>
+                                    <li class="dropdown-body">
+                                        <ul class="dropdown-menu-list withScroll" data-height="220">
+                                            <li class="clearfix">
+                                                <span class="pull-left p-r-5">
+                                                <img src="assets/global/images/avatars/avatar3.png" alt="avatar 3">
+                                                </span>
+                                                <div class="clearfix">
+                                                    <div>
+                                                        <strong>Alexa Johnson</strong>
+                                                        <small class="pull-right text-muted">
+                                                        <span class="glyphicon glyphicon-time p-r-5"></span>12 mins ago
+                                                        </small>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                                </div>
+                                            </li>
+                                            <li class="clearfix">
+                                                <span class="pull-left p-r-5">
+                                                <img src="assets/global/images/avatars/avatar4.png" alt="avatar 4">
+                                                </span>
+                                                <div class="clearfix">
+                                                    <div>
+                                                        <strong>John Smith</strong>
+                                                        <small class="pull-right text-muted">
+                                                        <span class="glyphicon glyphicon-time p-r-5"></span>47 mins ago
+                                                        </small>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                                </div>
+                                            </li>
+                                            <li class="clearfix">
+                                                <span class="pull-left p-r-5">
+                                                <img src="assets/global/images/avatars/avatar5.png" alt="avatar 5">
+                                                </span>
+                                                <div class="clearfix">
+                                                    <div>
+                                                        <strong>Bobby Brown</strong>
+                                                        <small class="pull-right text-muted">
+                                                        <span class="glyphicon glyphicon-time p-r-5"></span>1 hour ago
+                                                        </small>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                                </div>
+                                            </li>
+                                            <li class="clearfix">
+                                                <span class="pull-left p-r-5">
+                                                <img src="assets/global/images/avatars/avatar6.png" alt="avatar 6">
+                                                </span>
+                                                <div class="clearfix">
+                                                    <div>
+                                                        <strong>James Miller</strong>
+                                                        <small class="pull-right text-muted">
+                                                        <span class="glyphicon glyphicon-time p-r-5"></span>2 days ago
+                                                        </small>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-footer clearfix">
+                                        <a href="mailbox.html" class="pull-left">See all messages</a>
+                                        <a href="#" class="pull-right">
+                                        <i class="icon-settings"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li> -->
+                            <!-- END MESSAGES DROPDOWN -->
+                            <!-- BEGIN USER DROPDOWN -->
+                            <li class="dropdown" id="user-header">
+                                <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img src="{{currentUser.image}}" alt="user image">
+                                <span class="username">{{currentUser.name}}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#/user-profile" data-target="#"><i class="icon-user"></i><span>Perfil</span></a>
+                                    </li>
+									<li>
+                                        <a href="#/identity" data-target="#"><i class="icon-briefcase"></i><span>Identidad</span></a>
+                                    </li>
+                                   <!--  <li>
+                                        <a data-target="#"><i class="icon-calendar"></i><span>Calendario</span></a>
+                                    </li> -->
+                                    <!-- <li>
+                                        <a data-target="#"><i class="icon-settings"></i><span>Account Settings</span></a>
+                                    </li> -->
+                                    <li>
+                                        <a ng-click="logOut()" data-target="#"><i class="icon-logout"></i><span>Salir de la sesi&oacute;n</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- END USER DROPDOWN -->
+                            <!-- CHAT BAR ICON -->
+                            <li id="quickview-toggle"><a href="#"><i class="icon-bubbles"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- header-right -->
+                </div>
+                <!-- END TOPBAR -->
+                <!-- BEGIN PAGE CONTENT -->
+                <div ng-if="!showLoggin" ng-view class="at-view-slide-in-left page-content" ng-view-class=" page-wizard : /forms-wizard , page-thin : / , page-contact : /pages-contact, 
+                    page-profil : /user-profile, page-app : /user-profile" >
+                </div>
+                <!-- END PAGE CONTENT -->
+            </div>
+            <!-- END MAIN CONTENT -->
+            <!-- BEGIN BUILDER -->
+            <div class="builder hidden-sm hidden-xs" id="builder">
+                <a class="builder-toggle"><i class="icon-wrench"></i></a>
+                <div class="inner">
+                  <div class="builder-container">
+                    <a href="#" class="btn btn-sm btn-default" id="reset-style">RESET</a>
+                    <h4>PERSONALIZACIÓN</h4>
+                    <div class="layout-option layout-option-sidebar-fixed">
+                      <span> Menú</span>
+                      <label class="switch pull-right">
+                      <input data-layout="sidebar" id="switch-sidebar" type="checkbox" class="switch-input" checked>
+                      <span class="switch-label" data-on="On" data-off="Off"></span>
+                      <span class="switch-handle"></span>
+                      </label>
+                    </div>
+                    <div class="layout-option layout-option-sidebar-hover">
+                      <span> Quitar selectores</span>
+                      <label class="switch pull-right">
+                      <input data-layout="sidebar-hover" id="switch-sidebar-hover" type="checkbox" class="switch-input">
+                      <span class="switch-label" data-on="On" data-off="Off"></span>
+                      <span class="switch-handle"></span>
+                      </label>
+                    </div>
+                    <div class="layout-option">
+                      <span> Menú arriba</span>
+                      <label class="switch pull-right">
+                      <input data-layout="sidebar-top" id="switch-sidebar-top" type="checkbox" class="switch-input">
+                      <span class="switch-label" data-on="On" data-off="Off"></span>
+                      <span class="switch-handle"></span>
+                      </label>
+                    </div>
+                    <div class="layout-option layout-option-submenu-hover">
+                      <span> Selectores de submenú</span>
+                      <label class="switch pull-right">
+                      <input data-layout="submenu-hover" id="switch-submenu-hover" type="checkbox" class="switch-input">
+                      <span class="switch-label" data-on="On" data-off="Off"></span>
+                      <span class="switch-handle"></span>
+                      </label>
+                    </div>
+                    <div class="layout-option layout-option-fixed-topbar">
+                      <span>Ajustar encabezado</span>
+                      <label class="switch pull-right">
+                      <input data-layout="topbar" id="switch-topbar" type="checkbox" class="switch-input" checked>
+                      <span class="switch-label" data-on="On" data-off="Off"></span>
+                      <span class="switch-handle"></span>
+                      </label>
+                    </div>
+                    <div class="layout-option layout-option-boxed">
+                      <span>Márgenes</span>
+                      <label class="switch pull-right">
+                      <input data-layout="boxed" id="switch-boxed" type="checkbox" class="switch-input">
+                      <span class="switch-label" data-on="On" data-off="Off"></span>
+                      <span class="switch-handle"></span>
+                      </label>
+                    </div>
+                    <div class="layout-option layout-option-rtl">
+                      <span>Cambiar posición menú</span>
+                      <label class="switch pull-right">
+                      <input data-layout="rtl" id="switch-rtl" type="checkbox" class="switch-input">
+                      <span class="switch-label" data-on="On" data-off="Off"></span>
+                      <span class="switch-handle"></span>
+                      </label>
+                    </div>
+                    <h4 class="border-top">Color</h4>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="theme-color bg-dark" data-main="default" data-color="#2B2E33"></div>
+                        <div class="theme-color background-primary" data-main="primary" data-color="#319DB5"></div>
+                        <div class="theme-color bg-red" data-main="red" data-color="#C75757"></div>
+                        <div class="theme-color bg-green" data-main="green" data-color="#1DA079"></div>
+                        <div class="theme-color bg-orange" data-main="orange" data-color="#D28857"></div>
+                        <div class="theme-color bg-purple" data-main="purple" data-color="#B179D7"></div>
+                        <div class="theme-color bg-blue" data-main="blue" data-color="#4A89DC"></div>
+                      </div>
+                    </div>
+                    <h4 class="border-top">Tema</h4>
+                    <div class="row row-sm">
+                      <div class="col-xs-6">
+                        <div class="theme clearfix sdtl" data-theme="sdtl">
+                          <div class="header theme-left"></div>
+                          <div class="header theme-right-light"></div>
+                          <div class="theme-sidebar-dark"></div>
+                          <div class="bg-light"></div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="theme clearfix sltd" data-theme="sltd">
+                          <div class="header theme-left"></div>
+                          <div class="header theme-right-dark"></div>
+                          <div class="theme-sidebar-light"></div>
+                          <div class="bg-light"></div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="theme clearfix sdtd" data-theme="sdtd">
+                          <div class="header theme-left"></div>
+                          <div class="header theme-right-dark"></div>
+                          <div class="theme-sidebar-dark"></div>
+                          <div class="bg-light"></div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="theme clearfix sltl" data-theme="sltl">
+                          <div class="header theme-left"></div>
+                          <div class="header theme-right-light"></div>
+                          <div class="theme-sidebar-light"></div>
+                          <div class="bg-light"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <h4 class="border-top">Fondo</h4>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="bg-color bg-clean" data-bg="clean" data-color="#F8F8F8"></div>
+                        <div class="bg-color bg-lighter" data-bg="lighter" data-color="#EFEFEF"></div>
+                        <div class="bg-color bg-light-default" data-bg="light-default" data-color="#E9E9E9"></div>
+                        <div class="bg-color bg-light-blue" data-bg="light-blue" data-color="#E2EBEF"></div>
+                        <div class="bg-color bg-light-purple" data-bg="light-purple" data-color="#E9ECF5"></div>
+                        <div class="bg-color bg-light-dark" data-bg="light-dark" data-color="#DCE1E4"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END BUILDER -->
+        </section>
+        <!-- BEGIN QUICKVIEW SIDEBAR -->
+        <div id="quickview-sidebar">
+            <div class="quickview-header">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#chat" data-toggle="tab">Chat</a></li>
+                    <li><a href="#notes" data-toggle="tab">Notas</a></li>
+                    <li><a href="#settings" data-toggle="tab" class="settings-tab">Config</a></li>
+                </ul>
+            </div>
+            <div class="quickview">
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="chat">
+                        <div class="chat-body current">
+                            <div class="chat-search">
+                                <form class="form-inverse" action="#" role="search">
+                                    <div class="append-icon">
+                                        <input type="text" class="form-control" placeholder="Buscar contacto...">
+                                        <i class="icon-magnifier"></i>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="chat-groups">
+                                <div class="title">GRUPOS</div>
+                                <ul>
+                                    <li><i class="turquoise"></i> Favs</li>
+                                    <li><i class="turquoise"></i> Proyecto 1</li>
+                                    <li><i class="turquoise"></i> Amigos</li>
+                                </ul>
+                            </div>
+                            <div class="chat-list">
+                                <div class="title">FAVS</div>
+                                <ul>
+                                    <li class="clearfix">
+                                        <div class="user-img">
+                                            <img src="assets/global/images/avatars/avatar13.png" alt="avatar" />
+                                        </div>
+                                        <div class="user-details">
+                                            <div class="user-name">Bobby Brown</div>
+                                            <div class="user-txt">Conectado</div>
+                                        </div>
+                                        <div class="user-status">
+                                            <i class="online"></i>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="user-img">
+                                            <img src="assets/global/images/avatars/avatar5.png" alt="avatar" />
+                                            <div class="pull-right badge badge-danger">3</div>
+                                        </div>
+                                        <div class="user-details">
+                                            <div class="user-name">Alexa Johnson</div>
+                                            <div class="user-txt">Vacaciones</div>
+                                        </div>
+                                        <div class="user-status">
+                                            <i class="away"></i>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="user-img">
+                                            <img src="assets/global/images/avatars/avatar10.png" alt="avatar" />
+                                        </div>
+                                        <div class="user-details">
+                                            <div class="user-name">Bobby Brown</div>
+                                            <div class="user-txt">Ocupado</div>
+                                        </div>
+                                        <div class="user-status">
+                                            <i class="busy"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="chat-list">
+                                <div class="title">AMIGOS</div>
+                                <ul>
+                                    <li class="clearfix">
+                                        <div class="user-img">
+                                            <img src="assets/global/images/avatars/avatar7.png" alt="avatar" />
+                                            <div class="pull-right badge badge-danger">3</div>
+                                        </div>
+                                        <div class="user-details">
+                                            <div class="user-name">James Miller</div>
+                                            <div class="user-txt">Conectado</div>
+                                        </div>
+                                        <div class="user-status">
+                                            <i class="online"></i>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="user-img">
+                                            <img src="assets/global/images/avatars/avatar11.png" alt="avatar" />
+                                        </div>
+                                        <div class="user-details">
+                                            <div class="user-name">Fred Smith</div>
+                                            <div class="user-txt">En llamada..</div>
+                                        </div>
+                                        <div class="user-status">
+                                            <i class="offline"></i>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="user-img">
+                                            <img src="assets/global/images/avatars/avatar8.png" alt="avatar" />
+                                        </div>
+                                        <div class="user-details">
+                                            <div class="user-name">Ben Addams</div>
+                                            <div class="user-txt">Ocupado</div>
+                                        </div>
+                                        <div class="user-status">
+                                            <i class="offline"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="chat-conversation">
+                            <div class="conversation-header">
+                                <div class="user clearfix">
+                                    <div class="chat-back">
+                                        <i class="icon-action-undo"></i>
+                                    </div>
+                                    <div class="user-details">
+                                        <div class="user-name">James Miller</div>
+                                        <div class="user-txt">On the road again...</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="conversation-body">
+                                <ul>
+                                    <li class="img">
+                                        <div class="chat-detail">
+                                            <span class="chat-date">Hoy, 10:38pm</span>
+                                            <div class="conversation-img">
+                                                <img src="assets/global/images/avatars/avatar4.png" alt="avatar 4" />
+                                            </div>
+                                            <div class="chat-bubble">
+                                                <span>Hola</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="img">
+                                        <div class="chat-detail">
+                                            <span class="chat-date">Hoy, 10:45pm</span>
+                                            <div class="conversation-img">
+                                                <img src="assets/global/images/avatars/avatar4.png" alt="avatar 4" />
+                                            </div>
+                                            <div class="chat-bubble">
+                                                <span>¿Est&aacute;s?</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="img">
+                                        <div class="chat-detail">
+                                            <span class="chat-date">Hoy, 10:51pm</span>
+                                            <div class="conversation-img">
+                                                <img src="assets/global/images/avatars/avatar4.png" alt="avatar 4" />
+                                            </div>
+                                            <div class="chat-bubble">
+                                                <span>Av&iacute;same cuando regreses.</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="conversation-message">
+                                <input type="text" placeholder="Tu mensaje..." class="form-control form-white send-message" />
+                                <div class="item-footer clearfix">
+                                    <div class="footer-actions">
+                                        <i class="icon-rounded-marker"></i>
+                                        <i class="icon-rounded-camera"></i>
+                                        <i class="icon-rounded-paperclip-oblique"></i>
+                                        <i class="icon-rounded-alarm-clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="notes">
+                        <div class="list-notes current withScroll">
+                            <div class="notes ">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="add-note">
+                                            <i class="fa fa-plus"></i>NUEVA NOTA
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="notes-list">
+                                    <div class="note-item media current fade in">
+                                        <button class="close">×</button>
+                                        <div>
+                                            <div>
+                                                <p class="note-name">Cambiar correo</p>
+                                            </div>
+                                            <p class="note-desc hidden">Descripci&oacute;n.</p>
+                                            <p><small>Martes 6 de Mayo, 3:52 pm</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="note-item media fade in">
+                                        <button class="close">×</button>
+                                        <div>
+                                            <div>
+                                                <p class="note-name">Marcar a John</p>
+                                            </div>
+                                            <p class="note-desc hidden">Pedir laptop.</p>
+                                            <p><small>Jueves 8 de Mayo, 2:28 pm</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="note-item media fade in">
+                                        <button class="close">×</button>
+                                        <div>
+                                            <div>
+                                                <p class="note-name">Llevar carro al taller</p>
+                                            </div>
+                                            <p class="note-desc hidden">Definir hora</p>
+                                            <p><small>Lunes 12 de Mayo, 3:43 am</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-note note-hidden-sm">
+                            <div class="note-header clearfix">
+                                <div class="note-back">
+                                    <i class="icon-action-undo"></i>
+                                </div>
+                                <div class="note-edit">Editar nota</div>
+                                <div class="note-subtitle">T&iacute;tulo</div>
+                            </div>
+                            <div id="note-detail">
+                                <div class="note-write">
+                                    <textarea class="form-control" placeholder="Tu nota aqu&iacute;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="settings">
+                        <div class="settings">
+                            <div class="title">CONFIG</div>
+                            <div class="setting">
+                                <span> Mostrar Status</span>
+                                <label class="switch pull-right">
+                                <input type="checkbox" class="switch-input" checked>
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                                </label>
+                                <!-- <p class="setting-info">Lorem ipsum dolor sit amet consectetuer.</p> -->
+                            </div>
+                            <div class="setting">
+                                <span> Mostrar mi foto</span>
+                                <label class="switch pull-right">
+                                <input type="checkbox" class="switch-input" checked>
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                                </label>
+                                <!-- <p class="setting-info">Lorem ipsum dolor sit amet consectetuer.</p> -->
+                            </div>
+                            <div class="setting">
+                                <span> Mostrar ubicaci&oacute;n</span>
+                                <label class="switch pull-right">
+                                <input type="checkbox" class="switch-input">
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                                </label>
+                                <!-- <p class="setting-info">Lorem ipsum dolor sit amet consectetuer.</p> -->
+                            </div>
+                            <div class="title">CHAT</div>
+                            <div class="setting">
+                                <span> Mostrar mi foto</span>
+                                <label class="switch pull-right">
+                                <input type="checkbox" class="switch-input" checked>
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                            <div class="setting">
+                                <span> Mostrar nombre completo</span>
+                                <label class="switch pull-right">
+                                <input type="checkbox" class="switch-input" checked>
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                            <div class="setting">
+                                <span> Mostrar ubicación</span>
+                                <label class="switch pull-right">
+                                <input type="checkbox" class="switch-input">
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                            <div class="setting">
+                                <span> Mostrar leídos</span>
+                                <label class="switch pull-right">
+                                <input type="checkbox" class="switch-input" checked>
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                            <div class="title">Estadísticas</div>
+                            <div class="settings-chart">
+                                <div class="clearfix">
+                                    <div class="chart-title">Stat 1</div>
+                                    <div class="chart-number">82%</div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary setting1" data-transitiongoal="82"></div>
+                                </div>
+                            </div>
+                            <div class="settings-chart">
+                                <div class="clearfix">
+                                    <div class="chart-title">Stat 2</div>
+                                    <div class="chart-number">43%</div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary setting2" data-transitiongoal="43"></div>
+                                </div>
+                            </div>
+                            <div class="m-t-30" style="width:100%">
+                                <canvas id="setting-chart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END QUICKVIEW SIDEBAR -->
+        <!-- BEGIN SEARCH -->
+        <div id="morphsearch" class="morphsearch">
+            <form class="morphsearch-form">
+                <input class="morphsearch-input" type="search" placeholder="Buscar..." />
+                <button class="morphsearch-submit" type="submit">Buscar</button>
+            </form>
+            <div class="morphsearch-content withScroll">
+                <div class="dummy-column user-column">
+                    <h2>Usuarios</h2>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/avatars/avatar1_big.png" alt="Avatar 1" />
+                        <h3>John Smith</h3>
+                    </a>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/avatars/avatar2_big.png" alt="Avatar 2" />
+                        <h3>Bod Dylan</h3>
+                    </a>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/avatars/avatar3_big.png" alt="Avatar 3" />
+                        <h3>Jenny Finlan</h3>
+                    </a>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/avatars/avatar4_big.png" alt="Avatar 4" />
+                        <h3>Harold Fox</h3>
+                    </a>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/avatars/avatar5_big.png" alt="Avatar 5" />
+                        <h3>Martin Hendrix</h3>
+                    </a>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/avatars/avatar6_big.png" alt="Avatar 6" />
+                        <h3>Paul Ferguson</h3>
+                    </a>
+                </div>
+                <div class="dummy-column">
+                    <h2>Wizapedia</h2>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/gallery/1.jpg" alt="1" />
+                        <h3>¿Cómo solicitar más materiales?</h3>
+                    </a>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/gallery/2.jpg" alt="2" />
+                        <h3>¿Cómo solicitar una nueva campaña?</h3>
+                    </a>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/gallery/3.jpg" alt="3" />
+                        <h3>¿Cómo reportar un error en la plataforma?</h3>
+                    </a>
+                </div>
+                <div class="dummy-column">
+                    <h2>Reciente</h2>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/gallery/7.jpg" alt="7" />
+                        <h3>Inspiración en mis diseños</h3>
+                    </a>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/gallery/8.jpg" alt="8" />
+                        <h3>Palettes</h3>
+                    </a>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/gallery/9.jpg" alt="9" />
+                        <h3>Nuevas campañas</h3>
+                    </a>
+                    <a class="dummy-media-object" href="#">
+                        <img src="assets/global/images/gallery/10.jpg" alt="10" />
+                        <h3>Nuevas ideas</h3>
+                    </a>
+                </div>
+            </div>
+            <!-- /morphsearch-content -->
+            <span class="morphsearch-close"></span>
+        </div>
+        <!-- END SEARCH -->
+        <!-- BEGIN PRELOADER -->
+        <div class="loader-overlay">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+		</section>
+       
+		<section ng-show="showLoggin">
+			<div class="container" id="login-block">
+				<i class="user-img icons-faces-users-03"></i>
+				<div class="account-info">
+					
+					<h3>TU ADMINISTRADOR DE CAMPAÑAS ¡HOY!</h3> 
+					<ul>
+						<li><i class="icon-magic-wand"></i> Diseña tus campañas</li>
+						<li><i class="icon-layers"></i> Descarga tus campañas</li>
+						<li><i class="icon-arrow-right"></i> Administra tu equipo</li>
+						<li><i class="icon-drop"></i> Administra tus materiales</li>
+					</ul>
+				</div>
+				<div class="account-form">
+					<form class="form-signin" role="form">
+						<h3><strong>INICIA SESIÓN</strong> a tu cuenta</h3>
+						<div class="append-icon">
+							<input ng-model="username" type="text" name="name" id="name" class="form-control form-white username" placeholder="Usuario" required>
+							<i class="icon-user"></i>
+						</div>
+						<div class="append-icon m-b-20">
+							<input ng-model="password" type="password" name="password" class="form-control form-white password" placeholder="Contraseña" required>
+							<i class="icon-lock"></i>
+						</div>
+						<!-- class="alert alert-success" -->
+						<div ng-class="alertClass" ng-show="alertShow">
+							<h4 class="alert-title">¡Alerta!</h4>
+							<p>{{message}}</p>
+						</div>
+						<button ng-click="tryLoggin()" class="btn btn-lg btn-dark btn-rounded ladda-button" data-style="expand-left">Entrar</button>
+						<span class="forgot-password"><a id="password" href="account-forgot-password.html">Recuperar contraseña</a></span>
+						<div class="form-footer">
+							<div class="social-btn">
+								<button type="button" class="btn-fb btn btn-lg btn-block btn-square"><i class="fa fa-facebook pull-left"></i>Conectate con Facebook</button>
+								<button type="button" class="btn btn-lg btn-block btn-blue btn-square"><i class="fa fa-twitter pull-left"></i>Inicia con Twitter</button>
+							</div>
+							<div class="clearfix">
+								<p class="new-here"><a href="user-signup-v2.html">¡REGISTRATE!</a></p>
+							</div>
+						</div>
+					</form>
+					<form class="form-password" role="form">
+						<h3><strong>Recuperar</strong> mi contraseña</h3>
+						<div class="append-icon m-b-20">
+							<input type="password" name="password" class="form-control form-white password" placeholder="Email" required>
+							<i class="icon-lock"></i>
+						</div>
+						<button type="submit" id="submit-password" class="btn btn-lg btn-danger btn-block ladda-button" data-style="expand-left">Enviar contraseña por correo.</button>
+						<div class="clearfix m-t-60">
+							<p class="pull-left m-t-20 m-b-0"><a id="login" href="#">¿Tienes cuenta? Inicia aquí</a></p>
+							<p class="pull-right m-t-20 m-b-0"><a href="user-signup2.html">¿Nuevo aquí? Registrate</a></p>
+						</div>
+					</form>
+				</div>
+				<!-- <div id="account-builder">
+					<form class="form-horizontal" role="form">
+						<div class="row">
+							<div class="col-md-12">
+								<i class="fa fa-spin fa-gear"></i> 
+								<h3><strong>Customize</strong> Login Page</h3>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-xs-8 control-label">Social Login</label>
+									<div class="col-xs-4">
+										<label class="switch m-r-20">
+										<input id="social-cb" type="checkbox" class="switch-input" checked>
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-xs-8 control-label">Background Image</label>
+									<div class="col-xs-4">
+										<label class="switch m-r-20">
+										<input id="image-cb" type="checkbox" class="switch-input" checked>
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-xs-8 control-label">Background Slides</label>
+									<div class="col-xs-4">
+										<label class="switch m-r-20">
+										<input id="slide-cb" type="checkbox" class="switch-input">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-xs-8 control-label">User Image</label>
+									<div class="col-xs-4">
+										<label class="switch m-r-20">
+										<input id="user-cb" type="checkbox" class="switch-input">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div> -->
+			</div>
+			<!-- END LOCKSCREEN BOX -->
+			<p class="account-copyright">
+				<span>Copyright © 2016 </span><span>MBLEDTEQ</span>.<span>All rights reserved.</span>
+			</p>
+		</section>
+		<script src="fabric.min.js"></script>
+	   <!-- BEGIN ANGULARJS SCRIPTS -->
+        <script src="plugins/angular/angular.js"></script>
+        <script src="plugins/json3/lib/json3.js"></script>
+        <script src="plugins/angular-resource/angular-resource.js"></script>
+        <script src="plugins/angular-cookies/angular-cookies.js"></script>
+        <script src="plugins/angular-sanitize/angular-sanitize.js"></script>
+        <script src="plugins/angular-animate/angular-animate.js"></script>
+        <script src="plugins/angular-touch/angular-touch.js"></script>
+        <script src="plugins/angular-route/angular-route.js"></script>
+        <script src="plugins/angular-bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+        <script src="app.js"></script>
+        <script src="directives/ngViewClass.js"></script>
+        <!-- END ANGULARJS SCRIPTS -->
+		<script src="bootstrap-colorpicker-module.js"></script>
+        <script src="assets/global/plugins/jquery/jquery-3.1.0.min.js"></script>
+        <script src="assets/global/plugins/jquery/jquery-migrate-3.0.0.min.js"></script>
+        <script src="assets/global/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <script src="assets/global/plugins/gsap/main-gsap.min.js"></script>
+        <script src="assets/global/plugins/tether/js/tether.min.js"></script>
+        <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/global/plugins/appear/jquery.appear.js"></script>
+        <script src="assets/global/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+        <script src="assets/global/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>
+        <script src="assets/global/plugins/bootbox/bootbox.min.js"></script>
+        <script src="assets/global/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="assets/global/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+        <script src="assets/global/plugins/charts-sparkline/sparkline.min.js"></script>
+        <script src="assets/global/plugins/retina/retina.min.js"></script>
+        <script src="assets/global/plugins/select2/select2.full.min.js"></script>
+        <script src="assets/global/plugins/icheck/icheck.min.js"></script>
+        <script src="assets/global/plugins/backstretch/backstretch.min.js"></script>
+        <script src="assets/global/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <script src="assets/global/js/sidebar_hover.js"></script>
+        <script src="assets/global/js/widgets/notes.js"></script>
+        <script src="assets/global/js/pages/search.js"></script>
+        <script src="assets/global/plugins/quicksearch/quicksearch.js"></script>
+        <script src="assets/global/plugins/slick/slick.js"></script> 
+        <script src="assets/global/plugins/icheck/icheck.js"></script>
+        <script src="assets/global/plugins/switchery/switchery.js"></script>
+        <script src="assets/global/plugins/timepicker/jquery-ui-timepicker-addon.js"></script>
+        <script src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+        <script src="assets/global/plugins/colorpicker/spectrum.js"></script>
+        <script src="assets/global/plugins/touchspin/jquery.bootstrap-touchspin.js"></script>
+        <script src="assets/global/plugins/step-form-wizard/js/step-form-wizard.js"></script>
+        <script src="assets/global/plugins/step-form-wizard/plugins/parsley/parsley.min.js"></script>
+        <script src="assets/global/plugins/jquery-validation/jquery.validate.js"></script>
+        <script src="assets/global/plugins/bootstrap-slider/bootstrap-slider.js"></script>
+        <script src="assets/global/plugins/ion-slider/ion.rangeSlider.js"></script>
+        <script src="assets/global/plugins/bootstrap/js/jasny-bootstrap.js"></script>
+        <script src="assets/global/plugins/isotope/isotope.pkgd.min.js"></script>
+        <script src="assets/global/plugins/magnific/jquery.magnific-popup.js"></script>
+        <script src='assets/global/plugins/fullcalendar/lib/moment.min.js'></script>
+        <script src="assets/global/plugins/fullcalendar/fullcalendar.min.js"></script>
+        <script src="assets/global/plugins/countup/countUp.js"></script>
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script src="assets/global/plugins/google-maps/gmaps.js"></script>
+        <script src="assets/global/plugins/google-maps/markerclusterer.js"></script>
+        <script src="assets/global/plugins/maps-amcharts/ammap/ammap.js"></script>
+        <script src="assets/global/plugins/maps-amcharts/ammap/maps/js/worldLow.js"></script>
+        <script src="assets/global/plugins/maps-amcharts/ammap/themes/black.js"></script>
+        <script src="assets/global/plugins/maps-amcharts/ammap/ammap_amcharts_extension.js"></script>
+        <script src="assets/global/plugins/maps-amcharts/ammap/maps/js/continentsLow.js"></script>
+        <script src="assets/global/plugins/maps-amcharts/ammap/maps/js/worldLow.js"></script>
+        <script src="assets/global/plugins/maps-amcharts/ammap/maps/js/usaLow.js"></script>
+        <script src="assets/global/plugins/bootstrap-loading/lada.min.js"></script>
+        <script src="assets/global/plugins/jstree/jstree.js"></script>
+        <script src="assets/global/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="assets/global/plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="assets/global/plugins/typed/typed.js"></script>
+        <script src="assets/global/plugins/cke-editor/ckeditor.js"></script>
+        <script src="assets/global/plugins/cke-editor/config.js"></script>
+        <script src="assets/global/plugins/cke-editor/styles.js"></script>
+        <script src="assets/global/plugins/cke-editor/adapters/jquery.js"></script>
+        <script src="assets/global/plugins/cke-editor/lang/en.js"></script>
+        <script src="assets/global/plugins/cke-editor/skins/bootstrapck/skin.js"></script>
+        <script src="assets/global/plugins/summernote/summernote.js"></script>
+        <script src="assets/global/plugins/prettify/prettify.js"></script>
+        <script src="assets/global/plugins/dropzone/dropzone.min.js"></script>
+        <script src="assets/global/plugins/idle-timeout/jquery.idletimeout.min.js"></script>
+        <script src="assets/global/plugins/idle-timeout/jquery.idletimer.min.js"></script>
+        <script src="assets/global/plugins/cropper/cropper.js"></script>
+        <script src="assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>
+        <script src="assets/global/plugins/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+        <script src="assets/global/plugins/bootstrap-context-menu/bootstrap-contextmenu.min.js"></script>
+        <script src="assets/global/plugins/multidatepicker/multidatespicker.min.js"></script>
+        <script src="assets/global/js/widgets/todo_list.js"></script>
+        <script src="assets/global/plugins/metrojs/metrojs.min.js"></script>
+        <script src="assets/global/plugins/charts-chartjs/Chart.min.js"></script>
+        <script src="assets/global/plugins/charts-highstock/js/highstock.js"></script>
+        <script src="assets/global/plugins/charts-highstock/js/modules/exporting.js"></script>
+        <script src="assets/global/plugins/skycons/skycons.min.js"></script>
+        <script src="assets/global/plugins/simple-weather/jquery.simpleWeather.js"></script> 
+        <script src="assets/global/plugins/bootstrap-tags-input/bootstrap-tagsinput.js"></script>
+        <script src="assets/global/plugins/rateit/jquery.rateit.min.js"></script>
+        <script src="assets/global/plugins/charts-highstock/js/highcharts-more.js"></script>
+        <script src="assets/global/plugins/charts-highstock/js/modules/exporting.js"></script>
+        <script src="assets/global/plugins/autosize/autosize.min.js"></script>
+        <script src="assets/global/js/widgets/widget_weather.js"></script>
+        <script src="assets/global/js/pages/ecommerce.js"></script>
+		
+        
+        <!-- BEGIN CUSTOM ANGULARJS SCRIPTS -->
+		<script src="indexCtrl.js"></script>
+		<script src="loginCtrl.js"></script>
+        <script src="js/pages/dashboard.js"></script>
+        <script src="js/pages/charts.js"></script>
+        <script src="js/pages/charts_finance.js"></script>
+        <script src="js/pages/layouts_api.js"></script>
+        <script src="js/builder.js"></script>
+        <script src="js/application.js"></script>
+        <script src="js/plugins.js"></script> 
+        <script src="js/quickview.js"></script>
+        <script src="dashboard/dashboardCtrl.js"></script>
+        <script src="charts/charts/chartsCtrl.js"></script>
+        <script src="charts/financialCharts/financialChartsCtrl.js"></script>
+        <script src="uiElements/tabs/tabsCtrl.js"></script>
+        <script src="uiElements/buttons/buttonsCtrl.js"></script>
+        <script src="uiElements/modals/modalsCtrl.js"></script>
+        <script src="uiElements/components/componentsCtrl.js"></script>
+        <script src="uiElements/animations/animationsCtrl.js"></script>
+        <script src="uiElements/icons/iconsCtrl.js"></script>
+        <script src="uiElements/portlets/portletsCtrl.js"></script>
+        <script src="uiElements/nestableList/nestableListCtrl.js"></script>
+        <script src="uiElements/treeView/treeViewCtrl.js"></script>
+        <script src="uiElements/notifications/notificationsCtrl.js"></script>
+        <script src="uiElements/typography/typographyCtrl.js"></script>
+        <script src="uiElements/helperClasses/helperClassesCtrl.js"></script>
+        <script src="mailbox/mailboxTemplatesCtrl.js"></script>
+        <script src="mailbox/mailboxCtrl.js"></script>
+        <script src="mailbox/mailSendCtrl.js"></script>
+        <script src="mainCtrl.js"></script>
+        <script src="medias/croping/cropingCtrl.js"></script>
+        <script src="medias/hover/hoverCtrl.js"></script>
+        <script src="medias/sortable/sortableCtrl.js"></script>
+        <script src="forms/editors/editorsCtrl.js"></script>
+        <script src="forms/elements/elementsCtrl.js"></script>
+        <script src="forms/inputMasks/inputMasksCtrl.js"></script>
+        <script src="forms/plugins/pluginsCtrl.js"></script>
+        <script src="forms/sliders/slidersCtrl.js"></script>
+        <script src="forms/validation/validationCtrl.js"></script>
+        <script src="forms/wizard/wizardCtrl.js"></script>
+        <script src="pages/timeline/timelineCtrl.js"></script>
+        <script src="pages/blank/blankCtrl.js"></script>
+        <script src="pages/contact/contactCtrl.js"></script>
+        <script src="extra/fullCalendar/fullCalendarCtrl.js"></script>
+        <script src="extra/widgets/widgetsCtrl.js"></script>
+        <script src="extra/slider/sliderCtrl.js"></script>
+        <script src="extra/google/googleCtrl.js"></script>
+        <script src="extra/vector/vectorCtrl.js"></script>
+        <script src="ecommerce/pricingTable/pricingTableCtrl.js"></script>
+        <script src="ecommerce/invoice/invoiceCtrl.js"></script>
+        <script src="ecommerce/cart/cartCtrl.js"></script>
+        <script src="layout/apiCtrl.js"></script>
+        <script src="tables/dynamic/dynamicCtrl.js"></script>
+        <script src="tables/editable/editableCtrl.js"></script>
+        <script src="tables/filter/filterCtrl.js"></script>
+        <script src="tables/styling/stylingCtrl.js"></script>
+        <script src="user/profile/profileCtrl.js"></script>
+        <script src="user/sessionTimeout/sessionTimeoutCtrl.js"></script>
+		
+		<!-- My Controllers -->
+		<script src="nueva_campaña/nvaCampañaCtrl.js"></script>
+		<script src="user/newUserCtrl.js"></script>
+		<script src="user/CampaniaCtrl.js"></script>
+		<script src="user/profile/identityCtrl.js"></script>
+		<script src="campaigns/myCampaignsCtrl.js"></script>
+		<script src="campaigns/seeCampaignCtrl.js"></script>
+		<script src="campaigns/designerCampaignsCtrl.js"></script>
+		<script src="campaignDesign/designCampaignCtrl.js"></script>
+		<script src="campaigns/campaignMaterialsCtrl.js"></script>
+		
+		<!-- <script src="design/controllers/canvas.js"></script>
+		<script src="design/controllers/header.js"></script>
+		<script src="design/controllers/photos.js"></script>
+		<script src="design/controllers/stickers.js"></script>
+		<script src="design/directives/dragDrop.js"></script>
+		<script src="design/directives/fileSelect.js"></script>
+		<script src="design/factories/canvas.js"></script>
+		<script src="design/factories/fileReader.js"></script>
+		<script src="design/factories/images.js"></script>
+		<script src="design/factories/utils.js"></script>
+		<script src="design/factories/index.js"></script>
+		<script src="design/constants.js"></script> -->
+		<script src="design/CanvasCtrl.js"></script>
+		<script src="design/CanvasFactory.js"></script>
+		<script src="design/FileReaderFactory.js"></script>
+		<script src="design/HeaderCtrl.js"></script>
+		<script src="design/ImagesFactory.js"></script>
+		<script src="design/PhotosCtrl.js"></script>
+		<script src="design/StickersCtrl.js"></script>
+		<script src="design/UtilsFactory.js"></script>
+		<script src="design/AppSettings.js"></script>
+		<script src="design/dragDrop.js"></script>
+		<script src="design/fileReader.js"></script>
+		
+		<script src="ngDialog.js"></script>
+		
+		
+		<script src="angular-multiple-file-upload.js"></script>
+		<script src="angularjs-dropdown-multiselect.min.js"></script>
+		<script src="angular-dropzone.js"></script>
+		
+		
+        <!-- END CUSTOM ANGULARJS SCRIPTS -->
+		
+		
+		
+    </body>
+</html>

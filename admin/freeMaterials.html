@@ -1,0 +1,154 @@
+﻿	<div class="header">
+        <h2>MATERIALES <strong>GRATIS</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <!-- <ol class="breadcrumb">
+                <li>
+                    <a href="dashboard">Make</a>
+                </li>
+                <li>
+                    <a href="tables">Tables</a>
+                </li>
+                <li class="active">Tables Editable</li>
+            </ol> -->
+        </div>
+		
+    </div>
+<div class="row">
+	<div class="col-lg-12 portlets">
+		<div class="panel">
+			<!-- <div class="panel-header panel-controls">
+				<h3><i class="fa fa-table"></i> <strong>USUARIOS </strong> DE LA EMPRESA</h3>
+			</div> -->
+			<div class="panel-content">
+				<div class="row">
+					<div class="col-sm-12" >
+						<div ng-class="alertUserClass" ng-show="alertUserShow" style="height: 75px;">
+							<div class="col-sm-2 text-center" style="">
+								<i ng-click="closeAlert()" class="fa fa-check-circle-o fa-4x" style="margin-top: -4px; cursor:pointer;"></i>
+							</div>
+							<div class="col-sm-10">
+								<h4 class="alert-title">¡Alerta!</h4>
+								<p>{{messageUser}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			 	<div class="row" style="margin-top:20px;">
+					<div class="m-b-10 text-right">
+						<div class="btn-group">
+							<div>
+								<button data-toggle="modal" data-target="#new-material" class="btn btn-embossed btn-primary m-r-20" style="width: 170px;">
+									<i class="fa fa-upload"></i> 
+									Nuevo Material
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+							
+				<table class="table">
+					<thead>
+						<tr>
+							<th>
+								<a style="cursor:pointer;" ng-click="sortType = 'description'; sortReverse = !sortReverse">
+									Material
+									<span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'description' && sortReverse"  class="fa fa-caret-up"></span>
+								</a>
+							</th>
+							<th>
+								Dimensiones(BxA)
+							</th>
+							<th>
+								Gratis
+							</th>
+							<th>
+								Estatus
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="material in allMaterials | orderBy:sortType:sortReverse">
+							
+							<td>{{ material.description }}</td>
+							<td>{{ material.width }} x {{ material.height }}</td>
+							<td>
+								<div class="onoffswitch2">
+									<input type="checkbox" ng-change="chngFreeMaterial(material.id_material, material.free)"  ng-model="material.free" ng-true-value="1" ng-false-value="0"
+										name="onoffswitch" class="onoffswitch-checkbox" id="myonfreeswitch{{material.id_material}}" checked>
+									<label class="onoffswitch-label" for="myonfreeswitch{{material.id_material}}">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</td>
+							<td>
+								<div class="onoffswitch2">
+									<input type="checkbox" ng-change="chngMaterialStatus(material.id_material, material.status)"  ng-model="material.status" ng-true-value="1" ng-false-value="0"
+										name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch{{material.id_material}}" checked>
+									<label class="onoffswitch-label" for="myonoffswitch{{material.id_material}}">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</td>
+						</tr>  
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="new-material" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+				<h4 class="modal-title">NUEVO<strong> MATERIAL</strong></h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal ng-pristine ng-valid">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Descripción</label>
+							<div class="col-sm-9">
+								<input class="form-control" ng-model="description_p" type="text">
+							</div>
+						</div>								
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Altura(Pixeles)</label>
+							<div class="col-sm-9">
+								<input class="form-control" ng-model="width_p" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Largo(Pixeles)</label>
+							<div class="col-sm-9">
+								<input class="form-control" ng-model="height_p" type="text">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" type="button" class="pull-right btn btn-primary btn-square">Cerrar</button>
+				<button data-dismiss="modal" ng-click="saveMaterial()" type="button" class="pull-right btn btn-primary btn-square">Aceptar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+    <div class="copyright">
+        <p class="pull-left sm-pull-reset">
+            <span>Copyright <span class="copyright">&copy;</span> 2016 </span>
+            <span>MBLEDTEQ</span>.
+            <span>All rights reserved. </span>
+        </p>
+        <p class="pull-right sm-pull-reset">
+            <span><a href="#" class="m-r-10">Support</a> | <a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
+        </p>
+    </div>
+</div>

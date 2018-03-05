@@ -1,0 +1,11 @@
+[13-Dec-2016 11:18:22 America/Mexico_City] PHP Warning:  move_uploaded_file(/home/mbledteq/wizadqa.mbledteq.com/uploads/13912718_1227377720640361_1059762547616355931_n.jpg): failed to open stream: No such file or directory in /home/mbledteq/wizadqa.mbledteq.com/upload.php on line 14
+[13-Dec-2016 11:18:22 America/Mexico_City] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpsKbMA8' to '/home/mbledteq/wizadqa.mbledteq.com/uploads/13912718_1227377720640361_1059762547616355931_n.jpg' in /home/mbledteq/wizadqa.mbledteq.com/upload.php on line 14
+[13-Dec-2016 11:18:27 America/Mexico_City] PHP Warning:  move_uploaded_file(/home/mbledteq/wizadqa.mbledteq.com/uploads/1.png): failed to open stream: No such file or directory in /home/mbledteq/wizadqa.mbledteq.com/upload.php on line 14
+[13-Dec-2016 11:18:27 America/Mexico_City] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpk5OxD6' to '/home/mbledteq/wizadqa.mbledteq.com/uploads/1.png' in /home/mbledteq/wizadqa.mbledteq.com/upload.php on line 14
+[13-Dec-2016 19:27:49 America/Mexico_City] PHP Warning:  POST Content-Length of 12152845 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[13-Dec-2016 19:27:51 America/Mexico_City] PHP Warning:  POST Content-Length of 12550308 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[13-Dec-2016 19:28:50 America/Mexico_City] PHP Warning:  POST Content-Length of 15119050 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[13-Dec-2016 19:29:10 America/Mexico_City] PHP Warning:  POST Content-Length of 11714084 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[13-Dec-2016 19:30:25 America/Mexico_City] PHP Warning:  POST Content-Length of 14694525 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[13-Dec-2016 19:30:28 America/Mexico_City] PHP Warning:  POST Content-Length of 14976543 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[13-Dec-2016 19:31:48 America/Mexico_City] PHP Warning:  POST Content-Length of 13161849 bytes exceeds the limit of 8388608 bytes in Unknown on line 0

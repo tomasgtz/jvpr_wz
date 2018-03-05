@@ -1,0 +1,25 @@
+
+<div class="photo_container">
+   	<div id="import_photo" ng-click="photos.clickUpload(); $event.stopPropagation();">		
+   <div class="wrapper">
+      		asdas	
+      <h1>+</h1>
+      			
+      <p>CAMPAÑA LIBRE</p>
+      			<input type="file" id="photo_upload" ng-file-select images="previewImages" file-type="image" callback="photos.onFileUpload(file)" style="display:none;" >		
+   </div>
+   	
+</div>
+	
+<div class="line"></div>
+	asf
+<ul>
+   		
+   <li class="photos" ng-repeat="image in photos.images" dragIt="true">
+      			
+      <div class="delete" ng-click="photos.deletePhoto(image)">X</div>
+      			<img src="{{image.src}}" height="120" width="120" ng-click="photos.dropImage(image.src, $event)">			
+   </li>
+   	
+</ul>
+</div>

@@ -1,0 +1,149 @@
+<div>
+		<div class="header">
+			<h2>MIS <strong>CAMPAÑAS</strong></h2>
+			<div class="breadcrumb-wrapper">
+				<!-- <ol class="breadcrumb">
+					<li>
+						<a href="dashboard">Make</a>
+					</li>
+					<li>
+						<a href="tables">Tables</a>
+					</li>
+					<li class="active">Tables Editable</li>
+				</ol> -->
+			</div>
+			
+		</div>
+
+		<div class="row" ng-show="campaignsVisible">
+			<div class="col-lg-12 portlets">
+				<div class="panel">					
+					<div class="panel-content">
+						<!-- <p>Here you can manage your table easily: add new row, edit or remove existing data. You can export your table in PDF, Excel, CSV or just print it.</p> -->
+						<div class="row">
+							<div class="col-sm-2 text-left" >
+								<i ng-click="reload()" style="cursor:pointer;" class="fa fa-refresh fa-2x"></i><br/><span ng-show="showflag" style="font-size:18px;" class="label label-default">Se actualizó la información de las campañas.</span>
+							</div>
+						</div>
+						<div class="row text-left">
+							<div class="col-sm-6">
+								<h4 style="font-size:14px;"><b>BUSCAR:</b></h4><input ng-model="searchValue" ng-change="searchValueChange(searchValue)" type="text" class="form-control" id="field-1" >
+							</div>
+						</div>
+						<table class="table table-hover dataTable" id="table-editable">
+							<col width="10%">
+							<col width="20%">
+							<col width="10%">
+							<col width="10%">
+							<col width="20%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<thead>
+								<tr>
+									<th style="" width="10px">Detalle</th>
+									<th width="10px">
+										<a style="cursor:pointer;" ng-click="sortType = 'campaign_name'; sortReverse = !sortReverse">
+											Título
+											<span ng-show="sortType == 'campaign_name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'campaign_name' && sortReverse"  class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th width="10px">
+										<a style="cursor:pointer;" ng-click="sortType = 'date_up'; sortReverse = !sortReverse">
+											Alta
+											<span ng-show="sortType == 'date_up' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'date_up' && sortReverse"  class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th width="10px">Descripción</th>
+									<th width="10px">
+										<a style="cursor:pointer;" ng-click="sortType = 'segment_description'; sortReverse = !sortReverse">
+											Segmento
+											<span ng-show="sortType == 'segment_description' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'segment_description' && sortReverse"  class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th width="10px">
+										<a style="cursor:pointer;" ng-click="sortType = 'rangee'; sortReverse = !sortReverse">
+											Edad
+											<span ng-show="sortType == 'rangee' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'rangee' && sortReverse"  class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th width="10px">
+										<a style="cursor:pointer;" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+											Ciudad
+											<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse"  class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<!-- <th width="10px">Estatus</th> -->
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="campaign in allCampaigns | orderBy:sortType:sortReverse | filter:searchValue" >
+									<!-- <td><img src="assets/global/images/layouts/boxed.jpg" width="150px;" height="75px;"/></td> -->
+									<td ng-click="goToMaterials(campaign)" class="text-center" style="cursor:pointer;"><i class="fa fa-eye fa-2x"></i></td>
+									<td>{{campaign.campaign_name}}</td>
+									<td>{{campaign.date_up | date}}</td>
+									<td class="text-center"><a ng-click="showDescription(campaign)" data-toggle="modal" data-target="#modal-description" class="btn btn-default btn-raised rippler rippler-default fa fa-search" style="height: 36px;line-height: 20px;font-size: 20px;"></a></td>
+									<td>{{campaign.segment_description}}</td>
+									<td>{{campaign.rangee}}</td>
+									<td>{{campaign.name}}</td>
+									<!-- <td>
+										<span ng-if="campaign.status === '2'" class="label label-default">Inactiva</span>
+										<span ng-if="campaign.status === '1'" class="label label-success">Activa</span>
+									</td> -->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="copyright">
+            <p class="pull-left sm-pull-reset">
+                <span>Copyright <span class="copyright">&copy;</span> 2016 </span>
+                <span>MBLEDTEQ</span>.
+                <span>All rights reserved. </span>
+            </p>
+            <p class="pull-right sm-pull-reset">
+                <span><a href="#" class="m-r-10">SOPORTE</a> | <a href="#" class="m-l-10 m-r-10">TÉRMINOS</a> | <a href="#" class="m-l-10">POLITICA</a></span>
+            </p>
+        </div>
+    </div>
+
+	<div class="modal fade modal-slideright" id="deletePantone" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="c-primary m-b-30">¿Deseas borrar este elemento?</h2>
+                            <button type="button" ng-click="removePantone()" data-dismiss="modal" class="btn btn-primary btn-embossed btn-block" >Si</button>
+                            <button type="button" data-dismiss="modal" class="btn btn-white btn-block">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="modal fade" id="modal-description" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title">DESCRIPCIÓN<strong> DE LA CAMPAÑA</strong></h4>
+                </div>
+                <div class="modal-body">
+                    {{descriptionOnModal}}<br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

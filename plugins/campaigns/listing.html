@@ -1,0 +1,784 @@
+﻿<div>
+		<div class="header">
+			<h2>MIS <strong>CAMPAÑAS <i class="fa fa-flag fa-2x"></i></strong> </h2>
+			<div class="breadcrumb-wrapper">
+				<!-- <ol class="breadcrumb">
+					<li>
+						<a href="dashboard">Make</a>
+					</li>
+					<li>
+						<a href="tables">Tables</a>
+					</li>
+					<li class="active">Tables Editable</li>
+				</ol> -->
+			</div>
+			
+		</div>
+		<div class="row" ng-show="!campaignsVisible">
+			<div class="col-lg-12 portlets">
+				<div class="panel">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">NUEVA<strong> CAMPAÑA</strong></h4>
+							<div class="row" >
+								<div class="text-right">
+									<div class="btn-group">
+										<div ng-click="viewCampaignsList()">
+											<button class="btn btn-embossed btn-primary m-r-20"><i class="fa fa-home"></i> Mis campañas</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-body">
+							<p>Definición de la campaña.</p>
+							<div class="row" ng-show="wizardSteps === 1">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="field-1" class="control-label">Título</label>
+										<input ng-model="title" ng-change="titleChange(title)" type="text" class="form-control" id="field-1" >
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="field-2" class="control-label">Descripción:</label>
+										<input ng-model="description" ng-change="descriptionChange(description)" type="text" class="form-control" id="field-2" >
+									</div>
+								</div>
+								<div class="col-sm-6 form-group">
+									<div class="col-sm-3">
+										<label for="field-2" class="control-label">Segmento:</label>
+									</div>
+									<div class="col-sm-6">
+											<select id="selectsegment" name="singleSelect" ng-model="optionSegment" style="width:200px;">
+												<option ng-repeat="optionSegment in allSegments" value="{{optionSegment.id_segment}}">{{optionSegment.description}}</option>
+											</select><br>
+									</div>
+								</div>
+								<div class="col-sm-6 form-group">
+									<div class="col-sm-3">
+										<label for="field-2" class="control-label">Ciudad:</label>
+									</div>
+									<div class="col-sm-6">
+											<select id="selectcity" name="singleSelect" ng-model="optionCity" style="width:200px;">
+												<option ng-repeat="optionCity in allCities" 
+												value="{{optionCity.id_city}}">{{optionCity.name}}</option>
+											</select><br>
+											<!-- <select ng-options="optionCity.id_city as optionCity.name for optionCity in allCities"  ng-model="selectCity" style="width:200px;">
+											</select><br> -->
+									</div>
+								</div>
+								<div class="col-sm-6 form-group">
+									<div class="col-sm-3">
+										<label for="field-2" class="control-label">Edad:{{selected}}</label>
+									</div>
+									<div class="col-sm-6">
+											<select id="selectage" ng-model="selected" style="width:200px;">
+												<option  ng-repeat="ages in allAges" value="{{ages.id_age}}">{{ages.rangee}}</option>
+											</select><br>
+									</div>
+								</div>
+								<div class="col-sm-6 form-group">
+									<div class="">
+									</div>
+									<div class="col-sm-10">
+										<input ng-model="autorization" type="checkbox" data-checkbox="icheckbox_square-blue">
+										<label for="field-2" class="control-label">Autorización para descargar</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div ng-class="alertCampaignClass" ng-show="alertCampaignShow">
+											<h4 class="alert-title">¡Alerta!</h4>
+											<p>{{messageCampaign}}</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12" ng-if="title && description" >
+									<div class="modal-footer text-right">
+										<button ng-click="secondStep()" type="button" class="btn btn-primary btn-embossed bnt-square">Siguiente&nbsp;<i class="fa fa-arrow-right"></i> </button>
+									</div>
+								</div>
+							</div>
+							<div class="row" ng-show="wizardSteps === 2">
+								<div class="col-xlg-12 col-lg-12">
+									<div class="panel">
+										<div class="panel-header">
+											<h3><i class="icon-globe-alt"></i> <strong>CONFIGURACIÓN</strong> TEXTOS</h3>
+										</div>
+										<div class="panel-content">
+											<div class="row">
+												<div class="col-sm-12">
+													<form class="form-horizontal ng-pristine ng-valid">
+														<div class="col-md-12">
+															<h4 class="col-sm-12 control-label">
+																<button ng-click="newText()" type="button" class="btn btn-sm btn-primary pull-right">
+																	<i class="fa fa-plus-square"></i>
+																</button>
+															</h4>
+															<div class="form-group" ng-repeat="text in textConfig">
+																<h4 class="col-sm-1 control-label"></h4>
+																<div class="col-sm-10">
+																	<div class="col-sm-2">
+																		<a ng-click="removeText(text)" class="delete btn btn-sm btn-danger" href="javascript:;">
+																			<i class="icons-office-52">
+																			</i>
+																		</a>
+																	</div>
+																	<div class="col-sm-10">
+																		<input class="form-control" ng-model="text.text_config" type="text">
+																	</div>
+																</div>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-12">
+													<div ng-class="alertTextClass" ng-show="alertTextShow">
+														<h4 class="alert-title">¡Alerta!</h4>
+														<p>{{messageText}}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row" ng-if="newTextsArray.length>0">
+										<div class="col-md-12">
+											<div class="modal-footer text-right">
+												<button ng-click="firstStep()" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-arrow-left"></i>&nbsp;Regresar </button>
+												<button ng-click="thirdStep()" type="button" class="btn btn-primary btn-embossed bnt-square">Siguiente&nbsp;<i class="fa fa-arrow-right"></i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row" ng-show="wizardSteps === 3">
+								<div class="col-lg-12 portlets">
+									<div class="panel">
+										<div class="panel-header panel-controls">
+											<h3><i class="icon-cloud-upload"></i> CONFIGURACIÓN <strong>IMÁGENES</strong></h3>
+										</div>
+										<div class="panel-content">
+											<div class="row">
+												<div class="col-sm-12">												
+													<form callbacks="dzCallbacks" id="dropzoneFrm" action="upload.php" class="dropzone">
+														<div class="fallback">
+															<input name="file" type="file" multiple />
+														</div>
+													</form>
+												</div>
+												<div class="row">
+													<div class="col-sm-12">
+														<div ng-class="alertImageClass" ng-show="alertImageShow">
+															<h4 class="alert-title">¡Alerta!</h4>
+															<p>{{ImageText}}</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="modal-footer text-right">
+												<button ng-click="secondStep()" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-arrow-left"></i>&nbsp;Regresar </button>
+												<button ng-click="fourthStep()" type="button" class="btn btn-primary btn-embossed bnt-square">Siguiente&nbsp;<i class="fa fa-arrow-right"></i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row" ng-show="wizardSteps === 4">
+								<div class="col-lg-12 portlets">
+									<div class="panel">
+										<div class="panel-header panel-controls">
+											<h3><i class="icon-cloud-upload"></i> CONFIGURACIÓN <strong>PALETTE</strong></h3>
+										</div>
+										<div class="panel-content">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="form-group">
+														<div class="input-group">
+															<ul class="icheck-colors">
+																<li data-toggle="modal" data-target="#deletePantone" ng-repeat="pal in paletteConfig" ng-click="pantoneToRemove()" ng-style="{'background-color':pal.color}">
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-3">Agrega tus colores
+												</div>
+												<div class="col-sm-9">
+													<input colorpicker colorpicker-position="right" type="text" ng-model="your_model" />
+													<button ng-click="newPalette(your_model)" type="button" class="btn btn-sm btn-primary">
+														<i class="fa fa-plus-square"></i>
+													</button>
+												</div>
+											</div>
+											<!-- <div class="row">
+												<div class="col-md-6">
+													<div class="modal-footer text-right">
+														<button ng-click="uploadPalette()" type="button" class="btn btn-success btn-embossed bnt-square"><i class="fa fa-arrow-left"></i> Cargar Pantones</button>
+													</div>
+												</div>
+											</div> -->
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="modal-footer text-right">
+												<button ng-click="thirdStep()" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-arrow-left"></i>&nbsp;Regresar </button>
+												<button ng-click="fifthStep()" type="button" class="btn btn-primary btn-embossed bnt-square">Siguiente&nbsp;<i class="fa fa-arrow-right"></i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row" ng-show="wizardSteps === 5">
+								<div class="col-lg-12 portlets">
+									<div class="panel">
+										<div class="panel-header panel-controls">
+											<h3><i class="icon-cloud-upload"></i> CONFIGURACIÓN <strong>FUENTES</strong></h3>
+										</div>
+										<div class="panel-content">
+											<div class="row">
+												<div class="col-sm-12">
+													<form callbacks="dzCallbacks" id="dropzoneFrm2" action="upload.php" class="dropzone">
+														<div class="fallback">
+															<input name="file" type="file" multiple />
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="modal-footer text-right">
+												<button ng-click="fourthStep()" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-arrow-left"></i>&nbsp;Regresar </button>
+												<button ng-click="sixthStep()" type="button" class="btn btn-primary btn-embossed bnt-square">Siguiente&nbsp;<i class="fa fa-arrow-right"></i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row" ng-show="wizardSteps === 6">
+								<div class="col-lg-12 portlets">
+									<div class="panel">
+										<div class="panel-header panel-controls">
+											<h3><i class="icon-object-group"></i> ESCOJE LOS <strong>MATERIALES</strong></h3>
+										</div>
+										<div class="panel-content">
+											<div class="row">
+												<div class="col-sm-12">
+													<table class="table table-hover dataTable" id="table-editable">
+														<col width="50%">
+														<col width="50%">
+														<thead>
+															<tr>
+																<th width="20px">Material</th>
+																<th width="20px"></th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr ng-repeat="material in allMaterials">
+																<td>{{material.description}} - {{material.width}}px X {{material.height}}px</td>
+																<td class="text-center">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<input ng-model="material.selected" type="checkbox">
+																		</div>
+																	</div>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="modal-footer text-right">
+												<button ng-click="fifthStep()" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-arrow-left"></i>&nbsp;Regresar </button>
+												<button ng-click="sendData()" type="button" class="btn btn-success btn-embossed bnt-square">Guardar campaña</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="row" ng-show="campaignsVisible">
+			<div class="col-lg-12 portlets">
+				<div class="panel">
+				
+					<!-- <div class="panel-header ">
+						<h2>CAMPAÑAS<strong></strong></h2> 
+					</div>  -->
+					<!-- <div class="row">
+						<div class="col-sm-12">
+							<div ng-class="alertCreateClass" ng-show="alertCreateShow">
+								<h4 class="alert-title">¡Alerta!</h4>
+								<p>{{CreateText}}</p>
+							</div>
+						</div>
+					</div> -->
+					<div class="panel-content">
+						<div class="row">
+							<div class="col-sm-12" >
+								<div ng-class="alertCreateClass" ng-show="alertCreateShow" style="height: 75px;">
+									<div class="col-sm-2 text-center" style="">
+										<i ng-click="closeAlert()" class="fa fa-check-circle-o fa-4x" style="margin-top: -4px; cursor:pointer;"></i>
+									</div>
+									<div class="col-sm-10">
+										<h4 class="alert-title">¡Alerta!</h4>
+										<p>{{CreateText}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-content pagination2 table-responsive">
+						<!-- <p>Here you can manage your table easily: add new row, edit or remove existing data. You can export your table in PDF, Excel, CSV or just print it.</p> -->
+						<div class="row">
+							<div class="col-sm-2 text-left" >
+								<i ng-click="reload()" style="cursor:pointer;" class="fa fa-refresh fa-2x"></i><br/><span ng-show="showflag" style="font-size:18px;" class="label label-default">Se actualizó la información de las campañas.</span>
+							</div>
+							<div class="col-sm-10" style="text-align:right;">
+								<button ng-click="viewNewCampaigns()" class="btn btn-embossed btn-primary m-r-20"><i class="fa fa-plus"></i> Nueva Campaña</button>
+							</div>
+						</div>
+						<div class="row text-left">
+							<div class="col-sm-6">
+								<h4 style="font-size:14px;"><b>BUSCAR:</b></h4><input ng-model="searchValue" ng-change="searchValueChange(searchValue)" type="text" class="form-control" id="field-1" >
+							</div>
+						</div>
+						<!-- <div ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div> -->
+						<table class="table table-hover dataTable" id="table-editable" data-table-name="Total users">
+							<col width="5%">
+							<col width="10%">
+							<col width="20%">
+							<col width="10%">
+							<col width="10%">
+							<col width="20%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<thead>
+								<tr>
+									<th></th>
+									<th style="" width="10px">Detalle</th>
+									<th width="10px">
+										<a style="cursor:pointer;" ng-click="sortType = 'campaign_name'; sortReverse = !sortReverse">
+											Título
+											<span ng-show="sortType == 'campaign_name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'campaign_name' && sortReverse"  class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th width="10px">
+										<a style="cursor:pointer;" ng-click="sortType = 'date_up'; sortReverse = !sortReverse">
+											Alta
+											<span ng-show="sortType == 'date_up' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'date_up' && sortReverse"  class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th width="10px">Descripción</th>
+									<th width="10px">
+										<a style="cursor:pointer;" ng-click="sortType = 'segment_description'; sortReverse = !sortReverse">
+											Segmento
+											<span ng-show="sortType == 'segment_description' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'segment_description' && sortReverse"  class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th width="10px">
+										<a style="cursor:pointer;" ng-click="sortType = 'rangee'; sortReverse = !sortReverse">
+											Edad
+											<span ng-show="sortType == 'rangee' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'rangee' && sortReverse"  class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th width="10px">
+										<a style="cursor:pointer;" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+											Ciudad
+											<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse"  class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<!-- <th width="10px">Estatus</th> -->
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="campaign in allCampaigns | orderBy:sortType:sortReverse | filter:searchValue" >
+									<td>
+										<i ng-click="selectedCampaignForDelete(campaign)" data-toggle="modal" data-target="#deleteCampaign"
+										class="fa fa-minus-circle fa-2x" style="cursor:pointer; color:#4e120c;"></i>
+									</td>
+									<!-- <td><img src="assets/global/images/layouts/boxed.jpg" width="150px;" height="75px;"/></td> -->
+									<td class="text-center" style="cursor:pointer;" ng-click="goToEditCampaign(campaign)"><i class="fa fa-eye fa-2x"></i></td>
+									<td>{{campaign.campaign_name}}</td>
+									<td>{{campaign.date_up | date}}</td>
+									<td class="text-center"><a ng-click="showDescription(campaign)" data-toggle="modal" data-target="#modal-description" class="btn btn-default btn-raised rippler rippler-default fa fa-search" style="height: 36px;line-height: 20px;font-size: 20px;"></a></td>
+									<td>{{campaign.segment_description}}</td>
+									<td>{{campaign.rangee}}</td>
+									<td>{{campaign.name}}</td>
+									<!-- <td>
+										<span ng-if="campaign.status === '2'" class="label label-default">Inactiva</span>
+										<span ng-if="campaign.status === '1'" class="label label-success">Activa</span>
+									</td> -->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="copyright">
+            <p class="pull-left sm-pull-reset">
+                <span>Copyright <span class="copyright">&copy;</span> 2016 </span>
+                <span>MBLEDTEQ</span>.
+                <span>All rights reserved. </span>
+            </p>
+            <p class="pull-right sm-pull-reset">
+                <span><a href="#" class="m-r-10">SOPORTE</a> | <a href="#" class="m-l-10 m-r-10">TÉRMINOS</a> | <a href="#" class="m-l-10">POLITICA</a></span>
+            </p>
+        </div>
+    </div>
+	<div class="modal fade" id="modal-responsive" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title"><strong>NUEVA</strong> CAMPAÑA</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Definición de la campaña.</p>
+                    <div class="row" ng-if="wizardSteps === 1">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-1" class="control-label">Título</label>
+                                <input ng-model="title" ng-change="titleChange(title)" type="text" class="form-control" id="field-1" >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-2" class="control-label">Descripcion</label>
+                                <input ng-model="description" ng-change="descriptionChange(description)" type="text" class="form-control" id="field-2" >
+                            </div>
+                        </div>
+						<div class="col-md-12">
+                            <div class="form-group">
+								<input ng-model="autorization" type="checkbox" data-checkbox="icheckbox_square-blue">
+                                <label for="field-2" class="control-label">Autorización para descargar</label>
+                            </div>
+                        </div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div ng-class="alertCampaignClass" ng-show="alertCampaignShow">
+									<h4 class="alert-title">¡Alerta!</h4>
+									<p>{{messageCampaign}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12" ng-if="title && description" >
+							<div class="modal-footer text-right">
+								<button ng-click="createCampaign()" type="button" class="btn btn-success btn-embossed bnt-square">Crear Campaña<i class="fa fa-arrow-right"></i> </button>
+							</div>
+						</div>
+                    </div>
+                    <div class="row" ng-if="wizardSteps === 2">
+						<div class="col-xlg-12 col-lg-12">
+							<div class="panel">
+								<div class="panel-header">
+									<h3><i class="icon-globe-alt"></i> <strong>CONFIGURACIÓN</strong> TEXTOS</h3>
+								</div>
+								<div class="panel-content">
+									<div class="row">
+										<div class="col-sm-12">
+											<form class="form-horizontal ng-pristine ng-valid">
+												<div class="col-md-12">
+													<h4 class="col-sm-12 control-label">
+														<button ng-click="newText()" type="button" class="btn btn-sm btn-primary pull-right">
+															<i class="fa fa-plus-square"></i>
+														</button>
+													</h4>
+													<div class="form-group" ng-repeat="text in textConfig">
+														<h4 class="col-sm-1 control-label"></h4>
+														<div class="col-sm-10">
+															<div class="col-sm-2">
+																<a ng-click="removeText(text)" class="delete btn btn-sm btn-danger" href="javascript:;">
+																	<i class="icons-office-52">
+																	</i>
+																</a>
+															</div>
+															<div class="col-sm-10">
+																<input class="form-control" ng-model="text.text_config" type="text">
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div ng-class="alertTextClass" ng-show="alertTextShow">
+												<h4 class="alert-title">¡Alerta!</h4>
+												<p>{{messageText}}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row" ng-if="newTextsArray.length>0">
+								<div class="col-md-12">
+									<div class="modal-footer text-right">
+										<button ng-click="uploadTexts()" type="button" class="btn btn-success btn-embossed bnt-square">Cargar Textos<i class="fa fa-arrow-right"></i></button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" ng-if="wizardSteps === 3">
+						<div class="col-lg-12 portlets">
+							<div class="panel">
+								<div class="panel-header panel-controls">
+									<h3><i class="icon-cloud-upload"></i> CONFIGURACIÓN <strong>IMÁGENES</strong></h3>
+								</div>
+								<div class="panel-content">
+									<div class="row">
+										<div class="col-sm-12">
+										
+										</div>
+										<div class="col-sm-12">
+											<div class="text-right">
+												<ul style="color:black; list-style:none;">
+													<li ng-repeat="p in filesUploaded">
+														<a class="check btn btn-sm btn-success" href="javascript:;">
+															<img src="{{p.preview}}" width="100px" height="100px"/>{{p.name}}<i class="fa fa-check"></i>
+														</a>
+														<button ng-click="uploadImage(p)" type="button" class="btn btn-success btn-embossed bnt-square">Cargar <i class="fa fa-arrow-right"></i></button>
+														<div class="form-group">
+															<input ng-model="autorizationImage" type="checkbox" data-checkbox="icheckbox_square-blue">
+															<label for="field-2" class="control-label">Obligatoria</label>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="row">
+										<div class="col-sm-12">
+												<div ng-class="alertImageClass" ng-show="alertImageShow">
+													<h4 class="alert-title">¡Alerta!</h4>
+													<p>{{ImageText}}</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="modal-footer text-right">
+										<button ng-if="enableFourthStep" ng-click="fourthStep()" type="button" class="btn btn-primary btn-embossed bnt-square">Continuar<i class="fa fa-arrow-right"></i> </button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" ng-if="wizardSteps === 4">
+						<div class="col-lg-12 portlets">
+							<div class="panel">
+								<div class="panel-header panel-controls">
+									<h3><i class="icon-cloud-upload"></i> CONFIGURACIÓN <strong>PALETTE</strong></h3>
+								</div>
+								<div class="panel-content">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<div class="input-group">
+													<ul class="icheck-colors">
+														<li data-toggle="modal" data-target="#deletePantone" ng-repeat="pal in paletteConfig" ng-click="pantoneToRemove()" ng-style="{'background-color':pal.color}">
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-3">Agrega tus colores
+										</div>
+										<div class="col-sm-9">
+											<input colorpicker colorpicker-position="right" type="text" ng-model="your_model" />
+											<button ng-click="newPalette(your_model)" type="button" class="btn btn-sm btn-primary">
+												<i class="fa fa-plus-square"></i>
+											</button>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="modal-footer text-right">
+												<button ng-click="uploadPalette()" type="button" class="btn btn-success btn-embossed bnt-square"><i class="fa fa-arrow-left"></i> Cargar Pantones</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="modal-footer text-right">
+										<button ng-click="thirdStep()" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-arrow-left"></i> Regresar</button>
+										<button ng-click="fifthStep()" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-arrow-right"></i> Siguiente</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" ng-if="wizardSteps === 5">
+						<div class="col-lg-12 portlets">
+							<div class="panel">
+								<div class="panel-header panel-controls">
+									<h3><i class="icon-cloud-upload"></i> CONFIGURACIÓN <strong>FUENTES</strong></h3>
+								</div>
+								<div class="panel-content">
+									<div class="row">
+										<div class="col-sm-12">
+											<file-upload class="btn btn-success btn-rad btn-trans file-upload" preview="true" name="userFile" resize="true" max-width="1280" max-height="1280" ng-model="fontsUploaded" multiple="false" uri="/upload/upload" accept="image/png, image/jpg">
+												<i class="fa fa-upload"></i>
+												<span>Subir fuente</span>
+												
+											</file-upload>
+										</div>
+										<div class="col-sm-12">
+											<div class="text-right">
+												<ul style="color:black; list-style:none;">
+													<li ng-repeat="p in fontsUploaded">
+														<a class="check btn btn-sm btn-success" href="javascript:;">
+															{{p.name}}<i class="fa fa-check"></i>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="modal-footer text-right">
+										<button ng-click="fourthStep()" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-arrow-left"></i> Regresar</button>
+										<button ng-click="sixthStep()" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-check"></i> Siguiente</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" ng-if="wizardSteps === 6">
+						<div class="col-lg-12 portlets">
+							<div class="panel">
+								<div class="panel-header panel-controls">
+									<h3><i class="icon-object-group"></i> ESCOJE LOS <strong>MATERIALES</strong></h3>
+								</div>
+								<div class="panel-content">
+									<div class="row">
+										<div class="col-sm-12">
+											<table class="table table-hover dataTable" id="table-editable">
+												<col width="50%">
+												<col width="50%">
+												<thead>
+													<tr>
+														<th width="20px">Material</th>
+														<th width="20px"></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="material in allMaterials">
+														<td>{{material.description}} - {{material.width}}px X {{material.height}}px</td>
+														<td class="text-center">
+															<input ng-model="material.selected" type="checkbox" data-checkbox="icheckbox_square-blue">
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="modal-footer text-right">
+												<button ng-click="uploadMaterials()" type="button" class="btn btn-success btn-embossed bnt-square"><i class="fa fa-arrow-left"></i> Cargar Materiales</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="modal-footer text-right">
+										<button ng-click="fifthStep()" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-arrow-left"></i> Regresar</button>
+										<button data-dismiss="modal" type="button" class="btn btn-primary btn-embossed bnt-square"><i class="fa fa-check"></i> Guardar Campaña</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="modal fade modal-slideright" id="deletePantone" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="c-primary m-b-30">¿Deseas borrar este elemento?</h2>
+                            <button type="button" ng-click="removePantone()" data-dismiss="modal" class="btn btn-primary btn-embossed btn-block" >Aceptar</button>
+                            <button type="button" data-dismiss="modal" class="btn btn-white btn-block">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="modal fade" id="modal-description" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title">DESCRIPCIÓN<strong> DE LA CAMPAÑA</strong></h4>
+                </div>
+                <div class="modal-body">
+                    {{descriptionOnModal}}<br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="modal fade" id="deleteCampaign" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<h2 class="c-primary m-b-30">¿Deseas borrar esta campaña?</h2>
+							<button type="button" ng-click="eraseCampaign()" data-dismiss="modal" class="btn btn-primary btn-embossed btn-block" >Aceptar</button>
+							<button type="button" data-dismiss="modal" class="btn btn-white btn-block">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

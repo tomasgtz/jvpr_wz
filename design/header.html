@@ -1,0 +1,111 @@
+	<div class="header">
+        <h2>DISEÑO <strong>DE LA CAMPAÑA</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <!-- <ol class="breadcrumb">
+                <li>
+                    <a href="dashboard">Make</a>
+                </li>
+                <li>
+                    <a href="tables">Tables</a>
+                </li>
+                <li class="active">Tables Editable</li>
+            </ol> -->
+        </div>
+		
+    </div>
+<div class="wrapper">
+		<button ng-if="imageSelected || formSelected" ng-click="moveToFront()">Front </button><br/>
+		<button ng-if="imageSelected || formSelected" ng-click="moveToBack()">Back </button>
+		<button ng-if="imageSelected || formSelected" ng-click="moveToForward()">Front </button><br/>
+		<button ng-if="imageSelected || formSelected" ng-click="moveToBackward()">Back </button>
+		<button ng-click="exportAs()">Exportar </button>
+		<button ng-click="canvasIsTargeted()"> Color Canvas </button>
+		<button ng-click="addCircle()"> Circle </button>
+		<button ng-click="addTriangle()"> Triangle </button>
+		<button ng-click="addRectangle()"> Rectangle </button>
+		<button ng-click="addLine()"> Line </button>
+		
+		
+		<div class="row">
+			<div class="col-sm-9">
+				<div class="col-sm-3">
+					<button ng-click="canvasIsTargeted()" class="btn btn-embossed btn-warning m-r-20"><i class="fa fa-square"></i> Canvas</button>
+				</div>
+				<div class="col-sm-9">
+					<button style="width: 20px;" ng-click="addTriangle()" class="btn btn-embossed btn-default m-r-10"> T</button>
+					<button style="width: 20px;" ng-click="addCircle()" class="btn btn-embossed btn-default m-r-10"> C</button>
+					<button style="width: 20px;" ng-click="addRectangle()" class="btn btn-embossed btn-default m-r-10"> R</button>
+					<button style="width: 20px;" ng-click="addLine()" class="btn btn-embossed btn-default m-r-10"> L</button>
+					<button style="width: 20px;" ng-show="isObjectSelected" ng-click="deleteSelectedObject()" class="btn btn-embossed btn-default m-r-10"> <img src="/images/utils/delete.png" height="16" width="16"></button>
+					<button style="width: 20px;" ng-click="addText()" class="btn btn-embossed btn-default m-r-10"> <img src="/images/utils/pencil.png" height="16" width="16"></button>
+					<button style="width: 20px;" ng-click="resetBoard()" class="btn btn-embossed btn-default m-r-10"> <img src="/images/utils/reset.png"  height="16" width="16"></button>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<button ng-click="exportAs()" class="btn btn-embossed btn-primary m-r-20"><i class="fa fa-download"></i> Descargar</button>				
+			</div>
+		</div>
+		
+		<div class="row" ng-if="formSelected">
+			<div class="col-sm-12">
+				<div class="form-group">
+					<div class="input-group">
+						<ul class="icheck-colors">
+							<li ng-click="changeFormColor(pal)" ng-repeat="pal in paletteArray"  ng-style="{'background-color':pal.color}">
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" ng-if="canvasTarget">
+			<div class="col-sm-12">
+				<div class="form-group">
+					<div class="input-group">
+						<ul class="icheck-colors">
+							<li ng-click="changeCanvasColor(pal)" ng-repeat="pal in paletteArray"  ng-style="{'background-color':pal.color}">
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	   <!-- <div ui-view="header"></div> -->
+        <div id="hero_container" style="position:static; margin-top: 20px;">
+          <div id="left_sidebar">
+            <div class="header">
+              <h2>Imágenes de la campaña</h2>
+            </div>
+            <div class="sticker_container">   	
+			   <!--  <div class="button_container">						
+				  <div id="add_sticker" ng-click="openUploadDialog()">Agregar imágenes</div>					
+			   </div> -->		
+			   <ul ng-drag-drop dropTo="#canvas_board" styles="{{styles}}" on-drag="dragCallback(event)" on-drop="dropCallback(event)" on-over="overCallback(event)" style="list-style: none;">
+				  <li style="text-align: center;" class="item" ng-repeat="image in images" ng-click="dropImage(image, $event)">			
+					  <h3>{{image.title}}</h3>								
+					  <!-- <div  class="delete" ng-click="deleteSticker(image)">X</div> -->
+					  <img src="{{image.src}}" height="100" width="100" dragIt="true">		
+				  </li>	
+			   </ul>			   
+			</div>
+          </div>
+		  
+          <div id="canvas_container" style="border:1px solid #A8A8A8;">
+			<div id="canvas_board">
+			   <!-- <div class="edit_utils_container">						
+				  <ul class="horizontal_container">
+					 <li ng-show="isObjectSelected" ng-click="deleteSelectedObject()"><img src="/images/utils/delete.png" height="16" width="16"></li>								
+					 <li ng-click="addText()"><img src="/images/utils/pencil.png" height="16" width="16"></li>								
+					 <li ng-click="paintBrush()"><img src="/images/utils/paint.png" height="16" width="16"></li>								
+					 <li ng-click="resetBoard()"><img src="/images/utils/reset.png" height="16" width="16"></li>							
+				  </ul>					
+			   </div>	 -->			
+			   <canvas id="play_board" width="700" height="500"></canvas>
+			</div>
+          </div>
+         <!--  <div id="right_sidebar">
+            <div ui-view="photos" id="photos"></div>
+          </div> -->
+        </div>
+        <!-- <div ui-view="footer"></div> -->
+      </div> 

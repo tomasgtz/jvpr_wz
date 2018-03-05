@@ -1,0 +1,185 @@
+<div>
+		<div class="header">
+			<h2>NUEVA <strong>COMPAÑÍA</strong> </h2>
+			<div class="breadcrumb-wrapper">
+				<!-- <ol class="breadcrumb">
+					<li>
+						<a href="dashboard">Make</a>
+					</li>
+					<li>
+						<a href="tables">Tables</a>
+					</li>
+					<li class="active">Tables Editable</li>
+				</ol> -->
+			</div>
+			
+		</div>
+		
+		<div class="row">
+			<div ng-class="alertClass" ng-show="alertShow">
+				<h4 class="alert-title">¡Alerta!</h4>
+				<p>{{message}}</p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-12 portlets">
+				<div class="panel">
+					<!-- <div class="panel-header panel-controls">
+						<h3><i class="fa fa-table"></i> <strong>USUARIOS </strong> DE LA EMPRESA</h3>
+					</div> -->
+					<div class="panel-content">
+						<div class="row">
+							<div class="col-sm-12" style="text-align:right;">
+								<button ng-click="saveData()" class="btn btn-embossed btn-primary m-r-20"><i class="fa fa-plus"></i> Crear Usuario</button>
+							</div>
+						</div>
+						<div class="row" >
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="field-1" class="control-label">Nombre</label>
+									<input ng-model="name" ng-change="nameChange(name)" type="text" class="form-control" id="field-1" >
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="field-1" class="control-label">Dirección</label>
+									<input ng-model="desc" ng-change="descChange(desc)" type="text" class="form-control" id="field-1" >
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="field-1" class="control-label">Industria</label>
+									<input ng-model="industry" ng-change="industryChange(industry)" type="text" class="form-control" id="field-1" >
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="field-1" class="control-label">Página Web</label>
+									<input ng-model="webpage" ng-change="webChange(webpage)" type="text" class="form-control" id="field-1" >
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="field-1" class="control-label">Código postal</label>
+									<input onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-model="pc" ng-change="pcChange(pc)" type="text" class="form-control" id="field-1" >
+								</div>
+							</div>
+							<div class="col-sm-6 form-group">
+								<div class="col-sm-3">
+									<label for="field-2" class="control-label">Ciudad:</label>
+								</div>
+								<div class="col-sm-6">
+										<select id="selectcity" name="singleSelect" ng-model="optionCity" style="width:200px;">
+											<option ng-repeat="optionCity in allCities" 
+											value="{{optionCity.id_city}}">{{optionCity.name}}</option>
+										</select><br>
+										<!-- <select ng-options="optionCity.id_city as optionCity.name for optionCity in allCities"  ng-model="selectCity" style="width:200px;">
+										</select><br> -->
+								</div>
+							</div>
+							<div class="col-sm-6 form-group">
+								<div class="col-sm-3">
+									<label for="field-2" class="control-label">Subscripción:</label>
+								</div>
+								<div class="col-sm-6">
+										<select id="selectsubs" name="singleSelect" ng-model="optionSubs" style="width:200px;">
+											<option ng-repeat="optionSubs in allSubscriptions" 
+											value="{{optionSubs.id_subs}}">{{optionSubs.description}}</option>
+										</select><br>
+										<!-- <select ng-options="optionCity.id_city as optionCity.name for optionCity in allCities"  ng-model="selectCity" style="width:200px;">
+										</select><br> -->
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="field-1" class="control-label">Contratación</label>
+									<select id="selectcontact" style="width:200px;">
+										<option value="1">
+											Mensual
+										</option>
+										<option value="2">
+											Anual
+										</option>
+									</select><br>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div ng-class="alertUserClass" ng-show="alertUserShow">
+								<h4 class="alert-title">¡Alerta!</h4>
+								<p>{{messageUser}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="header">
+			<h2>USUARIO <strong>ADMINISTRADOR</strong> </h2>
+			<div class="breadcrumb-wrapper">
+				<!-- <ol class="breadcrumb">
+					<li>
+						<a href="dashboard">Make</a>
+					</li>
+					<li>
+						<a href="tables">Tables</a>
+					</li>
+					<li class="active">Tables Editable</li>
+				</ol> -->
+			</div>
+			
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-12 portlets">
+				<div class="panel">
+					<!-- <div class="panel-header panel-controls">
+						<h3><i class="fa fa-table"></i> <strong>USUARIOS </strong> DE LA EMPRESA</h3>
+					</div> -->
+					<div class="panel-content">
+					
+						<div class="row" >
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="field-1" class="control-label">Nombre de usuario</label>
+										<input ng-model="nameusernoemail" ng-change="nameUserNoEmailChange(nameusernoemail)" type="text" class="form-control" id="field-1" >
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="field-1" class="control-label">Correo electrónico</label>
+										<input ng-model="nameuser" ng-change="nameUserChange(nameuser)" type="text" class="form-control" id="field-1" >
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="field-1" class="control-label">Tel. Casa</label>
+										<input onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-model="telhome" ng-change="telhomeChange(telhome)" type="text" class="form-control" id="field-1" >
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="field-1" class="control-label">Móvil</label>
+										<input onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-model="telmobile" ng-change="telmobileChange(telmobile)" type="text" class="form-control" id="field-1" >
+									</div>
+								</div>
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div ng-class="alertUserClass" ng-show="alertUserShow">
+								<h4 class="alert-title">¡Alerta!</h4>
+								<p>{{messageUser}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>

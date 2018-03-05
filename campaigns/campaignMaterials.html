@@ -1,0 +1,429 @@
+	<div class="header">
+        <h2>DISEÑO <strong>DE LA CAMPAÑA</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <!-- <ol class="breadcrumb">
+                <li>
+                    <a href="dashboard">Make</a>
+                </li>
+                <li>
+                    <a href="tables">Tables</a>
+                </li>
+                <li class="active">Tables Editable</li>
+            </ol> -->
+        </div>
+		
+    </div>
+
+<div class="wrapper" >
+		
+	    <div class="row panel" style="padding-top:20px; padding-bottom:20px;">
+		<!-- 	<p><font face="verdana" color="green">This is some text!</font></p>
+			<p><font face="Wolf in the City.ttf" color="green">This is some text!</font></p> -->
+			<div class="col-sm-6 form-group">
+				<div class="col-sm-3">
+					<label for="field-2" class="control-label">Escoger material:</label>
+				</div>
+				<div class="col-sm-6" style="z-index: 0;">
+						<select class="form-control" ng-change="materialChange(material)" id="selectmateriall" name="singleSelect" ng-model="material" style="width:200px;">
+							<option ng-repeat="material in materialArray" value="{{material.id_material}}">{{material.description}}</option>
+						</select><br>
+				</div>
+				<div class="col-sm-2">
+						<button ng-click="materialChange()" class="btn btn-embossed btn-warning m-r-20" style="width:130px;">Seleccionar</button>
+				</div>
+				
+			</div>
+		</div>
+	    <div class="row panel" style="padding-top:20px; padding-bottom:20px;" ng-show="showCanvasMaterialSelected">
+			<div class="col-sm-2">
+				<h3 style="font-size:18px;"><b>Herramientas</b></h3>
+				<div class="edit_utils_container">			
+		
+				    <ul class="horizontal_container" >	
+						<li> 
+							<!-- <button ng-if="factory.canvas.getZoom()<4" style="width: 58px; padding: 0; background-color: #5DB6E6;" ng-click="addZoom()" class="btn btn-embossed btn-primary m-r-10">+Zoom</button>
+							<button ng-if="factory.canvas.getZoom() != 1" style="width: 58px; padding: 0; background-color: #5DB6E6;" ng-click="lessZoom()" class="btn btn-embossed btn-primary m-r-10">-Zoom</button> -->
+							<button ng-if="!zoomActivated" ng-click="ZoomStatus()" style="width: 130px; padding: 0; background-color: #5DB6E6;" class="btn btn-embossed btn-primary m-r-10">Activar Zoom</button>
+							<button ng-if="zoomActivated" ng-click="ZoomStatus()" style="width: 130px; padding: 0;" class="btn btn-embossed btn-warning m-r-10">Desactivar Zoom</button>
+						</li>
+						<li>
+							<button data-dismiss="modal" style="width: 130px; padding: 7px 15px 9px; background-color: #5DB6E6; color:white;" ng-show="isObjectSelected" ng-click="deleteSelectedObject()" class="btn btn-embossed btn-default m-r-10"> Borrar elemento</button>
+						</li>
+						<li> 
+							<button data-toggle="modal" data-target="#modal-canvasoptions" ng-click="canvasIsTargeted()" class="btn btn-embossed btn-warning m-r-20" style="width:130px; background-color: #44BBFF;">Lienzo <b>+</b></button>
+						</li>
+						<li> 
+							<button data-toggle="modal" data-target="#modal-images" style="width: 130px;     background-color: #44BBFF;" class="btn btn-embossed btn-warning m-r-10"> Imágenes</button>
+						</li>
+						<li> 
+							<button style="width: 130px; background-color: #44BBFF;" ng-click="addText()" class="btn btn-embossed btn-default m-r-10"> <img src="/images/utils/pencil.png" height="16" width="16"></button>
+						</li>
+						<!-- <li>
+							<jd-fontselect />
+						</li> -->
+						<li style="margin-bottom:10px;">
+							<div class="btn-group">
+							  <button style="width:130px;     background-color: #44BBFF; color:white;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							  <i class="fa fa-ellipsis-horizontal"></i> Formas <i class="fa fa-angle-down"></i>
+							  </button>
+							  <ul class="dropdown-menu">
+								<li>
+								  <button style="width: 130px;" ng-click="addTriangle()" class="btn btn-embossed btn-default m-r-10"> <i style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);	" class="fa fa-play fa-3x"></i></button>
+								</li>
+								<li>
+								  <button style="width: 130px;" ng-click="addCircle()" class="btn btn-embossed btn-default m-r-10"> <i class="fa fa-circle fa-3x"></i></button>
+								</li>
+								<li>
+								 <button style="width: 130px;" ng-click="addRectangle()" class="btn btn-embossed btn-default m-r-10"> <i class="fa fa-stop fa-3x"></i></button>
+								</li>
+								<li>
+								  <button style="width: 130px;" ng-click="addLine()" class="btn btn-embossed btn-default m-r-10"> <i class="fa fa-minus fa-3x"></i></button>
+								</li>								
+							  </ul>
+							</div>		
+						</li>
+						<li> 
+							<button ng-show="!cropStarted && (formSelected || imageSelected)" class="btn btn-embossed btn-blue m-r-20" style="width:130px; background-color: #44BBFF; color:white;" ng-click="startCrop()">Definir Crop</button>
+							<button ng-show="cropStarted" class="btn btn-embossed btn-blue m-r-20" style="width:130px; background-color: #462446; color:white;" ng-click="crop()">Crop</button>
+						</li>
+						<li> 
+							<button ng-show="formSelected || imageSelected" data-toggle="modal" data-target="#modal-formato" class="btn btn-embossed btn-blue m-r-20" style="width:130px; background-color: #462446; color:white;">Formato</button>
+						</li>
+						
+						<li>
+							<button style="z-index:200; background-color: #462446; border-radius: 20px; height: 50px; position: fixed; right: 0; width: 115px; bottom:0;" data-toggle="modal" data-target="#download-formats" class="btn btn-embossed btn-primary m-r-20">
+								<i style="font-size:25px;" class="fa fa-download"></i>
+								<p style="    margin: 0px 2px 10px;    line-height: 12px;">Descargar</p>
+							</button>
+						</li>
+				    </ul>				
+			    </div>
+				<!-- <h3 style="font-size:18px;"><b>Formato</b></h3>
+				<div class="edit_utils_container">		
+					<li style="margin-bottom:10px;">
+							<div class="btn-group">
+							  <button style="width:130px;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							  <i class="fa fa-ellipsis-horizontal"></i> Posición <i class="fa fa-angle-down"></i>
+							  </button>
+							  <ul class="dropdown-menu">
+								<li>
+								  <button class="btn btn-embossed btn-info m-r-10" ng-if="imageSelected || formSelected" ng-click="moveToFront()" style="width:130px;">Al frente</button>
+								</li>
+								<li>
+								  <button class="btn btn-embossed btn-info m-r-10" ng-if="imageSelected || formSelected" ng-click="moveToBack()" style="width:130px;">Al fondo</button>
+								</li>
+								<li>
+								 <button class="btn btn-embossed btn-info m-r-10" ng-if="imageSelected || formSelected" ng-click="moveToForward()" style="width:130px;">Adelante</button>
+								</li>
+								<li>
+								  <button class="btn btn-embossed btn-info m-r-10" ng-if="imageSelected || formSelected" ng-click="moveToBackward()" style="width:130px;">Atrás</button>
+								</li>
+							  </ul>
+							</div>		
+						</li>
+				</div> -->
+			</div>
+			<div class="col-sm-10">
+				<div id="hero_container" style="position:static; margin-top: 20px;" >
+					<div id="canvas_container" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+						<div id="canvas_board">			
+						   <canvas id="play_board"></canvas>
+						   <canvas id="zoom" width="400" height="200" style="position:absolute; top:0; left:0; display:none"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+	    </div>
+		<div class="modal fade modal-slideright" id="modal-images" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" style="width:300px;">
+				<div id="mContent" class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+						<h4 class="modal-title">AGREGA UNA<strong> IMAGEN</strong></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row" >
+							<div class="text-right">
+								<div class="btn-group">
+									<div>
+										<!-- HERE -->
+										<!-- <button type="button" class="btn btn-embossed btn-primary m-r-20" ng-click="uploadSticker()"><i class="fa fa-thumb-tack"></i> Agregar imágenes</button> -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<ul ng-drag-drop dropTo="#canvas_board" styles="{{styles}}" on-drag="dragCallback(event)" on-drop="dropCallback(event)" on-over="overCallback(event)" style="list-style: none; max-height: 500px; overflow-y: scroll;">
+								   <li style="text-align: center; margin-bottom:10px;" class="item" ng-repeat="image in images" ng-click="dropImage(image, $event)">			
+									  <h3>{{image.title}}</h3>								
+									  <!-- <div  class="delete" ng-click="deleteSticker(image)">X</div> -->
+									  <!-- <img data-dismiss="modal" src="{{image.src}}" height="{{image.height}}" width="{{image.width}}" dragIt="true">	 -->
+										<div style="height:100%; width:100%;">
+											<img data-dismiss="modal" src="{{image.src}}"  style="width:100%; min-height:100%; box-shadow: 6px 6px 7px #888888;">
+										</div>
+								   </li>	
+								</ul>
+							</div>
+							<!-- <div class="col-sm-12">
+								<form callbacks="dzCallbacks" id="dropzoneFrm3" action="upload1.php" class="dropzone" style="height: 300px;    overflow-y: scroll;">
+									<div class="fallback">
+										<input name="file" type="file" multiple />
+									</div>
+								</form>
+							</div> -->
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="modal fade modal-slideright" id="new-image" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						
+						<h4 class="modal-title">AGREGA UNA<strong> IMAGEN</strong></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label class="col-sm-3 control-label">Nombre de la imagen:</label>
+									{{previewImages}}
+									<div class="col-sm-9">
+										<input class="form-control" ng-model="newImage" type="text">
+									</div>
+								</div>
+								<div class="image_container ng-scope" ng-repeat="image in images">
+									<div style="height:100%; width:100%;">
+										<img ng-src="image.src"  style="width:100% min-height:100%">
+									</div>
+								</div>
+								<input type="file" id="sticker_upload" ng-file-select images="previewImages" callback="onFileUpload()" file-type="image" style="display:none;" >
+								<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="uploadSticker()">Cargar</button>
+								<button type="submit" class="ngdialog-button ngdialog-button-primary" ng-click="submitSticker(form)">Submit</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modal-fonts" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+						<h4 class="modal-title">AGREGA UNA<strong> TIPOGRAFÍA</strong></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="panel-content">
+									<div class="row">
+										<div class="col-sm-12">
+											<form callbacks="dzCallbacks" id="dropzoneFrm2" action="upload.php" class="dropzone" style="height: 300px;    overflow-y: scroll;">
+												<div class="fallback">
+													<input name="file" type="file" multiple />
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="download-formats" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+						<h4 class="modal-title">FORMATO DE<strong> DESCARGA</strong></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-3 text-center">	
+								<button ng-click="exportPDF()" style="width:120px;" type="button" class="btn btn-success btn-embossed" data-dismiss="modal">PDF</button>
+							</div>
+							<div class="col-sm-3 text-center">	
+								<button ng-click="exportPNG()" style="width:120px;" type="button" class="btn btn-success btn-embossed" data-dismiss="modal">PNG</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="apply-fonts" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+						<h4 class="modal-title">APLICA LA <strong> TIPOGRAFÍA</strong></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-12" style="    height: 200px;    overflow-y: scroll;">
+								<table class="table table-hover dataTable" id="table-editable">
+									<col width="50%">
+									<col width="50%">
+									<thead>
+										<tr>
+											<th width="20px"></th>
+											<th width="20px"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="font in fontsUploaded">
+											<td>{{font.font}}</td>
+											<td class="text-center">
+												<button ng-click="modifyFont(font)" type="button" class="btn btn-primary btn-success" data-dismiss="modal">Aplicar</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade modal-slideright" id="modal-canvasoptions" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<h2 class="c-primary m-b-30">Propiedades del Lienzo</h2>
+								<div class="row" ng-if="canvasTarget">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<div class="input-group">
+												<ul class="icheck-colors">
+													<li ng-click="changeCanvasColor(pal)" ng-repeat="pal in paletteArray"  ng-style="{'background-color':pal.color}" style="border: 2px solid black;">
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12" ng-class="alertExpiredClass" ng-show="alertExpiredShow">
+												<h4 class="alert-title">¡Alerta!</h4>
+												<p>{{alertExpiredMessage}}</p>
+											</div>
+										</div>
+										<input colorpicker colorpicker-position="bottom" type="text" ng-model="your_model" style="width: 90px;" />
+										<button ng-click="newPalette(your_model)" type="button" class="btn btn-sm btn-primary">
+										<i class="fa fa-plus-square"></i>
+										</button>
+										<button ng-if="canvasTarget" style="width: 130px;" ng-click="setTransparent()" class="btn btn-embossed btn-default m-r-10"> Transparente</button>
+										<button ng-if="canvasTarget" style="width: 130px;" ng-click="clearCanvas()" class="btn btn-embossed btn-default m-r-10"> Limpiar</button>
+									</div>
+								</div>
+								<button type="button" data-dismiss="modal" class="btn btn-default btn-block">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade modal-slideright" id="modal-formato" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" style="max-width: 380px;">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<h2 style="margin-top: 40px;" class="c-primary m-b-30">Formato</h2>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="row" ng-if="formSelected" style="margin-bottom: -10px;">
+											<div class="col-sm-12">
+												<div class="form-group">
+													<div class="input-group">
+														<ul class="icheck-colors">
+															<li ng-click="changeFormColor(pal)" ng-repeat="pal in paletteArray"  ng-style="{'background-color':pal.color}" style="border: 2px solid black;">
+															</li>
+														</ul>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-12" ng-class="alertExpiredClass" ng-show="alertExpiredShow">
+														<h4 class="alert-title">¡Alerta!</h4>
+														<p>{{alertExpiredMessage}}</p>
+													</div>
+												</div>
+												<input colorpicker colorpicker-position="bottom" type="text" ng-model="your_model" style="width: 90px;" />
+												<button ng-click="newPalette(your_model)" type="button" class="btn btn-sm btn-primary">
+												<i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+										</div>
+										
+										<!-- <div class="text-center"> 
+											<button ng-if="showFonts" data-dismiss="modal" data-toggle="modal" data-target="#apply-fonts" class="btn btn-embossed btn-warning m-r-20" style="width:180px; background-color: #44BBFF; margin-top: 8px; margin-left: 10px;">Aplicar Tipografías</button>
+										</div> -->
+										<div class="text-center" style="margin-top:15px; margin-bottom:15px;">
+											<!-- <select class="form-control"  id="selectFont" name="singleSelect" ng-model="material" style="width:200px;">
+												<option ng-repeat="font in fontsUploaded" value="{{font.font}}">{{font.font}}</option>
+											</select> -->
+											<jd-fontselect stack="myFontStack"/>											
+											<br>
+										</div>
+										<div class="text-center"> 
+											<h2 style="font-family: {{myFontStack}};">Ejemplo de la fuente</h2>
+											<button ng-click="modifyFont()" type="button" class="btn btn-primary btn-success" data-dismiss="modal">Aplicar Tipografía</button>
+										</div>
+										<div class="text-center">
+											<div class="btn-group">
+											  <button style="width:180px; margin-top:20px; margin-left: 10px;    margin-bottom: 8px;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+											  <i class="fa fa-ellipsis-horizontal"></i> Posición <i class="fa fa-angle-down"></i>
+											  </button>
+											  <ul class="dropdown-menu">
+												<li>
+												  <button class="btn btn-embossed btn-info m-r-10" ng-if="imageSelected || formSelected" ng-click="moveToFront()" style="width:130px;">Al frente</button>
+												</li>
+												<li>
+												  <button class="btn btn-embossed btn-info m-r-10" ng-if="imageSelected || formSelected" ng-click="moveToBack()" style="width:130px;">Al fondo</button>
+												</li>
+												<li>
+												 <button class="btn btn-embossed btn-info m-r-10" ng-if="imageSelected || formSelected" ng-click="moveToForward()" style="width:130px;">Adelante</button>
+												</li>
+												<li>
+												  <button class="btn btn-embossed btn-info m-r-10" ng-if="imageSelected || formSelected" ng-click="moveToBackward()" style="width:130px;">Atrás</button>
+												</li>
+											  </ul>
+											</div>	
+										</div>
+										<!-- <div class="text-center"> 
+											<button ng-if="showFonts" data-dismiss="modal" data-toggle="modal" data-target="#modal-fonts" class="btn btn-embossed btn-warning m-r-20" style="width:180px; background-color: #44BBFF; margin-top: 8px; margin-left: 10px;">Subir Tipografías</button>
+										</div> -->
+									</div>
+								</div>
+								<button style="margin-top:30px;" type="button"  data-dismiss="modal" class="btn btn-default btn-block">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div> 

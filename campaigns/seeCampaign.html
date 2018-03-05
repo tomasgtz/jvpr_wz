@@ -1,0 +1,178 @@
+<div>
+   <div class="header">
+      <h2 style="font-size:20px;">NOMBRE: <strong>{{CampaignSelected.campaign_name}}</strong></h2>
+      <div class="breadcrumb-wrapper">
+      </div>
+   </div>
+   <div class="row">
+		<div ng-class="alertClass" ng-show="alertShow">
+			<h4 class="alert-title">¡Alerta!</h4>
+			<p>{{message}}</p>
+		</div>
+	</div>
+		
+   <div class="row">
+      <div class="col-lg-12 portlets">
+         <div class="panel">
+            <div class="panel-content">
+				<div class="row">
+					<div class="col-sm-12" style="text-align:right;">
+						<button ng-click="saveChanges()" class="btn btn-embossed btn-primary m-r-20"><i class="fa fa-check"></i> Guardar cambios</button>
+					</div>
+				</div>
+               <div class="row" >
+                  <div class="col-sm-12">
+					 <div class="row" >
+                        <h3 style="border-bottom: 1px solid black;"><i class="fa fa-briefcase"></i>DESCRIPCIÓN<strong> DE LA CAMPAÑA</strong></h3>
+                        <textarea ng-model="CampaignSelected.description" rows="4" class="form-control" required="" aria-required="true"></textarea>
+						<!-- <h3><strong>{{CampaignSelected.description}}</strong></h3> -->
+                     </div>
+                     <div class="row" style="margin-top:12px;">
+                        <h3 style="border-bottom: 1px solid black;"><i class="fa fa-picture-o"></i>IMÁGENES<strong> DE LA CAMPAÑA</strong></h3>
+                        <form id="dzImages" action="upload.php" class="dropzone" 
+                           ng-dropzone">
+                        </form>
+                     </div>
+                     <div  class="row" style="margin-top:12px;">
+                        <h3 style="border-bottom: 1px solid black;"><i class="fa fa-font"></i>FUENTES<strong> DE LA CAMPAÑA</strong></h3>
+                        <form id="dzFonts" action="upload.php" class="dropzone" 
+                           ng-dropzone">
+                        </form>
+                     </div>
+                     <div class="row" style="margin-top:12px;">
+                        <h3 style="border-bottom: 1px solid black;"><i class="fa fa-paint-brush"></i>PANTONES<strong> DE LA CAMPAÑA</strong></h3>
+                        <div class="col-sm-12">
+                           <div class="form-group">
+                              <div class="input-group">
+                                 <ul class="icheck-colors">
+                                    <li data-toggle="modal" data-target="#deletePantone" ng-repeat="pal in paletteArray" ng-click="pantoneToRemove(pal)" ng-style="{'background-color':pal.color}">
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-sm-3">Agrega tus colores
+                           </div>
+                           <div class="col-sm-9">
+                              <input colorpicker colorpicker-position="right" type="text" ng-model="your_model" />
+                              <button ng-click="newPalette(your_model)" type="button" class="btn btn-sm btn-primary">
+                              <i class="fa fa-plus-square"></i>
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row" style="margin-top:12px;">
+                        <h3 style="border-bottom: 1px solid black;"><i class="fa fa-list"></i>TEXTOS<strong> DE LA CAMPAÑA</strong></h3>
+						<h4 class="col-sm-12 control-label">
+							<button ng-click="newText()" type="button" class="btn btn-sm btn-primary pull-right">
+								<i class="fa fa-plus-square"></i>
+							</button>
+						</h4>
+                        <div class="form-group" ng-repeat="text in textArray">
+                           <div class="col-sm-10" style="margin-bottom:5px;">
+                              <div class="col-sm-2">
+                                 <a ng-click="eraseText(text)" class="delete btn btn-sm btn-danger" href="javascript:;">
+                                 <i class="icons-office-52">
+                                 </i>
+                                 </a>
+                              </div>
+                              <div class="col-sm-10">
+                                 <input class="form-control" ng-model="text.text" type="text">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row" style="margin-top:12px;">
+                        <h3 style="border-bottom: 1px solid black;"><i class="fa fa-laptop"></i>MATERIAL<strong> DE LA CAMPAÑA</strong></h3>
+                        <h4 class="col-sm-12 control-label">
+							<button data-toggle="modal" data-target="#modal-materials" type="button" class="btn btn-sm btn-primary pull-right">
+								<i class="fa fa-plus-square"></i>
+							</button>
+						</h4>
+						<div class="col-sm-3" ng-repeat="material in materialArray">
+							<div>
+								<!-- <a ng-click="eraseMaterial(text)" class="delete btn btn-sm btn-danger" href="javascript:;">
+									<i class="icons-office-52">
+									</i>
+                                </a> -->
+								<span><img width="100px" height="50px" src="http://wizadqa.mbledteq.com/materiales/{{material.thumbnail}}">
+								<h3>{{material.description}}  -  {{material.width}}x{{material.height}}</h3><span>
+							</div>
+						</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="footer">
+      <div class="copyright">
+         <p class="pull-left sm-pull-reset">
+            <span>Copyright <span class="copyright">&copy;</span> 2016 </span>
+            <span>MBLEDTEQ</span>.
+            <span>All rights reserved. </span>
+         </p>
+         <p class="pull-right sm-pull-reset">
+            <span><a href="#" class="m-r-10">SOPORTE</a> | <a href="#" class="m-l-10 m-r-10">TÉRMINOS</a> | <a href="#" class="m-l-10">POLITICA</a></span>
+         </p>
+      </div>
+   </div>
+   <div class="modal fade modal-slideright" id="deletePantone" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-body">
+               <div class="row">
+                  <div class="col-md-12">
+                     <h2 class="c-primary m-b-30">¿Deseas borrar este elemento?</h2>
+                     <button type="button" ng-click="erasePalette()" data-dismiss="modal" class="btn btn-primary btn-embossed btn-block" >Aceptar</button>
+                     <button type="button" data-dismiss="modal" class="btn btn-white btn-block">Cancelar</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="modal fade" id="modal-materials" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title">ESCOJE LOS<strong> MATERIALES</strong></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+						<div class="col-sm-12">
+							<table class="table table-hover dataTable" id="table-editable">
+								<col width="50%">
+								<col width="50%">
+								<thead>
+									<tr>
+										<th width="20px">Material</th>
+										<th width="20px"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="material in allMaterials">
+										<td>{{material.description}} - {{material.width}}px X {{material.height}}px</td>
+										<td class="text-center">
+											<div class="col-md-12">
+												<div class="form-group">
+													<input ng-model="material.selected" ng-true-value="1" ng-false-value="0" ng-change="materialSelected(material)" type="checkbox">
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

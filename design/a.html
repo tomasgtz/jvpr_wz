@@ -1,0 +1,9 @@
+"
+<div class=\"dialog_wrapper\">
+   \n	
+   <form name=\"form\">
+      \n		
+      <div class=\"ngdialog-message\">\n			<h2 class=\"heading -medium\">Nueva imagen</h2>\n			<label name=\"title\" class=\"heading -small\">Nombre de la imagen: <span class=\"warn\">*</span></label>\n			<input type=\"textfield\" placeholder=\"Nombre\" ng-model=\"stickers.title\" name=\"title\" class=\"input_field\" required=\"\"/>\n			<div ng-show=\"form.$submitted || form.title.$touched\">\n		      <div ng-show=\"form.title.$error.required\" class=\"heading -small warn\">Agregue el nombre de la imagen.</div>
+      \n		    
+</div>
+\n			<input type=\"file\" id=\"sticker_upload\" ng-file-select images=\"previewImages\" callback=\"stickers.onFileUpload()\" file-type=\"image\" style=\"display:none;\" >\n			<div class=\"image_container\" ng-repeat=\"image in previewImages\">\n				<img src=\"{{image}}\" ng-show=\"stickers.uploaded\" height=\"120\" width=\"120\">\n			</div>\n		</div>\n		<div class=\"ngdialog-buttons\">\n			<button type=\"submit\" class=\"ngdialog-button ngdialog-button-primary\" ng-show=\"stickers.uploaded\" ng-click=\"stickers.submitSticker(form)\">Submit</button>\n			<button type=\"button\" class=\"ngdialog-button ngdialog-button-secondary\" ng-show=\"!stickers.uploaded\" ng-click=\"stickers.uploadSticker()\">Cargar</button>\n		</div>\n	</form>	\n</div>\n"

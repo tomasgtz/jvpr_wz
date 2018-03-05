@@ -1,0 +1,266 @@
+﻿<div class="col-lg-12 col-md-12">
+
+	<div class="row" style="margin-top: 15px;    padding-top: 10px;">	
+		<div class="col-md-12">
+			<div class="">
+				<div class="col-xs-12">
+					<div class="row header-name panel">
+						<div class="col-xs-12 panel">
+							<div class="col-xs-12">
+								<div class="profil-img">
+									<!-- <button type="button" class="btn btn-embossed btn-primary m-r-20" ng-click="uploadSticker()"><i class="fa fa-thumb-tack"></i> Agregar imágenes</button>
+									<input type="file" id="sticker_upload" ng-file-select images="previewImages" callback="onFileUpload()" file-type="image" style="display:none;" >-->
+									<label for="file-input">
+										<img style=" height:100px; border-radius:10px;" ng-src="{{currentUser.image}}"> 
+									</label>
+
+									<input style="display:none;" id="file-input" type="file" fileread="currentUser.image"/>
+									<!-- <div style="text-align: center;" class="item" ng-repeat="image in images" >			
+									  <h3>{{image.title}}</h3>								
+									  <img data-dismiss="modal" src="{{image.src}}" height="100" width="100" dragIt="true">		
+								   </div>	 -->
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12">
+							<div style="font-size: 18px;" class="name"><b>{{currentUser.company_name}}</b><i class="fa fa-check-circle"></i></div>
+							<!-- <div class="profil-info"><i class="icon-calendar"></i>{{currentUser.date_up}}</div> -->
+							<!-- <div class="profil-info"><i class="icon-call-end"></i>{{currentUser.home_phone}}</div> -->
+							<div class="profil-info"><i class="icon-call-end"></i>{{currentUser.web_page}}</div>
+						</div>
+						<!-- <div class="col-xs-3 moments">
+							<div class="num-moments c-primary countup" data-from="0" data-to="137" data-delay="2000" data-suffix="+" data-duration="6">0</div>
+							<div class="text-center">Moments</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="col-md-6"> -->
+			<!-- <div class=""> -->
+				<!-- <div class="col-xs-12"> -->
+					<!-- <div class="row header-name panel"> -->
+						<!-- <div class="col-xs-12 panel"> -->
+							<!-- <div class="col-xs-12"> -->
+								<!-- <div class="profil-img">									 -->
+									<!-- <label for="file-input"> -->
+										<!-- <img style=" height:100px; border-radius:10px;" src="{{currentUser.logo}}"> -->
+									<!-- </label> -->
+
+									<!-- <input style="display:none;" id="file-input" type="file" fileread="currentUser.logo"/> -->
+								<!-- </div> -->
+							<!-- </div> -->
+						<!-- </div> -->
+						<!-- <div class="col-xs-12"> -->
+							<!-- <div style="font-size: 18px;" class="name"><b>{{currentUser.name}}</b><i class="fa fa-check-circle"></i></div> -->
+							<!-- <!-- <div class="profil-info"><i class="icon-calendar"></i>{{currentUser.date_up}}</div> --> 
+							<!-- <!-- <div class="profil-info"><i class="icon-call-end"></i>{{currentUser.home_phone}}</div> --> 
+							<!-- <div class="profil-info"><i class="icon-call-end"></i>{{currentUser.mobile_phone}}</div> -->
+						<!-- </div> -->
+						<!-- <!-- <div class="col-xs-3 moments"> -->
+							<!-- <div class="num-moments c-primary countup" data-from="0" data-to="137" data-delay="2000" data-suffix="+" data-duration="6">0</div> -->
+							<!-- <div class="text-center">Moments</div> -->
+						<!-- </div> --> 
+					<!-- </div> -->
+				<!-- </div> -->
+			<!-- </div> -->
+		<!-- </div>	 -->
+	</div>
+
+	<div class="profil-content">
+		<div class="row ng-scope">
+			<div class="col-md-12">
+				<div class="panel" ng-if="currentUser.typenum == '2'">
+					<div class="panel-header panel-controls">
+						<h3><i class="icon-home"></i> <strong>DATOS</strong> EMPRESA</h3>
+						
+						<div class="row">
+							<div class="col-sm-12" >
+								<div ng-class="alertCompanyClass" ng-show="alertCompanyShow" style="height: 75px;">
+									<div class="col-sm-2 text-center" style="">
+										<i ng-click="closeAlertCompany()" class="fa fa-check-circle-o fa-4x" style="margin-top: -4px; cursor:pointer;"></i>
+									</div>
+									<div class="col-sm-10">
+										<h4 class="alert-title">¡Alerta!</h4>
+										<p>{{messageCompany}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					<!-- <div class="control-btn"><a href="#" class="panel-reload hidden"><i ng-click="reloadAllData()" class="icon-reload"></i></a><a href="#" class="panel-toggle"><i class="fa fa-angle-down"></i></a><a href="#" class="panel-close"><i class="icon-trash"></i></a></div> -->
+					</div>
+					<div class="panel-content">
+						<div class="row">
+							<form class="form-horizontal ng-pristine ng-valid">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label style="top:0;" class="col-sm-3 control-label">Última modificación</label>
+										<div class="col-sm-9">
+											{{currentUser.company_update}}
+										</div>
+									</div>
+									<div class="form-group">
+										<label style="top:0;" class="col-sm-3 control-label">Subscripción</label>
+										<div class="col-sm-9">
+											{{currentUser.subs_description}}
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Domicilio</label>
+										<div class="col-sm-9">
+											<input class="form-control" ng-model="currentUser.address" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Compañía</label>
+										<div class="col-sm-9">
+											<input class="form-control" ng-model="currentUser.company_name" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Industria</label>
+										<div class="col-sm-9">
+											<input class="form-control" ng-model="currentUser.industry" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Página Web</label>
+										<div class="col-sm-9">
+											<input class="form-control" ng-model="currentUser.web_page" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">C.P.</label>
+										<div class="col-sm-3">
+											<input class="form-control" ng-model="currentUser.pc" type="text">
+										</div>
+										<label class="col-sm-3 control-label">Empleados</label>
+										<div class="col-sm-3">
+											<input ng-disabled="true" class="form-control" ng-model="currentUser.no_employees" type="text">
+										</div>
+									</div>
+								</div>
+								
+								<button ng-click="saveCompanyData()" type="button" class="pull-right btn btn-primary btn-square">Guardar cambios</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-header panel-controls">
+						<h3><i class="icon-user"></i> <strong>DATOS</strong> USUARIO</h3>
+					<!-- <div class="control-btn"><a href="#" class="panel-reload hidden"><i class="icon-reload"></i></a><a href="#" class="panel-toggle"><i class="fa fa-angle-down"></i></a><a href="#" class="panel-close"><i class="icon-trash"></i></a></div> -->
+					
+						<div class="row">
+							<div class="col-sm-12" >
+								<div ng-class="alertUserClass" ng-show="alertUserShow" style="height: 75px;">
+									<div class="col-sm-2 text-center" style="">
+										<i ng-click="closeAlert()" class="fa fa-check-circle-o fa-4x" style="margin-top: -4px; cursor:pointer;"></i>
+									</div>
+									<div class="col-sm-10">
+										<h4 class="alert-title">¡Alerta!</h4>
+										<p>{{messageUser}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="panel-content">
+						<div class="row">
+							<form class="form-horizontal ng-pristine ng-valid">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label style="top:0;" class="col-sm-3 control-label">Rol de Usuario</label>
+										<div class="col-sm-9">
+											{{currentUser.type}}
+										</div>
+									</div>
+									<div class="form-group">
+										<label style="top:0;" class="col-sm-3 control-label">Última modificación</label>
+										<div class="col-sm-9">
+											{{currentUser.date_update}}
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Correo electrónico</label>
+										<div class="col-sm-9">
+											<input class="form-control" ng-model="currentUser.name" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Contraseña</label>
+										<div class="col-sm-9">
+											<input class="form-control" ng-model="currentUser.password" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label"># Móvil</label>
+										<div class="col-sm-9">
+											<input class="form-control" ng-model="currentUser.mobile_phone" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label"># Casa</label>
+										<div class="col-sm-9">
+											<input class="form-control" ng-model="currentUser.home_phone" type="text">
+										</div>
+									</div>
+								</div>
+								
+								
+								<button ng-click="saveUserData()" type="button" class="pull-right btn btn-primary btn-square">Guardar cambios</button>
+							
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <div class="col-lg-2 col-md-3 hidden-sm hidden-xs profil-right">
+    <div class="profil-sidebar-element">
+        <h3><strong>ABOUT ME</strong></h3>
+        <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis pra quem é amistosis quis leo.</p>
+    </div>
+    <div class="profil-sidebar-element m-t-20">
+        <h3><strong>PERSONAL STATS</strong></h3>
+        <p class="c-gray m-t-0">
+            <i>Last connection: 2 days ago</i>
+        </p>
+        <h3><strong>AVERAGE RATING</strong></h3>
+        <div id="stars" class="stars pull-left">
+            <span class="fa fa-star c-primary"></span>
+            <span class="fa fa-star c-primary"></span>
+            <span class="fa fa-star c-primary"></span>
+            <span class="fa fa-star c-primary"></span>
+            <span class="fa fa-star-o c-primary"></span>
+        </div>
+        <div class="sidebar-number pull-right">4/5</div>
+        <div class="clearfix"></div>
+        <h3><strong>MY SHARING</strong></h3>
+        <p class="m-t-0"><span class="c-primary"><strong>15</strong></span> Replies</p>
+        <p class="m-t-0"><span class="c-primary"><strong>8</strong></span> Messages</p>
+        <p class="m-t-0"><span class="c-primary"><strong>24</strong></span> Questions</p>
+    </div>
+    <div class="m-t-20">
+        <p>You and Bryan are not friend yet</p>
+        <button type="button" class="btn btn-block btn-primary bd-0 no-bd"><i class="icon-user"></i> Add to my friends</button>
+    </div>
+    <div class="m-t-60" style="width:100%">
+        <canvas id="profil-chart" height="450"></canvas>
+    </div>
+</div> -->
+<div class="footer">
+    <div class="copyright">
+        <p class="pull-left sm-pull-reset">
+            <span>Copyright <span class="copyright">&copy;</span> 2016 </span>
+            <span>MBLEDTEQ</span>.
+            <span>All rights reserved. </span>
+        </p>
+        <p class="pull-right sm-pull-reset">
+            <span><a href="#" class="m-r-10">Support</a> | <a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
+        </p>
+    </div>
+</div>

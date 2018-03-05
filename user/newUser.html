@@ -1,0 +1,187 @@
+﻿	<div class="header">
+        <h2>MIS <strong>USUARIOS</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <!-- <ol class="breadcrumb">
+                <li>
+                    <a href="dashboard">Make</a>
+                </li>
+                <li>
+                    <a href="tables">Tables</a>
+                </li>
+                <li class="active">Tables Editable</li>
+            </ol> -->
+        </div>
+		
+    </div>
+<div class="row">
+	<div class="col-lg-12 portlets">
+		<div class="panel">
+			<!-- <div class="panel-header panel-controls">
+				<h3><i class="fa fa-table"></i> <strong>USUARIOS </strong> DE LA EMPRESA</h3>
+			</div> -->
+			<div class="panel-content">
+				<div class="row">
+					<div class="col-sm-12" >
+						<div ng-class="alertUserClass" ng-show="alertUserShow" style="height: 75px;">
+							<div class="col-sm-2 text-center" style="">
+								<i ng-click="closeAlert()" class="fa fa-check-circle-o fa-4x" style="margin-top: -4px; cursor:pointer;"></i>
+							</div>
+							<div class="col-sm-10">
+								<h4 class="alert-title">¡Alerta!</h4>
+								<p>{{messageUser}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			<!-- 	<div class="row" style="margin-top:20px;">
+					<div class="m-b-10 text-right">
+						<div class="btn-group">
+							<div>
+								<button class="btn btn-embossed btn-warning m-r-20" style="width: 170px;">
+									<i class="fa fa-save"></i> 
+									Guardar cambios
+								</button>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				
+				<div class="row" >
+					<div class="m-b-10 text-right">
+						<div class="btn-group">
+							<div data-toggle="modal" data-target="#new-user">
+								<button class="btn btn-embossed btn-primary m-r-20" style="width: 170px;">
+									<i class="fa fa-plus"></i> 
+									Nuevo Usuario
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							<th>
+								<a style="cursor:pointer;" ng-click="sortType = 'date_up'; sortReverse = !sortReverse">
+									Alta
+									<span ng-show="sortType == 'date_up' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'date_up' && sortReverse"  class="fa fa-caret-up"></span>
+								</a>
+							</th>
+							<th>
+								<a style="cursor:pointer;" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+									Usuario
+									<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'name' && sortReverse"  class="fa fa-caret-up"></span>
+								</a>
+							</th>
+							<th>
+								<a style="cursor:pointer;" ng-click="sortType = 'statusdesc'; sortReverse = !sortReverse">
+									Estatus
+									<span ng-show="sortType == 'statusdesc' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'statusdesc' && sortReverse"  class="fa fa-caret-up"></span>
+								</a>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="user in allUsers | orderBy:sortType:sortReverse">
+							<td>
+								<i ng-click="selectedUserForDelete(user)" data-toggle="modal" data-target="#deleteUser"
+								class="fa fa-minus-circle fa-2x" style="cursor:pointer; color:#4e120c;"></i>
+							</td>
+							<td>{{ user.date_up }}</td>
+							<td>{{ user.name }}</td>
+							<td>
+								<div class="onoffswitch2">
+									<input type="checkbox" ng-change="newUserStatus(user.id_user, user.status)"  ng-model="user.status" ng-true-value="1" ng-false-value="0"
+										name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch{{user.id_user}}" checked>
+									<label class="onoffswitch-label" for="myonoffswitch{{user.id_user}}">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</td>
+						</tr>  
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="new-user" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+				<h4 class="modal-title">NUEVO<strong> USUARIO</strong></h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal ng-pristine ng-valid">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Nombre de usuario</label>
+							<div class="col-sm-9">
+								<input class="form-control" ng-model="username_p" type="text">
+							</div>
+						</div>		
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Correo electrónico</label>
+							<div class="col-sm-9">
+								<input class="form-control" ng-model="name_p" type="text">
+							</div>
+						</div>								
+						<div class="form-group">
+							<label class="col-sm-3 control-label"># Móvil</label>
+							<div class="col-sm-9">
+								<input class="form-control" ng-model="mobilephone_p" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label"># Casa</label>
+							<div class="col-sm-9">
+								<input class="form-control" ng-model="homephone_p" type="text">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" type="button" class="pull-right btn btn-primary btn-square">Cerrar</button>
+				<button data-dismiss="modal" ng-click="saveUser()" type="button" class="pull-right btn btn-primary btn-square">Aceptar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="c-primary m-b-30">¿Deseas borrar este usuario?</h2>
+						<button type="button" ng-click="eraseUser()" data-dismiss="modal" class="btn btn-primary btn-embossed btn-block" >Aceptar</button>
+						<button type="button" data-dismiss="modal" class="btn btn-white btn-block">Cancelar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+    <div class="copyright">
+        <p class="pull-left sm-pull-reset">
+            <span>Copyright <span class="copyright">&copy;</span> 2016 </span>
+            <span>MBLEDTEQ</span>.
+            <span>All rights reserved. </span>
+        </p>
+        <p class="pull-right sm-pull-reset">
+            <span><a href="#" class="m-r-10">Support</a> | <a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,221 @@
+<div>
+		<div class="header">
+			<h2>HISTORIAL <strong>DE MOVIMIENTOS</strong> </h2>
+			<div class="breadcrumb-wrapper">
+				<!-- <ol class="breadcrumb">
+					<li>
+						<a href="dashboard">Make</a>
+					</li>
+					<li>
+						<a href="tables">Tables</a>
+					</li>
+					<li class="active">Tables Editable</li>
+				</ol> -->
+			</div>
+			
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-12 portlets">
+				<div class="panel">
+					<!-- <div class="panel-header panel-controls">
+						<h3><i class="fa fa-table"></i> <strong>USUARIOS </strong> DE LA EMPRESA</h3>
+					</div> -->
+					<div class="panel-content">
+						<div class="row text-left">
+							<div class="col-sm-6">
+								<h4 style="font-size:14px;"><b>BUSCAR:</b></h4><input ng-model="filterGeneral" ng-change="filterGeneralChange(filterGeneral)" type="text" class="form-control" id="field-1" >
+							</div>
+							<div class="col-sm-4">
+								<h4 style="font-size:14px;"><b>COMPAÑIA:</b></h4>
+								<select  id="selectcompany" name="singleSelect" ng-model="company" style="width:200px;">
+									<option ng-repeat="company in companiesArray" 
+									value="{{company.id_company}}">{{company.name}}</option>
+								</select>
+							</div>
+							<div class="col-sm-2">
+								<h4 style="font-size:14px;"><b>&nbsp;</b></h4>
+								<button ng-click="getHistoryCompany()" class="btn btn-embossed btn-default m-r-20"><i class="fa fa-search"></i> Consultar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-12 portlets">
+				<div class="panel">
+					<!-- <div class="panel-header panel-controls">
+						<h3><i class="fa fa-table"></i> <strong>USUARIOS </strong> DE LA EMPRESA</h3>
+					</div> -->
+					<div class="panel-content">
+					
+						<div class="row">
+							<div class="col-sm-6">
+								<b><h2>GENERALES</h2></b>
+							</div>
+							<div class="col-sm-6 text-right" style="text-align: right;">
+								<button ng-click="exportToExcel('#tableToExport')" class="btn btn-embossed btn-success m-r-20"><i class="fa fa-download"></i> Descargar </button>
+							</div>
+						</div>
+					
+						<!-- <div class="row text-left">
+							<div class="col-sm-6">
+								<h4 style="font-size:14px;"><b>BUSCAR:</b></h4><input ng-model="filterGeneral" ng-change="filterGeneralChange(filterGeneral)" type="text" class="form-control" id="field-1" >
+							</div>
+							<div class="col-sm-4">
+								<h4 style="font-size:14px;"><b>COMPAÑIA:</b></h4>
+								<select  id="selectcompany" name="singleSelect" ng-model="company" style="width:200px;">
+									<option ng-repeat="company in companiesArray" 
+									value="{{company.id_company}}">{{company.name}}</option>
+								</select>
+							</div>
+							<div class="col-sm-2">
+								<h4 style="font-size:14px;"><b>&nbsp;</b></h4>
+								<button ng-click="getHistoryCompany()" class="btn btn-embossed btn-default m-r-20"><i class="fa fa-search"></i> Consultar</button>
+							</div>
+						</div> -->
+						<div id="tableToExport">
+							<table class="table" >
+								<thead>
+									<tr>
+										<th></th>
+										<th>
+											<a style="cursor:pointer;" ng-click="sortType = 'date_up'; sortReverse = !sortReverse">
+												Alta
+												<span ng-show="sortType == 'date_up' && !sortReverse" class="fa fa-caret-down"></span>
+												<span ng-show="sortType == 'date_up' && sortReverse"  class="fa fa-caret-up"></span>
+											</a>
+										</th>
+										<th>
+											<a style="cursor:pointer;" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+												Usuario
+												<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+												<span ng-show="sortType == 'name' && sortReverse"  class="fa fa-caret-up"></span>
+											</a>
+										</th>
+										<th>
+											<a style="cursor:pointer;" ng-click="sortType = 'message'; sortReverse = !sortReverse">
+												Historial
+												<span ng-show="sortType == 'message' && !sortReverse" class="fa fa-caret-down"></span>
+												<span ng-show="sortType == 'message' && sortReverse"  class="fa fa-caret-up"></span>
+											</a>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="mov in history[0] | orderBy:sortType:sortReverse | filter:filterGeneral">
+										<td><i class="icon-user"></i></td>
+										<td>{{ mov.date_up }}</td>
+										<td>{{ mov.name }}</td>
+										<td>{{ mov.message }}</td>
+									</tr>  
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div ng-class="alertUserClass" ng-show="alertUserShow">
+								<h4 class="alert-title">¡Alerta!</h4>
+								<p>{{messageUser}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-12 portlets">
+				<div class="panel">
+					<!-- <div class="panel-header panel-controls">
+						<h3><i class="fa fa-table"></i> <strong>USUARIOS </strong> DE LA EMPRESA</h3>
+					</div> -->
+					<div class="panel-content">
+					
+						<div class="row">
+							<div class="col-sm-6">
+								<b><h2>CAMPAÑAS</h2></b>
+							</div>
+							<div class="col-sm-6 text-right" style="text-align: right;">
+								<button ng-click="exportToExcel('#tableToExport2')" class="btn btn-embossed btn-success m-r-20"><i class="fa fa-download"></i> Descargar </button>
+							</div>
+						</div>
+					
+						<!-- <div class="row text-left">
+							<div class="col-sm-6">
+								<h4 style="font-size:14px;"><b>BUSCAR:</b></h4><input ng-model="filterGeneral" ng-change="filterGeneralChange(filterGeneral)" type="text" class="form-control" id="field-1" >
+							</div>
+							<div class="col-sm-4">
+								<h4 style="font-size:14px;"><b>COMPAÑIA:</b></h4>
+								<select  id="selectcompany" name="singleSelect" ng-model="company" style="width:200px;">
+									<option ng-repeat="company in companiesArray" 
+									value="{{company.id_company}}">{{company.name}}</option>
+								</select>
+							</div>
+							<div class="col-sm-2">
+								<h4 style="font-size:14px;"><b>&nbsp;</b></h4>
+								<button ng-click="getHistoryCompany()" class="btn btn-embossed btn-default m-r-20"><i class="fa fa-search"></i> Consultar</button>
+							</div>
+						</div> -->
+						<div id="tableToExport2">
+							<table class="table" >
+								<thead>
+									<tr>
+										<th></th>
+										<th>
+											<a style="cursor:pointer;" ng-click="sortType = 'date_up'; sortReverse = !sortReverse">
+												Alta
+												<span ng-show="sortType == 'date_up' && !sortReverse" class="fa fa-caret-down"></span>
+												<span ng-show="sortType == 'date_up' && sortReverse"  class="fa fa-caret-up"></span>
+											</a>
+										</th>
+										<th>
+											<a style="cursor:pointer;" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+												Usuario
+												<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+												<span ng-show="sortType == 'name' && sortReverse"  class="fa fa-caret-up"></span>
+											</a>
+										</th>
+										<th>
+											<a style="cursor:pointer;" ng-click="sortType = 'message'; sortReverse = !sortReverse">
+												Mensaje
+												<span ng-show="sortType == 'message' && !sortReverse" class="fa fa-caret-down"></span>
+												<span ng-show="sortType == 'message' && sortReverse"  class="fa fa-caret-up"></span>
+											</a>
+										</th>
+										<th>
+											<a style="cursor:pointer;" ng-click="sortType = 'campaign_name'; sortReverse = !sortReverse">
+												Campaña
+												<span ng-show="sortType == 'campaign_name' && !sortReverse" class="fa fa-caret-down"></span>
+												<span ng-show="sortType == 'campaign_name' && sortReverse"  class="fa fa-caret-up"></span>
+											</a>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="mov in history[1] | orderBy:sortType:sortReverse | filter:filterGeneral">
+										<td><i class="icon-user"></i></td>
+										<td>{{ mov.date_up }}</td>
+										<td>{{ mov.name }}</td>
+										<td>{{ mov.message }}</td>
+										<td>{{ mov.campaign_name }}</td>
+									</tr>  
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div ng-class="alertUserClass" ng-show="alertUserShow">
+								<h4 class="alert-title">¡Alerta!</h4>
+								<p>{{messageUser}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
