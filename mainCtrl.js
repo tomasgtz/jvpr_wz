@@ -1,5 +1,5 @@
 
-var webServiceUrl = 'https://localhost/wizad/empresas/serviciosWizad.php/';
+var webServiceUrl = 'https://empresas.wizad.mx/api/serviciosWizad.php/';
 
 angular.module('newApp').service('userService', function($http,$q){
 	

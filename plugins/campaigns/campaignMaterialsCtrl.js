@@ -6,7 +6,7 @@
  * Controller of the newappApp
  */
  
-var urlHostEmpresas = 'https://localhost/wizad/empresas/';
+var urlHostEmpresas = 'https://empresas.wizad.mx/';
 
 
 angular.module('newApp')

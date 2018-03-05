@@ -1,6 +1,6 @@
 'use strict';
 
-var urlHostEmpresas = 'https://localhost/wizad/empresas/';
+var urlHostEmpresas = 'https://empresas.wizad.mx/';
 
 angular.module('newApp').controller('identityCtrl', function ($scope, campaignService, userService, applicationService, pluginsService, $log, objCampaign, generalService) {
 		

@@ -6,8 +6,8 @@
  * Controller of the newappApp
  */
 
-var urlHost = 'https://localhost/';
-var urlHostEmpresas = 'https://localhost/wizad/empresas/';
+var urlHost = 'https://wizad.mx/';
+var urlHostEmpresas = 'https://empresas.wizad.mx/';
  
 angular.module('newApp')
   .controller('campaignMaterialsCtrl', function ($scope, CanvasFactory, ngDialog, $rootScope, $timeout, ngDragDrop, ImagesFactory, UtilsFactory, AppSettings, campaignService, objCampaign , $location, generalService) {

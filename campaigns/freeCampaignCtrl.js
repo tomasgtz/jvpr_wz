@@ -6,7 +6,7 @@
  * Controller of the newappApp
  */
 
-var urlHost = 'https://localhost/';
+var urlHost = 'https://wizad.mx/';
 
 angular.module('newApp')
   .controller('freeCampaignCtrl', function ($scope, CanvasFactory, ngDialog, $rootScope, $timeout, ngDragDrop, ImagesFactory, UtilsFactory, AppSettings, campaignService, objCampaign , $location, generalService) {

@@ -55,14 +55,14 @@ $app->post(
 				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
-try
+				try
 				{
-				$cn=new PDO($dsn, $user, $pass);
-				$cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-				
-						$data = $cn->query("call uspGet_LoggedUser('$email_p', '$password_p');")->fetchAll(PDO::FETCH_ASSOC);
+					$cn=new PDO($dsn, $user, $pass);
+					$cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+					
+					$data = $cn->query("call uspGet_LoggedUser('$email_p', '$password_p');")->fetchAll(PDO::FETCH_ASSOC);
 
-						echo json_encode($data);
+					echo json_encode($data);
 				}
 				catch(PDOException $e) {
 						echo $e->getMessage();
@@ -90,8 +90,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -136,8 +136,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -184,8 +184,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -226,8 +226,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -267,8 +267,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -309,8 +309,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -352,8 +352,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -398,8 +398,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -440,8 +440,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -481,8 +481,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -526,8 +526,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db";
 
@@ -574,8 +574,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db";
 
@@ -619,8 +619,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -661,8 +661,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -702,8 +702,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -744,8 +744,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -786,8 +786,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -828,8 +828,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -870,8 +870,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -912,8 +912,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -954,8 +954,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -996,8 +996,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1038,8 +1038,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1080,8 +1080,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1122,8 +1122,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1164,8 +1164,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1204,8 +1204,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1245,8 +1245,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1286,8 +1286,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1328,8 +1328,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1370,8 +1370,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1415,8 +1415,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1462,8 +1462,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1505,8 +1505,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1558,8 +1558,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1611,8 +1611,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1654,8 +1654,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1698,8 +1698,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1743,8 +1743,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1788,8 +1788,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1831,8 +1831,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1878,8 +1878,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1920,8 +1920,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -1964,8 +1964,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2004,8 +2004,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2044,8 +2044,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2084,8 +2084,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2124,8 +2124,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2164,8 +2164,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2203,8 +2203,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2242,8 +2242,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2281,8 +2281,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2320,8 +2320,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2364,8 +2364,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2403,8 +2403,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2442,8 +2442,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2481,8 +2481,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2520,8 +2520,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2566,8 +2566,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2608,8 +2608,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2650,8 +2650,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2692,8 +2692,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2733,8 +2733,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2776,8 +2776,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2820,8 +2820,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2861,8 +2861,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2901,8 +2901,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2940,8 +2940,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -2979,8 +2979,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -3048,8 +3048,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -3099,8 +3099,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
@@ -3147,8 +3147,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db";
 
@@ -3203,8 +3203,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db";
 
@@ -3251,8 +3251,8 @@ $app->post(
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db";
 
@@ -3286,8 +3286,8 @@ $app->post(
 						
 				$dbms = 'mysql';
 				$host = 'localhost'; 
-				$db = 'vemacu_wizad';
-				$user = 'vemacu_mrkt';
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
 				$pass = 'Decaene09!';
 				$dsn = "$dbms:host=$host;dbname=$db";
 
