@@ -27,8 +27,8 @@ angular.module('newApp')
 	$scope.canvas = {};
 	$scope.factory.stickersCount = 0;
 	$scope.factory.photosCount = 0;
-	$scope.factory.canvas = new fabric.Canvas("play_board");
-	$scope.factory.canvas.preserveObjectStacking = true;
+//	$scope.factory.canvas = new fabric.Canvas("play_board");
+//	$scope.factory.canvas.preserveObjectStacking = true;
 	$scope.formSelected = false;
 	$scope.imageSelected = false;
 	$scope.canvasTarget = false;
