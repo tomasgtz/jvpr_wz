@@ -81,8 +81,8 @@ angular.module('newApp').service('userService', function($http,$q){
 					UserContext.free_campaign    = data[0].free_campaign;	
 					UserContext.days_left    	 = data[0].days_left;	
 					UserContext.UserName    	 = data[0].UserName;	
-					console.log(UserContext.image);
-					console.log(UserContext.logo);
+					//console.log(UserContext.image);
+					//console.log(UserContext.logo);
 				}
 				
 				defered.resolve(data);		

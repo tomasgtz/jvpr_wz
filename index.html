@@ -1,14 +1,18 @@
 <!doctype html>
 <html class="no-js">
     <head>
-		<meta http-equiv="Pragma" content="no-cache">
-		<meta http-equiv="expires" content="0">
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta name="description" content="admin-themes-lab">
         <meta name="author" content="themes-lab">
         <link rel="shortcut icon" href="wizadicon.png" type="image/png">
         <title>WIZAD</title>
+        <!-- FPD BEGIN 
+            <link rel="stylesheet" type="text/css" href="css/main.css">
+            <!-- The CSS for the plugin itself - required -->
+        	<!-- <link rel="stylesheet" type="text/css" href="css/FancyProductDesigner-all.min.css" /> -->
+        <!-- FPD END -->
+
         <link href="assets/global/css/style.css" rel="stylesheet">
         <link href="assets/global/css/theme.css" rel="stylesheet">
         <link href="assets/global/css/ui.css" rel="stylesheet">
@@ -45,6 +49,18 @@
         <link href="assets/admin/layout1/css/layout.css" rel="stylesheet">
         <!-- END LAYOUT STYLE -->
         <script src="assets/global/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        
+        <!-- FPD BEGIN -->
+            <!-- Include js files -->
+        	<script src="js/jquery.min.js" type="text/javascript"></script>
+        	<script src="js/jquery-ui.min.js" type="text/javascript"></script>
+        	<!-- HTML5 canvas library - required -->
+         	<script src="js/fabric.min.js" type="text/javascript"></script>
+        	<!-- The plugin itself - required 
+            <script src="js/FancyProductDesigner-all.min.js" type="text/javascript"></script>  -->
+        <!-- FPD END -->
+            
+            
     </head>
     <body ng-app="newApp" ng-class="indexClass" ng-controller="mainCtrl">
         <!--[if lt IE 7]>
@@ -126,122 +142,7 @@
 						<li ng-show="currentUser.days_left > 0 && currentUser.typenum == '1'" ng-class="{ active  : isActive('/suggestion-box')}"><a href="#/suggestion-box"><i class="fa fa-question"></i><span>Comentarios</span></a></li>
 						<li ng-show="currentUser.days_left > 0 && currentUser.typenum == '1'" ng-class="{ active  : isActive('/new-company')}"><a href="#/new-company"><i class="fa fa-building"></i><span>Alta Compañía</span></a></li>
 						<li ng-show="currentUser.typenum ==  '2' || currentUser.id_company == '4'"  ng-class="{ active  : isActive('/subscription')}"><a href="#/subscription"><i class="fa fa-money"></i><span>Contratación</span></a></li>
-						<!--<li ng-class="{ active  : isActive('/canvas')}"><a href="#/canvas"><i class="fa fa-table"></i><span>canvas</span></a></li>
-						<li ng-class="{ active  : isActive('/stickers')}"><a href="#/stickers"><i class="fa fa-table"></i><span>stickers</span></a></li>
-						<li ng-class="{ active  : isActive('/photos')}"><a href="#/photos"><i class="fa fa-table"></i><span>photos</span></a></li> -->
-                        <!-- <li class="nav-parent" >
-                            <a href="#"><i class="icon-bulb"></i><span>Mailbox</span> <span class="fa arrow"></span></a>
-                            <ul class="children collapse">
-                                <li ng-class="{ active  : isActive('mailbox.html')}"><a href="mailbox.html"> Inbox</a></li>
-                                <li ng-class="{ active  : isActive('mailbox.html/#send')}"><a href="mailbox.html#/send"> Send Email</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-parent">
-                            <a href=""><i class="icon-screen-desktop"></i><span>UI Elements</span><span class="fa arrow"></span></a>
-                            <ul class="children collapse">
-                                <li ng-class="{ active  : isActive('/ui-buttons')}"><a href="#ui-buttons"> Buttons</a></li>
-                                <li ng-class="{ active  : isActive('/ui-components')}"><a href="#ui-components"> Components</a></li>
-                                <li ng-class="{ active  : isActive('/ui-tabs')}"><a href="#ui-tabs"> Tabs</a></li>
-                                <li ng-class="{ active  : isActive('/ui-animations')}"><a href="#ui-animations"> Animations CSS3</a></li>
-                                <li ng-class="{ active  : isActive('/ui-icons')}"><a href="#ui-icons"> Icons</a></li>
-                                <li ng-class="{ active  : isActive('/ui-portlets')}"><a href="#ui-portlets"> Portlets</a></li>
-                                <li ng-class="{ active  : isActive('/ui-nestableList')}"><a href="#ui-nestableList"> Nestable List</a></li>
-                                <li ng-class="{ active  : isActive('/ui-treeView')}"><a href="#ui-treeView"> Tree View</a></li>
-                                <li ng-class="{ active  : isActive('/ui-modals')}"><a href="#ui-modals"> Modals</a></li>
-                                <li ng-class="{ active  : isActive('/ui-notifications')}"><a href="#ui-notifications"> Notifications</a></li>
-                                <li ng-class="{ active  : isActive('/ui-typography')}"><a href="#ui-typography"> Typography</a></li>
-                                <li ng-class="{ active  : isActive('/ui-helperClasses')}"><a href="#ui-helperClasses"> Helper Classes</a></li>
-                            </ul>
-                        </li>
-                        <li ng-class="{ active  : isActive('/layout-api')}"><a href="#layout-api"><i class="icon-layers"></i><span>Layouts</span></a></li>
-                        <li class="nav-parent">
-                            <a href=""><i class="icon-note"></i><span>Forms </span><span class="fa arrow"></span></a>
-                            <ul class="children collapse">
-                                <li ng-class="{ active  : isActive('/forms-elements')}"><a href="#forms-elements"> Forms Elements</a></li>
-                                <li ng-class="{ active  : isActive('/forms-validation')}"><a href="#forms-validation"> Forms Validation</a></li>
-                                <li ng-class="{ active  : isActive('/forms-plugins')}"><a href="#forms-plugins"> Advanced Plugins</a></li>
-                                <li ng-class="{ active  : isActive('/forms-wizard')}"><a href="#forms-wizard"> <span class="pull-right badge badge-danger">low</span> 
-                                    <span>Form Wizard</span></a>
-                                </li>
-                                <li ng-class="{ active  : isActive('/forms-sliders')}"><a href="#forms-sliders"> Sliders</a></li>
-                                <li ng-class="{ active  : isActive('/forms-editors')}"><a href="#forms-editors"> Text Editors</a></li>
-                                <li ng-class="{ active  : isActive('/forms-input-masks')}"><a href="#forms-input-masks"> Input Masks</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-parent">
-                            <a href=""><i class="fa fa-table"></i><span>Tables</span><span class="fa arrow"></span></a>
-                            <ul class="children collapse">
-                                <li ng-class="{ active  : isActive('/tables-styling')}"><a href="#tables-styling"> Tables Styling</a></li>
-                                <li ng-class="{ active  : isActive('/tables-dynamic')}"><a href="#tables-dynamic"> Tables Dynamic</a></li>
-                                <li ng-class="{ active  : isActive('/tables-filter')}"><a href="#tables-filter"> Tables Filter</a></li>
-                                <li ng-class="{ active  : isActive('/tables-editable')}"><a href="#tables-editable"> Tables Editable</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-parent">
-                            <a href=""><i class="icon-bar-chart"></i><span>Charts </span><span class="fa arrow"></span></a>
-                            <ul class="children collapse">
-                                <li ng-class="{ active  : isActive('/charts')}"><a href="#/charts"> Charts</a></li>
-                                <li ng-class="{ active  : isActive('/financial-charts')}"><a href="#/financial-charts"> Financial Charts</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-parent">
-                            <a href=""><i class="icon-picture"></i><span>Medias</span><span class="fa arrow"></span></a>
-                            <ul class="children collapse">
-                                <li ng-class="{ active  : isActive('/medias-croping')}"><a href="#medias-croping"> Images Croping</a></li>
-                                <li ng-class="{ active  : isActive('/medias-sortable')}"><a href="#medias-sortable"> Gallery Sortable</a></li>
-                                <li ng-class="{ active  : isActive('/medias-hover')}"><a href="#medias-hover"> <span class="pull-right badge badge-primary">12</span> Hover Effects</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-parent">
-                            <a href=""><i class="icon-docs"></i><span>Pages </span><span class="fa arrow"></span></a>
-                            <ul class="children collapse">
-                                <li ng-class="{ active  : isActive('/pages-timeline')}"><a href="#pages-timeline"> Timeline</a></li>
-                                <li ng-class="{ active  : isActive('/pages-blank')}"><a href="#pages-blank"> Blank Page</a></li>
-                                <li ng-class="{ active  : isActive('/pages-contact')}"><a href="#pages-contact"> Contact</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-parent">
-                            <a href=""><i class="icon-user"></i><span>User </span><span class="fa arrow"></span></a>
-                            <ul class="children collapse">
-                                <li ng-class="{ active  : isActive('/user-profile')}"><a href="#user-profile"> <span class="pull-right badge badge-danger">Hot</span> Profile</a></li>
-                                <li ng-class="{ active  : isActive('/user-sessionTimeout')}"><a href="#user-sessionTimeout"> Session Timeout</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-parent">
-                            <a href=""><i class="icon-basket"></i><span>eCommerce </span><span class="fa arrow"></span></a>
-                            <ul class="children collapse">
-                                <li ng-class="{ active  : isActive('/ecom-cart')}"><a href="#ecom-cart"> Shopping Cart</a></li>
-                                <li ng-class="{ active  : isActive('/ecom-invoice')}"><a href="#ecom-invoice"> Invoice</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-parent">
-                            <a href=""><i class="icon-cup"></i><span>Extra </span><span class="fa arrow"></span></a>
-                            <ul class="children collapse">
-                                <li ng-class="{ active  : isActive('/extra-fullCalendar')}"><a href="#extra-fullCalendar"><span class="pull-right badge badge-primary">New</span> Fullcalendar</a></li>
-                                <li ng-class="{ active  : isActive('/extra-widgets')}"><a href="#extra-widgets"> Widgets</a></li>
-                                <li ng-class="{ active  : isActive('/extra-slider')}"><a href="#extra-slider"> Sliders</a></li>
-                                <li ng-class="{ active  : isActive('/extra-google')}"><a href="#extra-google"> Google Maps</a></li>
-                                <li ng-class="{ active  : isActive('/extra-vector')}"><a href="#extra-vector"> Vector Maps</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="sidebar-widgets">
-                        <p class="menu-title widget-title">Folders <span class="pull-right"><a href="#" class="new-folder"> <i class="icon-plus"></i></a></span></p>
-                        <ul class="folders">
-                            <li>
-                                <a href="#"><i class="icon-doc c-primary"></i>My documents</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="icon-picture"></i>My images</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="icon-lock"></i>Secure data</a>
-                            </li>
-                            <li class="add-folder">
-                                <input type="text" placeholder="Folder's name..." class="form-control input-sm">
-                            </li>
-                        </ul>
-                    </div> -->
+	
                     <div class="sidebar-footer clearfix">
                         <a class="pull-left footer-settings" data-target="#" data-rel="tooltip" data-placement="top" data-original-title="Settings">
                         <i class="icon-settings"></i>
@@ -267,194 +168,12 @@
                             <a class="menutoggle" href="#" data-toggle="sidebar-collapsed"><span class="menu__handle"><span>Menu</span></span></a>
                             <ul class="nav nav-icons">
                                 <li><a href="#" class="toggle-sidebar-top"><span class="icon-user-following"></span></a></li>
-                                <!-- <li><a href="mailbox.html"><span class="octicon octicon-mail-read"></span></a></li> -->
-                                <!-- <li><a href="#"><span class="octicon octicon-flame"></span></a></li> -->
-                                <!-- <li><a href="builder-page.html"><span class="octicon octicon-rocket"></span></a></li> -->
                             </ul>
                         </div>
                     </div>
                     <div class="header-right">
                         <ul class="header-menu nav navbar-nav">
-                            <!-- BEGIN USER DROPDOWN -->
-                            <!-- <li class="dropdown" id="language-header">
-                                <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <i class="icon-globe"></i>
-                                <span data-translate="Language">Language</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a data-target="#" data-lang="en"><img src="assets/global/images/flags/usa.png" alt="flag-english"> <span>English</span></a>
-                                    </li>
-                                    <li>
-                                        <a data-target="#" data-lang="es"><img src="assets/global/images/flags/spanish.png" alt="flag-english"> <span>Español</span></a>
-                                    </li>
-                                    <li>
-                                        <a data-target="#" data-lang="fr"><img src="assets/global/images/flags/french.png" alt="flag-english"> <span>Français</span></a>
-                                    </li>
-                                </ul>
-                            </li> -->
-                            <!-- END USER DROPDOWN -->
-                            <!-- BEGIN NOTIFICATION DROPDOWN -->
-                            <!-- <li class="dropdown" id="notifications-header">
-                                <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <i class="icon-bell"></i>
-                                <span class="badge badge-danger badge-header">6</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-header clearfix">
-                                        <p class="pull-left">12 Notificaciones</p>
-                                    </li>
-                                    <li>
-                                        <ul class="dropdown-menu-list withScroll" data-height="220">
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-star p-r-10 f-18 c-orange"></i>
-                                                JESUS PI&Ntilde;A acaba de iniciar una campa&ntilde;a.
-                                                <span class="dropdown-time">Hace un momento</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-heart p-r-10 f-18 c-red"></i>
-                                                PABLO BARRERA añadi&oacute; una campa&ntilde;a a favoritos.
-                                                <span class="dropdown-time">15 mins</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-file-text p-r-10 f-18"></i>
-                                                Nueva campa&ntilde;a disponible.
-                                                <span class="dropdown-time">22 mins</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
-                                                Nuevos materiales agregados.
-                                                <span class="dropdown-time">40 mins</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-bell p-r-10 f-18 c-orange"></i>
-                                                Se descarg&oacute; una campa&ntilde;a.
-                                                <span class="dropdown-time">1 hr</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-bell p-r-10 f-18"></i>
-                                                Mensaje General
-                                                <span class="dropdown-time">2 hrs</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-comment p-r-10 f-18 c-gray"></i>
-                                                JESUS PI&Ntilde;A hizo una sugerencia a una campa&ntilde;a
-                                                <span class="dropdown-time">3 hrs</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
-                                                Nuevas im&aacute;genes agregadas.
-                                                <span class="dropdown-time">2 d&iacute;as</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-footer clearfix">
-                                        <a data-target="#" class="pull-left">Ver todas las notificaciones.</a>
-                                        <a data-target="#" class="pull-right">
-                                        <i class="icon-settings"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> -->
-                            <!-- END NOTIFICATION DROPDOWN -->
-                            <!-- BEGIN MESSAGES DROPDOWN -->
-                            <!-- <li class="dropdown" id="messages-header">
-                                <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <i class="icon-paper-plane"></i>
-                                <span class="badge badge-primary badge-header">
-                                8
-                                </span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-header clearfix">
-                                        <p class="pull-left">
-                                            You have 8 Messages
-                                        </p>
-                                    </li>
-                                    <li class="dropdown-body">
-                                        <ul class="dropdown-menu-list withScroll" data-height="220">
-                                            <li class="clearfix">
-                                                <span class="pull-left p-r-5">
-                                                <img src="assets/global/images/avatars/avatar3.png" alt="avatar 3">
-                                                </span>
-                                                <div class="clearfix">
-                                                    <div>
-                                                        <strong>Alexa Johnson</strong>
-                                                        <small class="pull-right text-muted">
-                                                        <span class="glyphicon glyphicon-time p-r-5"></span>12 mins ago
-                                                        </small>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix">
-                                                <span class="pull-left p-r-5">
-                                                <img src="assets/global/images/avatars/avatar4.png" alt="avatar 4">
-                                                </span>
-                                                <div class="clearfix">
-                                                    <div>
-                                                        <strong>John Smith</strong>
-                                                        <small class="pull-right text-muted">
-                                                        <span class="glyphicon glyphicon-time p-r-5"></span>47 mins ago
-                                                        </small>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix">
-                                                <span class="pull-left p-r-5">
-                                                <img src="assets/global/images/avatars/avatar5.png" alt="avatar 5">
-                                                </span>
-                                                <div class="clearfix">
-                                                    <div>
-                                                        <strong>Bobby Brown</strong>
-                                                        <small class="pull-right text-muted">
-                                                        <span class="glyphicon glyphicon-time p-r-5"></span>1 hour ago
-                                                        </small>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix">
-                                                <span class="pull-left p-r-5">
-                                                <img src="assets/global/images/avatars/avatar6.png" alt="avatar 6">
-                                                </span>
-                                                <div class="clearfix">
-                                                    <div>
-                                                        <strong>James Miller</strong>
-                                                        <small class="pull-right text-muted">
-                                                        <span class="glyphicon glyphicon-time p-r-5"></span>2 days ago
-                                                        </small>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-footer clearfix">
-                                        <a href="mailbox.html" class="pull-left">See all messages</a>
-                                        <a href="#" class="pull-right">
-                                        <i class="icon-settings"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> -->
+ 
                             <!-- END MESSAGES DROPDOWN -->
                             <!-- BEGIN USER DROPDOWN -->
                             <li class="dropdown" id="user-header">
@@ -469,12 +188,7 @@
 									<li>
                                         <a ng-if="currentUser.typenum == '2' || currentUser.typenum == '4' || currentUser.typenum == '3' && currentUser.id_company != '4'" href="#/identity" data-target="#"><i class="icon-briefcase"></i><span>Identidad</span></a>
                                     </li>
-                                   <!--  <li>
-                                        <a data-target="#"><i class="icon-calendar"></i><span>Calendario</span></a>
-                                    </li> -->
-                                    <!-- <li>
-                                        <a data-target="#"><i class="icon-settings"></i><span>Account Settings</span></a>
-                                    </li> -->
+                                  
                                     <li>
                                         <a ng-click="logOut()" data-target="#"><i class="icon-logout"></i><span>Salir de la sesi&oacute;n</span></a>
                                     </li>
@@ -1128,64 +842,7 @@
 						</div>
 					</form>
 				</div>
-				<!-- <div id="account-builder">
-					<form class="form-horizontal" role="form">
-						<div class="row">
-							<div class="col-md-12">
-								<i class="fa fa-spin fa-gear"></i> 
-								<h3><strong>Customize</strong> Login Page</h3>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-xs-8 control-label">Social Login</label>
-									<div class="col-xs-4">
-										<label class="switch m-r-20">
-										<input id="social-cb" type="checkbox" class="switch-input" checked>
-										<span class="switch-label" data-on="On" data-off="Off"></span>
-										<span class="switch-handle"></span>
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-xs-8 control-label">Background Image</label>
-									<div class="col-xs-4">
-										<label class="switch m-r-20">
-										<input id="image-cb" type="checkbox" class="switch-input" checked>
-										<span class="switch-label" data-on="On" data-off="Off"></span>
-										<span class="switch-handle"></span>
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-xs-8 control-label">Background Slides</label>
-									<div class="col-xs-4">
-										<label class="switch m-r-20">
-										<input id="slide-cb" type="checkbox" class="switch-input">
-										<span class="switch-label" data-on="On" data-off="Off"></span>
-										<span class="switch-handle"></span>
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-xs-8 control-label">User Image</label>
-									<div class="col-xs-4">
-										<label class="switch m-r-20">
-										<input id="user-cb" type="checkbox" class="switch-input">
-										<span class="switch-label" data-on="On" data-off="Off"></span>
-										<span class="switch-handle"></span>
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div> -->
+		
 			</div>
 			<!-- END LOCKSCREEN BOX -->
 			<p class="account-copyright">
@@ -1207,9 +864,14 @@
         <script src="directives/ngViewClass.js"></script>
         <!-- END ANGULARJS SCRIPTS -->
 		<script src="bootstrap-colorpicker-module.js"></script>
+		
+		
+	  <!--	SE REMUEVEN LIBRERIAS POR CONFLICTO CON FANCY DESIGNER
         <script src="assets/global/plugins/jquery/jquery-3.1.0.min.js"></script>
         <script src="assets/global/plugins/jquery/jquery-migrate-3.0.0.min.js"></script>
         <script src="assets/global/plugins/jquery-ui/jquery-ui.min.js"></script>
+      -->
+        <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script src="assets/global/plugins/gsap/main-gsap.min.js"></script>
         <script src="assets/global/plugins/tether/js/tether.min.js"></script>
         <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -1328,18 +990,7 @@
 		<script src="campaigns/campaignMaterialsCtrl.js"></script>
 		<script src="campaigns/freeCampaignCtrl.js"></script>
 		<script src="admin/freeMaterialsCtrl.js"></script>
-		<!-- <script src="design/controllers/canvas.js"></script>
-		<script src="design/controllers/header.js"></script>
-		<script src="design/controllers/photos.js"></script>
-		<script src="design/controllers/stickers.js"></script>
-		<script src="design/directives/dragDrop.js"></script>
-		<script src="design/directives/fileSelect.js"></script>
-		<script src="design/factories/canvas.js"></script>
-		<script src="design/factories/fileReader.js"></script>
-		<script src="design/factories/images.js"></script>
-		<script src="design/factories/utils.js"></script>
-		<script src="design/factories/index.js"></script>
-		<script src="design/constants.js"></script> -->
+
 		<script src="design/CanvasCtrl.js"></script>
 		<script src="design/CanvasFactory.js"></script>
 		<script src="design/FileReaderFactory.js"></script>
@@ -1363,7 +1014,6 @@
 
         <!-- END CUSTOM ANGULARJS SCRIPTS -->
 		
-		
-		
+        	
     </body>
 </html>

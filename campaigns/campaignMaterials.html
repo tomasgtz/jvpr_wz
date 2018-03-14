@@ -1,3 +1,4 @@
+     
 	<div class="header">
         <h2>DISEÑO <strong>DE LA CAMPAÑA</strong></h2>
         <div class="breadcrumb-wrapper">
@@ -13,6 +14,7 @@
         </div>
 		
     </div>
+    
 
 <div class="wrapper" >
 		
@@ -124,15 +126,45 @@
 				</div> -->
 			</div>
 			<div class="col-sm-10">
+				
+			<!--	    <div id="clothing-designer" class="fpd-container fpd-shadow-2 fpd-topbar fpd-tabs fpd-tabs-side fpd-top-actions-centered fpd-bottom-actions-centered fpd-views-inside-left">
+
+                  		<div class="fpd-product" title="Sweater" data-thumbnail="images/sweater/preview.png">
+        	    			<img src="images/sweater/basic.png" title="Base" data-parameters='{"left": 332, "top": 311, "colors": "#D5D5D5,#990000,#cccccc", "price": 20}' />
+        			  		<img src="images/sweater/highlights.png" title="Hightlights" data-parameters='{"left": 332, "top": 311}' />
+        			  		<img src="images/sweater/shadow.png" title="Shadow" data-parameters='{"left": 332, "top": 309}' />
+        				</div>
+
+    		  		</div>-->
+				
+				
 				<div id="hero_container" style="position:static; margin-top: 20px;" >
-					<div id="canvas_container" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-						<div id="canvas_board">			
-						   <canvas id="play_board"></canvas>
+				    <div id="canvas_container" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+						<div id="canvas_board">
+						
+						<table>
+							<tr>
+							  <td></td>
+							  <td>
+								<canvas id="top-ruler" width="600" height="50"/>
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+								 <canvas id="left-ruler" width="50" height="400"/>
+							  </td>
+							  <td>
+								<canvas id="play_board"></canvas>
+							  </td>
+							</tr>
+							</table>
+														
 						   <canvas id="zoom" width="400" height="200" style="position:absolute; top:0; left:0; display:none"></canvas>
-						</div>
+						</div> 
 					</div>
-				</div>
+				</div> 
 			</div>
+
 	    </div>
 		<div class="modal fade modal-slideright" id="modal-images" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog" style="width:300px;">
@@ -427,3 +459,104 @@
 			</div>
 		</div>
     </div> 
+    
+    
+
+        
+        <!-- FPD BEGIN -->    
+            <script type="text/javascript">
+/*        	    jQuery(document).ready(function(){
+        
+        	    	var $yourDesigner = $('#clothing-designer'),
+        	    		pluginOpts = {
+        		    		stageWidth: 1200,
+        		    		editorMode: false,
+        		    		fonts: [
+        				    	{name: 'Helvetica'},
+        				    	{name: 'Times New Roman'},
+        				    	{name: 'Pacifico', url: 'Enter_URL_To_Pacifico'},
+        				    	{name: 'Arial'},
+        			    		{name: 'Lobster', url: 'google'}
+        			    	],
+        		    		customTextParameters: {
+        			    		colors: false,
+        			    		removable: true,
+        			    		resizable: true,
+        			    		draggable: true,
+        			    		rotatable: true,
+        			    		autoCenter: true,
+        			    		boundingBox: "Base"
+        			    	},
+        		    		customImageParameters: {
+        			    		draggable: true,
+        			    		removable: true,
+        			    		resizable: true,
+        			    		rotatable: true,
+        			    		colors: '#000',
+        			    		autoCenter: true,
+        			    		boundingBox: "Base"
+        			    	},
+        			    	actions:  {
+        						'top': ['download','print', 'snap', 'preview-lightbox'],
+        						'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code', 'ruler'],
+        						'bottom': ['undo','redo'],
+        						'left': ['manage-layers','info','save','load']
+        					},
+							mainBarModules:['designs', 'images', 'text']
+        	    		},
+        
+        	    	yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts);
+					
+					
+        	    	
+					//print button
+        			$('#print-button').click(function(){
+        				yourDesigner.print();
+        				return false;
+        			});
+        
+        			//create an image
+        			$('#image-button').click(function(){
+        				var image = yourDesigner.createImage();
+        				return false;
+        			});
+        
+        			//checkout button with getProduct()
+        			$('#checkout-button').click(function(){
+        				var product = yourDesigner.getProduct();
+        				console.log(product);
+        				return false;
+        			});
+        
+        			//event handler when the price is changing
+        			$yourDesigner.on('priceChange', function(evt, price, currentPrice) {
+        				$('#thsirt-price').text(currentPrice);
+        			});
+        
+        			//save image on webserver
+        			$('#save-image-php').click(function() {
+        
+        				yourDesigner.getProductDataURL(function(dataURL) {
+        					$.post( "php/save_image.php", { base64_image: dataURL} );
+        				});
+        
+        			});
+        
+        			//send image via mail
+        			$('#send-image-mail-php').click(function() {
+        
+        				yourDesigner.getProductDataURL(function(dataURL) {
+        					$.post( "php/send_image_via_mail.php", { base64_image: dataURL} );
+        				});
+        
+        			});
+        
+        	    });*/
+
+
+	
+
+
+		</script>  
+        <!-- FPD END -->        
+        

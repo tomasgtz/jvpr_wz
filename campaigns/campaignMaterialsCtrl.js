@@ -6,8 +6,8 @@
  * Controller of the newappApp
  */
 
-var urlHost = 'https://wizad.mx/';
-var urlHostEmpresas = 'https://empresas.wizad.mx/';
+var urlHost = 'https://localhost/';
+var urlHostEmpresas = 'https://localhost/wizad/empresas/';
  
 angular.module('newApp')
   .controller('campaignMaterialsCtrl', function ($scope, CanvasFactory, ngDialog, $rootScope, $timeout, ngDragDrop, ImagesFactory, UtilsFactory, AppSettings, campaignService, objCampaign , $location, generalService) {
@@ -27,7 +27,7 @@ angular.module('newApp')
 	$scope.canvas = {};
 	$scope.factory.stickersCount = 0;
 	$scope.factory.photosCount = 0;
-//	$scope.factory.canvas = new fabric.Canvas("play_board");
+	$scope.factory.canvas = new fabric.Canvas("play_board");
 //	$scope.factory.canvas.preserveObjectStacking = true;
 	$scope.formSelected = false;
 	$scope.imageSelected = false;
@@ -58,6 +58,9 @@ angular.module('newApp')
 	$scope.cntObj=0;
 	$scope.election_object_left=0;
 	$scope.selection_object_top=0;
+	
+	$scope.topRuler = new fabric.Canvas('top-ruler');
+	$scope.leftRuler = new fabric.Canvas('left-ruler');
 	
 	/*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*/
 	/*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*/
@@ -118,6 +121,8 @@ angular.module('newApp')
 		return file.previewElement.classList.add("dz-success");
 	});
 	
+	
+  
 	$scope.modifyFont = function(){
 		// var activeObject = $scope.factory.canvas.getActiveObject();
 		
@@ -429,6 +434,7 @@ angular.module('newApp')
 			$scope.zoomActivated = true;
 		}
 	}
+	
 	
 	$scope.factory.canvas.on({
 	  'object:moving': function objectMoving(e) {
@@ -934,6 +940,63 @@ angular.module('newApp')
 			}while($scope.randomNumberArray.includes(value))				
 			return value;
 		}
+		
+		$scope.redrawRulers = function () {
+			
+			$scope.topRuler.clear();
+			$scope.leftRuler.clear();
+			$scope.topRuler.setBackgroundColor('#aaa');
+			$scope.leftRuler.setBackgroundColor('#aaa');
+
+			zoomLevel = $scope.factory.canvas.getZoom();
+			
+			for (i = 0; i < $scope.factory.canvas.width; i += (10 * zoomLevel)) {
+				
+				var topLine = new fabric.Line([i, 10, i, 20], {
+				  stroke: 'black',
+				  strokeWidth: 1
+				});
+				
+				$scope.topRuler.add(topLine);
+			}
+			
+			for (i = 0; i < $scope.factory.canvas.height; i += (10 * zoomLevel)) {	
+				var leftLine = new fabric.Line([10, i, 20, i], {
+				  stroke: 'black',
+				  strokeWidth: 1
+				});
+				
+				$scope.leftRuler.add(leftLine);
+			}
+		
+			// Numbers
+			for (i = 0; i < 600;  i += (100 * zoomLevel)) {
+				var text = new fabric.Text((Math.round(i / zoomLevel)).toString(), {
+					left: i,
+				  top: 10,
+				  fontSize: 8
+				});
+				$scope.topRuler.add(text);
+			}
+		}
+		
+		$scope.redrawRulers();
+		
+		$('#canvas_board').on('mousewheel', function(e) {
+			
+		    var dir = e.originalEvent.wheelDelta;
+		    if (dir > 0){
+		      var ZoomValue = $scope.factory.canvas.getZoom() * 1.2;		    
+		    
+		    } else {
+		    	var ZoomValue = $scope.factory.canvas.getZoom() * .83333333333333333;
+		    }
+
+ 			$scope.redrawRulers();
+		    $scope.factory.canvas.setZoom(ZoomValue, e);
+			e.originalEvent.returnValue = false;
+	  	});
+		
 		
 		$scope.addText = function () {
 			  

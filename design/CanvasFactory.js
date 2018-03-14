@@ -47,7 +47,7 @@ angular.module('newApp')
 		  }
 		});
 
-		factory.restoreCanvas();
+		//factory.restoreCanvas();
 	  });
 
 	  //Save Canvas State
