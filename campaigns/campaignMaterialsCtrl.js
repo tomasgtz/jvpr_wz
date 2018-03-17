@@ -28,7 +28,7 @@ angular.module('newApp')
 	$scope.factory.stickersCount = 0;
 	$scope.factory.photosCount = 0;
 	$scope.factory.canvas = new fabric.Canvas("play_board");
-//	$scope.factory.canvas.preserveObjectStacking = true;
+	$scope.factory.canvas.preserveObjectStacking = true;
 	$scope.formSelected = false;
 	$scope.imageSelected = false;
 	$scope.canvasTarget = false;
@@ -281,6 +281,9 @@ angular.module('newApp')
 		$scope.factory.canvas.setDimensions({width: $scope.newMaterialChange.width_small, height: 
 			parseInt($scope.newMaterialChange.height_small)});
 				
+		$scope.topRuler.setDimensions({width: $scope.newMaterialChange.width_small, height: 20 });
+		
+		$scope.leftRuler.setDimensions({width: 20, height: parseInt($scope.newMaterialChange.height_small) });
 		// if(parseInt($scope.canvasWidth) > 800){
 			// if(parseInt($scope.canvasHeight) > 500){
 				// // $("#hero_container").css("min-width", "900px");
@@ -486,7 +489,7 @@ angular.module('newApp')
 		
 	  $scope.images = [{
 		title: "2x1",
-		src: "http://wizadqa.mbledteq.com/uploads/TELCEL2.jpg",
+		src: "images/2x1.png",
 		isUserUploaded: false
 	  }, {
 		title: "Cinepolis",
@@ -945,8 +948,8 @@ angular.module('newApp')
 			
 			$scope.topRuler.clear();
 			$scope.leftRuler.clear();
-			$scope.topRuler.setBackgroundColor('#aaa');
-			$scope.leftRuler.setBackgroundColor('#aaa');
+			$scope.topRuler.setBackgroundColor('#ddd');
+			$scope.leftRuler.setBackgroundColor('#ddd');
 
 			zoomLevel = $scope.factory.canvas.getZoom();
 			
@@ -1036,8 +1039,6 @@ angular.module('newApp')
 		alert("Sorry :( not yet implemented...");
 	  };
 
-	  // var font = $scope.factory.canvas.Font('Ubuntuu', 'http://wizadqa.mbledteq.com/uploads/fonts/Raleway-Light.ttf');
-	  
 	  
 	  
 	  //reset the board

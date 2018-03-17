@@ -3038,7 +3038,7 @@ $app->post(
 										<th>Contrase&ntilde;a:</th><td>  '.$password_p.'   </td>
 									</tr>
 									<tr>
-										<th>Sitio Web:</th><td><a href="http://www.wizadqa.mbledteq.com">www.wizadqa.mbledteq.com</a></td>
+										<th>Sitio Web:</th><td><a href="http://www.wizadqa.mx">www.wizad.mx</a></td>
 									</tr>
 								</table>
 							</body>

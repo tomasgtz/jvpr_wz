@@ -59,7 +59,7 @@ angular.module('newApp').service('userService', function($http,$q){
 					UserContext.password 	 	 = data[0].password;
 					UserContext.type 		 	 = data[0].type;
 					UserContext.typenum		 	 = data[0].typenum;
-					UserContext.image 		 	 = data[0].image != "" ? data[0].image : "http://www.wizadqa.mbledteq.com/nouserphoto.png";
+					UserContext.image 		 	 = data[0].image != "" ? data[0].image : "nouserphoto.png";
 					UserContext.date_up 	 	 = data[0].date_up;
 					UserContext.date_update  	 = data[0].date_update;
 					UserContext.home_phone 	 	 = data[0].home_phone;
@@ -67,7 +67,7 @@ angular.module('newApp').service('userService', function($http,$q){
 					UserContext.fk_company 	 	 = data[0].fk_company;
 					UserContext.status 		 	 = data[0].status;
 					UserContext.address 		 = data[0].address;
-					UserContext.logo 		 	 = data[0].logo != "" ? data[0].logo : "http://www.wizadqa.mbledteq.com/nobanneravailable.png";
+					UserContext.logo 		 	 = data[0].logo != "" ? data[0].logo : "nobanneravailable.png";
 					UserContext.company_name  	 = data[0].company_name;
 					UserContext.company_status 	 = data[0].company_status;
 					UserContext.company_update 	 = data[0].company_update;	

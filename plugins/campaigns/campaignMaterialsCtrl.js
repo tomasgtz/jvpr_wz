@@ -116,7 +116,7 @@ angular.module('newApp')
 		if($scope.currentUser.id_company === "4" && material.free == 0){
 			
 			console.log("Marca de Agua");
-			var myImg = 'http://wizadqa.mbledteq.com/materiales/'+material.thumbnail;
+			var myImg = 'materiales/'+material.thumbnail;
 			fabric.Image.fromURL(myImg, function(oImg) {
 				var l = Math.random() * (500 - 0) + 0;
 				var t = Math.random() * (500 - 0) + 0;                
@@ -271,7 +271,7 @@ angular.module('newApp')
 		
 	  $scope.images = [{
 		title: "2x1",
-		src: "http://wizadqa.mbledteq.com/uploads/TELCEL2.jpg",
+		src: "images/2x1.png",
 		isUserUploaded: false
 	  }, {
 		title: "Cinepolis",
@@ -628,8 +628,7 @@ angular.module('newApp')
 		alert("Sorry :( not yet implemented...");
 	  };
 
-	  // var font = $scope.factory.canvas.Font('Ubuntuu', 'http://wizadqa.mbledteq.com/uploads/fonts/Raleway-Light.ttf');
-	  
+	 
 	  
 	  
 	  //reset the board

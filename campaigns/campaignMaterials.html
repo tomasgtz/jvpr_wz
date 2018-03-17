@@ -58,7 +58,7 @@
 							<button data-toggle="modal" data-target="#modal-images" style="width: 130px;     background-color: #44BBFF;" class="btn btn-embossed btn-warning m-r-10"> Imágenes</button>
 						</li>
 						<li> 
-							<button style="width: 130px; background-color: #44BBFF;" ng-click="addText()" class="btn btn-embossed btn-default m-r-10"> <img src="/images/utils/pencil.png" height="16" width="16"></button>
+							<button style="width: 130px; background-color: #44BBFF;" ng-click="addText()" class="btn btn-embossed btn-default m-r-10"> <img src="/empresas/images/utils/pencil.png" height="16" width="16"></button>
 						</li>
 						<!-- <li>
 							<jd-fontselect />
@@ -141,31 +141,23 @@
 				<div id="hero_container" style="position:static; margin-top: 20px;" >
 				    <div id="canvas_container" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 						<div id="canvas_board">
-						
-						<table>
-							<tr>
-							  <td></td>
-							  <td>
-								<canvas id="top-ruler" width="600" height="50"/>
-							  </td>
-							</tr>
-							<tr>
-							  <td>
-								 <canvas id="left-ruler" width="50" height="400"/>
-							  </td>
-							  <td>
-								<canvas id="play_board"></canvas>
-							  </td>
-							</tr>
-							</table>
-														
-						   <canvas id="zoom" width="400" height="200" style="position:absolute; top:0; left:0; display:none"></canvas>
-						</div> 
+							<table>
+								<tr>
+									<td>&nbsp;</td>
+									<td><canvas id="top-ruler" width="600" height="20"/></td>
+								</tr>
+								<tr>
+									<td><canvas id="left-ruler" width="20" height="400"/></td>
+									<td>
+										<canvas id="play_board"></canvas>
+										<canvas id="zoom" width="400" height="200" style="position:absolute; top:0; left:0; display:none"></canvas>
+									</td>
+								</tr>
+							</table>										
+						</div>
 					</div>
-				</div> 
-			</div>
-
-	    </div>
+				</div>
+		</div>
 		<div class="modal fade modal-slideright" id="modal-images" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog" style="width:300px;">
 				<div id="mContent" class="modal-content">
@@ -459,104 +451,3 @@
 			</div>
 		</div>
     </div> 
-    
-    
-
-        
-        <!-- FPD BEGIN -->    
-            <script type="text/javascript">
-/*        	    jQuery(document).ready(function(){
-        
-        	    	var $yourDesigner = $('#clothing-designer'),
-        	    		pluginOpts = {
-        		    		stageWidth: 1200,
-        		    		editorMode: false,
-        		    		fonts: [
-        				    	{name: 'Helvetica'},
-        				    	{name: 'Times New Roman'},
-        				    	{name: 'Pacifico', url: 'Enter_URL_To_Pacifico'},
-        				    	{name: 'Arial'},
-        			    		{name: 'Lobster', url: 'google'}
-        			    	],
-        		    		customTextParameters: {
-        			    		colors: false,
-        			    		removable: true,
-        			    		resizable: true,
-        			    		draggable: true,
-        			    		rotatable: true,
-        			    		autoCenter: true,
-        			    		boundingBox: "Base"
-        			    	},
-        		    		customImageParameters: {
-        			    		draggable: true,
-        			    		removable: true,
-        			    		resizable: true,
-        			    		rotatable: true,
-        			    		colors: '#000',
-        			    		autoCenter: true,
-        			    		boundingBox: "Base"
-        			    	},
-        			    	actions:  {
-        						'top': ['download','print', 'snap', 'preview-lightbox'],
-        						'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code', 'ruler'],
-        						'bottom': ['undo','redo'],
-        						'left': ['manage-layers','info','save','load']
-        					},
-							mainBarModules:['designs', 'images', 'text']
-        	    		},
-        
-        	    	yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts);
-					
-					
-        	    	
-					//print button
-        			$('#print-button').click(function(){
-        				yourDesigner.print();
-        				return false;
-        			});
-        
-        			//create an image
-        			$('#image-button').click(function(){
-        				var image = yourDesigner.createImage();
-        				return false;
-        			});
-        
-        			//checkout button with getProduct()
-        			$('#checkout-button').click(function(){
-        				var product = yourDesigner.getProduct();
-        				console.log(product);
-        				return false;
-        			});
-        
-        			//event handler when the price is changing
-        			$yourDesigner.on('priceChange', function(evt, price, currentPrice) {
-        				$('#thsirt-price').text(currentPrice);
-        			});
-        
-        			//save image on webserver
-        			$('#save-image-php').click(function() {
-        
-        				yourDesigner.getProductDataURL(function(dataURL) {
-        					$.post( "php/save_image.php", { base64_image: dataURL} );
-        				});
-        
-        			});
-        
-        			//send image via mail
-        			$('#send-image-mail-php').click(function() {
-        
-        				yourDesigner.getProductDataURL(function(dataURL) {
-        					$.post( "php/send_image_via_mail.php", { base64_image: dataURL} );
-        				});
-        
-        			});
-        
-        	    });*/
-
-
-	
-
-
-		</script>  
-        <!-- FPD END -->        
-        
