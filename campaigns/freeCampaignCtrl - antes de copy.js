@@ -158,7 +158,7 @@ angular.module('newApp')
 			$scope.CampaignSelected.date_up 	= data.date_up;
 			$scope.CampaignSelected.date_update = data.date_update;
 			$scope.CampaignSelected.status 		= data.status;			
-
+			$scope.CampaignSelected.autorization 		= data.autorization;
 			var params = {
 				"campaign_p" : ""
 			}

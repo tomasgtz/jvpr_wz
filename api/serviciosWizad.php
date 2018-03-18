@@ -41,7 +41,7 @@ $app->post(
 			$email_p = $req->post('email_p');
 			$password_p = $req->post('password_p');
 			
-				//almaceno de el parÃ¡metro al servicio
+				//almaceno de el parámetro al servicio
 				//conexion con base de datos
 				//Replace the below connection parameters to fit your environment
 				$dbms = 'mysql';
@@ -128,6 +128,8 @@ $app->post(
 			$userupdate_p = $req->post('userupdate_p');
 			$dimension_p = $req->post('dimension_p');
 			$company_p = $req->post('company_p');
+                        $download_p = $req->post('download_p');
+
 			
 				//NO MOVER
 				
@@ -145,7 +147,7 @@ $app->post(
 				try
 				{
 						//CAMBIAR PROCEDIMIENTO
-						$data = $cn->query("call uspIns_NewCampaign('$name_p','$description_p','$userup_p','$userupdate_p','$dimension_p','$company_p');")->fetchAll(PDO::FETCH_ASSOC);
+						$data = $cn->query("call uspIns_NewCampaign('$name_p','$description_p','$userup_p','$userupdate_p','$dimension_p','$company_p', '$download_p');")->fetchAll(PDO::FETCH_ASSOC);
 						
 						echo json_encode($data);
 				}
@@ -3569,7 +3571,7 @@ $app->post(
 						
 							mail($to, "Wizad - Registrate", $message, $headers);
 							// $test2 = json_decode($xx, true);
-							$data = "Usuario registrado exitosamente, se enviÃ³ tu contraseÃ±a por correo. Â¡Ya puedes iniciar en nuestra plataforma!";
+							$data = "Usuario registrado exitosamente, se envió tu contraseña por correo. ¡Ya puedes iniciar en nuestra plataforma!";
 							echo json_encode($data);
 						}else{
 							$data = "Este usuario ya se encuentra registrado.";
@@ -3673,6 +3675,7 @@ $app->post(
 			$segment_c = $req->post('segment_c');
 			$city_c = $req->post('city_c');
 			$age_c = $req->post('age_c');
+                        
 			
 			// foreach($array as $item) {
 				// $textnew = $item['color']; 
@@ -3696,7 +3699,7 @@ $app->post(
 				try
 				{
 						//CAMBIAR PROCEDIMIENTO
-						$data = $cn->query("call uspIns_NewCampaign('$title_c','$description_c',0,0,1,'$company_p','$segment_c','$city_c','$age_c');")->fetchAll(PDO::FETCH_ASSOC);
+						$data = $cn->query("call uspIns_NewCampaign('$title_c','$description_c',0,0,1,'$company_p','$segment_c','$city_c','$age_c', '$autorization_c');")->fetchAll(PDO::FETCH_ASSOC);
 						
 						echo json_encode($data);
 				}
@@ -3810,76 +3813,115 @@ $app->post(
 			$delPackArray = json_decode( $delPackArray, true );
 			$delFontArray = $req->post('delFontArray');
 			$delFontArray = json_decode( $delFontArray, true );
+			$autorization = $req->post('autorization');
+                        $name         = $req->post('name');
+                        $description  = $req->post('description');
+                        $userupdate   = $req->post('userupdate');
+                       
+
 			
+			//NO MOVER
 			
-				//NO MOVER
-				
-				//Replace the below connection parameters to fit your environment
-				$dbms = 'mysql';
-				$host = 'localhost'; 
-				$db = 'wizadadm_wizad';
-				$user = 'wizadadm_mrkt';
-				$pass = 'Decaene09!';
-				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
+			//Replace the below connection parameters to fit your environment
+			$dbms = 'mysql';
+			$host = 'localhost'; 
+			$db = 'wizadadm_wizad';
+			$user = 'wizadadm_mrkt';
+			$pass = 'Decaene09!';
+			$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
 
 
-				$cn=new PDO($dsn, $user, $pass);
-				$cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-				try
-				{
-					//New items to campaign update
-						foreach($newTextArray as $item) {
-							$textnew = $item['text']; 
-							$data = $cn->query("call uspIns_CampaignTexts('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
-						}
-						foreach($newPaletteArray as $item) {
-							$textnew = $item['color']; 
-							$data = $cn->query("call uspIns_CampaignPalette('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
-						}
-						foreach($newMaterialArray as $item) {
-							$textnew = $item['id_material']; 
-							$data = $cn->query("call uspIns_CampaignMaterial('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
-						}
-						foreach($newPackArray as $item) {
-							$textnew = $item['image']; 
-							$data = $cn->query("call uspIns_CampaignPack('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
-						}
-						foreach($newFontArray as $item) {
-							$textnew = $item['font']; 
-							$data = $cn->query("call uspIns_CampaignFonts('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
-						}
-						
-					//Drop items to campaign update	
-						foreach($delTextArray as $item) {
-							$textnew = $item['id_cgtext']; 
-							$data = $cn->query("call uspDel_CampaignTexts('$textnew');")->fetchAll(PDO::FETCH_ASSOC);
-						}
-						foreach($delPaletteArray as $item) {
-							$textnew = $item['id_cgpalette']; 
-							$data = $cn->query("call uspDel_CampaignPalette('$textnew');")->fetchAll(PDO::FETCH_ASSOC);
-						}
-						foreach($delMaterialArray as $item) {
-							$textnew = $item['id_material']; 
-							$data = $cn->query("call uspDel_CampaignMaterial('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
-						}
-						foreach($delPackArray as $item) {
-							$textnew = $item['id_cgpack']; 
-							$data = $cn->query("call uspDel_CampaignPack('$textnew');")->fetchAll(PDO::FETCH_ASSOC);
-						}
-						foreach($delFontArray as $item) {
-							$textnew = $item['id_cgfont']; 
-							$data = $cn->query("call uspDel_CampaignFonts('$textnew');")->fetchAll(PDO::FETCH_ASSOC);
-						}
-						
-						echo json_encode($data);
+			$cn=new PDO($dsn, $user, $pass);
+			$cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+			try
+			{
+
+				$data = $cn->query("call uspUpd_Campaign('$name', '$description', '$userupdate', '$campaignid', '$autorization' );");
+
+				//New items to campaign update
+				if(is_array($newTextArray) && count($newTextArray) > 0) {
+					foreach($newTextArray as $item) {
+						$textnew = $item['text']; 
+						$data = $cn->query("call uspIns_CampaignTexts('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
+					}
 				}
-				
-				catch(PDOException $e) {
-						echo $e->getMessage();
-				}			
+
+				if(is_array($newPaletteArray) && count($newPaletteArray) > 0) {
+					foreach($newPaletteArray as $item) {
+						$textnew = $item['color']; 
+						$data = $cn->query("call uspIns_CampaignPalette('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+
+				if(is_array($newMaterialArray) && count($newMaterialArray) > 0) {
+					foreach($newMaterialArray as $item) {
+						$textnew = $item['id_material']; 
+						$data = $cn->query("call uspIns_CampaignMaterial('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+
+				if(is_array($newPackArray) && count($newPackArray) > 0) {
+					foreach($newPackArray as $item) {
+						$textnew = $item['image']; 
+						$data = $cn->query("call uspIns_CampaignPack('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+
+				if(is_array($newFontArray) && count($newFontArray) > 0) {
+					foreach($newFontArray as $item) {
+						$textnew = $item['font']; 
+						$data = $cn->query("call uspIns_CampaignFonts('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}						
+				//Drop items to campaign update	
+
+
+				if(is_array($delTextArray) && count($delTextArray) > 0) {
+					foreach($delTextArray as $item) {
+						$textnew = $item['id_cgtext']; 
+						$data = $cn->query("call uspDel_CampaignTexts('$textnew');")->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+
+				if(is_array($delPaletteArray) && count($delPaletteArray) > 0) {
+					foreach($delPaletteArray as $item) {
+						$textnew = $item['id_cgpalette']; 
+						$data = $cn->query("call uspDel_CampaignPalette('$textnew');")->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+
+				if(is_array($delMaterialArray) && count($delMaterialArray) > 0) {
+					foreach($delMaterialArray as $item) {
+						$textnew = $item['id_material']; 
+						$data = $cn->query("call uspDel_CampaignMaterial('$campaignid','$textnew');")->fetchAll(PDO::FETCH_ASSOC);
+					}
+
+				}
+
+				if(is_array($delPackArray) && count($delPackArray) > 0) {
+					foreach($delPackArray as $item) {
+						$textnew = $item['id_cgpack']; 
+						$data = $cn->query("call uspDel_CampaignPack('$textnew');")->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+
+				if(is_array($delFontArray) && count($delFontArray) > 0) {
+					foreach($delFontArray as $item) {
+						$textnew = $item['id_cgfont']; 
+						$data = $cn->query("call uspDel_CampaignFonts('$textnew');")->fetchAll(PDO::FETCH_ASSOC);
+					}
+
+				}
+				$data[] = array('returnMessage' => "SUCCESS");	
+				echo json_encode($data);
+			}
+			
+			catch(PDOException $e) {
+					echo "Error: ".$e->getMessage();
+			}			
 				
 					
-			}
+		}
 );
 
 $app->post(
@@ -4926,6 +4968,41 @@ $app->post(
 			
 				
 		}
+);
+
+
+$app->post(
+		'/GetDownloadPermission',function() use ($app){
+						
+				$allPostVars = $app->request->post();
+				$req = $app->request();
+				$array = array();
+				$idcompany_p	= $req->post('idcompany_p');
+				
+				$dbms = 'mysql';
+				$host = 'localhost'; 
+				$db = 'wizadadm_wizad';
+				$user = 'wizadadm_mrkt';
+				$pass = 'Decaene09!';
+				$dsn = "$dbms:host=$host;dbname=$db;charset=utf8";
+				
+				$cn=new PDO($dsn, $user, $pass);
+				$cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+				
+				try
+				{					
+						$callBack  = $cn->query("CALL uspGet_CampaignDownloadPermission ('$idcampaign_p')")->fetchAll(PDO::FETCH_ASSOC);
+						array_push($array, $callBack);
+						
+						echo json_encode($array);
+				}
+				
+				catch(Exception $e) {
+						echo $e->getMessage();
+				}			
+				
+					
+			}
 );
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //inicializamos la aplicacion(API)

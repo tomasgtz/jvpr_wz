@@ -134,7 +134,6 @@ angular.module('newApp').service('campaignService', function($http,$q){
 				if(data[0] !== undefined){
 					
 				}
-				
 				defered.resolve(data);		
 			})
 			.error(function(data){
@@ -1056,6 +1055,8 @@ angular.module('newApp').service('campaignService', function($http,$q){
 			var delMaterialArray 	= angular.toJson(params.delMaterialArray);
 			var delPackArray 		= angular.toJson(params.delPackArray);
 			var delFontArray 		= angular.toJson(params.delFontArray);
+			var autorization		= params.autorization;
+			
 			
 			$http({
 			method: 'POST',
@@ -1072,8 +1073,9 @@ angular.module('newApp').service('campaignService', function($http,$q){
 					newPackArray : newPackArray, newFontArray : newFontArray,
 					delTextArray : delTextArray, delPaletteArray : delPaletteArray, 
 					delMaterialArray : delMaterialArray, delPackArray : delPackArray, 
-					delFontArray : delFontArray }
-			})
+					delFontArray : delFontArray, autorization : autorization, name : params.name, description : params.description, userupdate : params.userupdate }
+			}			
+			)
 			.success(function(data) {
 				if(data[0] !== undefined){
 					

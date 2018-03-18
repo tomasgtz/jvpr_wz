@@ -259,8 +259,16 @@ angular.module('newApp')
 		objCampaign.getCampaign()
 		.then(function(data) {
 
-			$scope.CampaignSelected = data;			
-
+			$scope.CampaignSelected = data;
+			console.log("asd tom5 [" + data.download + "] loading campaign info");	
+			
+			if(data.download == '1') {
+				$scope.CampaignSelected.download = true;
+			} else {
+			
+				$scope.CampaignSelected.download = false;
+			}
+			
 			var params = {
 				"campaign_p" : ""
 			}
@@ -296,7 +304,7 @@ angular.module('newApp')
 						for(var j in $scope.materialArray){
 							if($scope.allMaterials[i].id_material === $scope.materialArray[j].id_material){
 								$scope.allMaterials[i].selected = "1";
-								console.log("Checked" + " " + i);
+								
 								console.log($scope.allMaterials[i].selected);
 							}
 						}
@@ -341,8 +349,10 @@ angular.module('newApp')
 				"delPaletteArray" 	: "",
 				"delMaterialArray" 	: "",
 				"delPackArray" 		: "",
-				"delFontArray" 		: ""
-				
+				"delFontArray" 		: "",
+				"autorization"		: "",
+				"description"		: "",
+				"name"				: ""
 			}
 			
 			params.campaign_p		= $scope.CampaignSelected.id_campaign;
@@ -356,6 +366,15 @@ angular.module('newApp')
 			params.delMaterialArray	= $scope.deletedMaterials;
 			params.delPackArray		= $scope.deletedImages;
 			params.delFontArray		= $scope.deletedFonts;
+			params.name				= $scope.CampaignSelected.campaign_name;
+			params.description		= $scope.CampaignSelected.description;
+			params.userupdate		= $scope.currentUser.id_user
+			
+			if( $scope.CampaignSelected.download	) {
+				params.autorization = 1;
+			} else {
+				params.autorization = 0;
+			}
 			
 			campaignService.SaveCampaignUpdate(params)
 			.then(function(data) {

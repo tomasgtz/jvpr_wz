@@ -314,6 +314,10 @@ angular.module('newApp')
 		$scope.searchValueChange = function(searchValue){
 			$scope.searchValue = searchValue;
 		}
+		$scope.autorizationChange = function(autorization_1) {
+		
+			$scope.autorization = autorization_1;
+		}
 		
 		//Images added to campaign
 		myDropzone.on("success", function(file) {

@@ -149,6 +149,10 @@ angular.module('newApp')
 			$scope.title = title;
 		}
 		
+		$scope.autorizationChange = function(autorization_1) {
+			$scope.autorization = autorization_1;
+		}
+		
 		
 		/**		Services	**/
 		
@@ -162,6 +166,7 @@ angular.module('newApp')
 			
 			paramss.company_p 		= $scope.currentUser.id_company;
 			paramss.title_c 		= $scope.title;
+			console.log("asd tom");
 			if($scope.autorization){
 				paramss.autorization_c 	= 1;
 			}else{
@@ -257,7 +262,7 @@ angular.module('newApp')
 				"pack_p" : "",
 				"font_p" : ""
 			}
-			
+			console.log("asd tom2");
 			paramss.company_p 		= $scope.currentUser.id_company;
 			paramss.title_c 		= $scope.title;
 			if($scope.autorization){

@@ -315,6 +315,10 @@ angular.module('newApp')
 			$scope.searchValue = searchValue;
 		}
 		
+		$scope.autorizationChange = function(autorization) {
+			$scope.autorization = autorization;
+		}
+		
 		//Images added to campaign
 		myDropzone.on("success", function(file) {
 			var newPack 	= { id_pack: 0, pack: '' };
@@ -342,6 +346,7 @@ angular.module('newApp')
 			
 			paramss.company_p 		= $scope.currentUser.id_company;
 			paramss.title_c 		= $scope.title;
+			console.log("asd tom3");
 			if($scope.autorization){
 				paramss.autorization_c 	= 1;
 			}else{
@@ -453,6 +458,7 @@ angular.module('newApp')
 			}else{
 				paramss.autorization_c 	= 0;
 			}
+			console.log("guarda nueva campaña");
 			
 			paramss.description_c 	= $scope.description;
 			paramss.segment_c 		= $( "#selectsegment" ).val();

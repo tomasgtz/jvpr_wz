@@ -149,6 +149,10 @@ angular.module('newApp')
 			$scope.title = title;
 		}
 		
+		$scope.autorizationChange = function(autorization_1) {
+			$scope.autorization = autorization_1;
+		}
+		
 		
 		/**		Services	**/
 		

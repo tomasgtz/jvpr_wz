@@ -1,6 +1,6 @@
 <div>
    <div class="header">
-      <h2 style="font-size:20px;">NOMBRE: <strong>{{CampaignSelected.campaign_name}}</strong></h2>
+      <h2 style="font-size:20px;">NOMBRE: <strong><input type="text" ng-model="CampaignSelected.campaign_name"></strong></h2>
       <div class="breadcrumb-wrapper">
       </div>
    </div>
@@ -22,6 +22,13 @@
 				</div>
                <div class="row" >
                   <div class="col-sm-12">
+				     <div class="row" >
+                        <h3 style="border-bottom: 1px solid black;"><i class="fa fa-briefcase"></i>PERMISO PARA <strong> DESCARGAR</strong></h3>
+                        
+						<input ng-model="CampaignSelected.download" id="aut" type="checkbox">
+						<label for="aut" class="control-label">Autorización para descargar</label>
+						
+                     </div>
 					 <div class="row" >
                         <h3 style="border-bottom: 1px solid black;"><i class="fa fa-briefcase"></i>DESCRIPCIÓN<strong> DE LA CAMPAÑA</strong></h3>
                         <textarea ng-model="CampaignSelected.description" rows="4" class="form-control" required="" aria-required="true"></textarea>

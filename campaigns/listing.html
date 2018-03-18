@@ -82,8 +82,8 @@
 									<div class="">
 									</div>
 									<div class="col-sm-10">
-										<input ng-model="autorization" type="checkbox" data-checkbox="icheckbox_square-blue">
-										<label for="field-2" class="control-label">Autorización para descargar</label>
+										<input ng-model="autorization" id="aut" type="checkbox" ng-change="autorizationChange(autorization)">
+										<label for="aut" class="control-label">Autorización para descargar</label>
 									</div>
 								</div>
 								<div class="row">
