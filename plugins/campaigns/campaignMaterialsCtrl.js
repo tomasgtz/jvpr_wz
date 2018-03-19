@@ -19,9 +19,10 @@ angular.module('newApp')
 				"name" 			: "",
 				"date_up" 		: "",
 				"date_update" 	: "",
-				"status" 		: ""
+				"status" 		: "",
+				"autorization"  : ""
 		}
-		
+	
 	$scope.objectsC = [];
 	$scope.factory = {};
 	$scope.canvas = {};
@@ -64,6 +65,7 @@ angular.module('newApp')
 	
 	
 	$scope.materialSelect = function(material){
+		
 		$scope.canvasWidth = material.width;
 		$scope.canvasHeight = material.height;
 		
@@ -166,13 +168,14 @@ angular.module('newApp')
 	
 	objCampaign.getCampaign()
 		.then(function(data) {
-
+			
 			$scope.CampaignSelected.id_campaign = data.id_campaign;
 			$scope.CampaignSelected.description = data.description;
 			$scope.CampaignSelected.name 		= data.name;
 			$scope.CampaignSelected.date_up 	= data.date_up;
 			$scope.CampaignSelected.date_update = data.date_update;
-			$scope.CampaignSelected.status 		= data.status;			
+			$scope.CampaignSelected.status 		= data.status;
+			$scope.CampaignSelected.autorization = data.autorization;
 
 			var params = {
 				"campaign_p" : ""

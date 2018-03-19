@@ -19,7 +19,8 @@ angular.module('newApp')
 				"name" 			: "",
 				"date_up" 		: "",
 				"date_update" 	: "",
-				"status" 		: ""
+				"status" 		: "",
+				"autorization"  : ""
 		}
 		
 	$scope.objectsC = [];
@@ -161,12 +162,12 @@ angular.module('newApp')
 		$scope.adminNotified = true;
 	}
 	
-	var newPaletteO = { color: "" };
+	/*var newPaletteO = { color: "" };
 	newPaletteO.color = "#000000";
 	$scope.paletteArray.push(newPaletteO);
 	newPaletteO = { color: "" };
 	newPaletteO.color = "#FFFFFF";
-	$scope.paletteArray.push(newPaletteO);
+	$scope.paletteArray.push(newPaletteO);*/
 	
 	$scope.notifyAdministrador = function(){
 		$scope.adminNotified = true;
@@ -204,7 +205,7 @@ angular.module('newApp')
 	}
 	
 	$scope.newPalette = function(newColor){
-		console.log(newColor);
+		console.log("asd tom14 agregando color a la paleta " + newColor);
 		$scope.your_model = "";
 		if(newColor === undefined || newColor === ""){
 			$scope.alertExpiredClass = "alert alert-warning";
@@ -366,56 +367,62 @@ angular.module('newApp')
 	
 	objCampaign.getCampaign()
 		.then(function(data) {
-
+	
 			$scope.CampaignSelected.id_campaign = data.id_campaign;
 			$scope.CampaignSelected.description = data.description;
-			$scope.CampaignSelected.name 		= data.name;
+			$scope.CampaignSelected.name 		= data.campaign_name;
 			$scope.CampaignSelected.date_up 	= data.date_up;
 			$scope.CampaignSelected.date_update = data.date_update;
 			$scope.CampaignSelected.status 		= data.status;	
-			$scope.CampaignSelected.autorization = data.autorization;				
+			$scope.CampaignSelected.autorization = data.download;		
+		
+			console.log("asd tom9 carga datos de campaña description= " + $scope.CampaignSelected.description);			
+			console.log("asd tom9 carga datos de campaña autorization= " + $scope.CampaignSelected.autorization);				
+			console.log("asd tom9 carga datos de campaña name= " + $scope.CampaignSelected.name);				
 
 			var params = {
 				"campaign_p" : ""
 			}
+			
 			params.campaign_p = $scope.CampaignSelected.id_campaign;
 			$scope.images = [];
 			$scope.imagesIdentity = [];
+			$scope.phrases = [];
 			
-			// campaignService.GPackCampaign(params)
-			// .then(function(data) {
-				// if(data.length>0){
-				// $scope.imageArray = data;
-				// for (var i in $scope.imageArray){
-					// var newImg   = { title: '', src: '' , isUserUploaded: false};
-					// newImg.title = $scope.imageArray[i].image;
-					// newImg.src   = 'http://wizadqa.mbledteq.com/uploads/' + $scope.imageArray[i].image;
-					// $scope.images.push(newImg);
-				// }
-				// }
-			// })
+			campaignService.GPackCampaign(params)
+			.then(function(data) {
+				if(data.length>0){
+				$scope.imageArray = data;
+				for (var i in $scope.imageArray){
+					var newImg   = { title: '', src: '' , isUserUploaded: false};
+					newImg.title = $scope.imageArray[i].image;
+					newImg.src   = urlHostEmpresas + 'uploads/' + $scope.imageArray[i].image;
+					$scope.images.push(newImg);
+				}
+				}
+			})
 			
-			// campaignService.GPackIdentity(params)
-			// .then(function(data) {
-				// if(data.length>0){
-				// $scope.identityImageArray = data;
-				// for (var i in $scope.identityImageArray){
-					// var newImg   = { title: '', src: '' , isUserUploaded: false};
-					// newImg.title = $scope.identityImageArray[i].image;
-					// newImg.src   = 'http://wizadqa.mbledteq.com/uploads/' + $scope.identityImageArray[i].image;
-					// $scope.imagesIdentity.push(newImg);
-				// }
-				// }
-			// })
+			campaignService.GPackIdentity(params)
+			.then(function(data) {
+				if(data.length>0){
+				$scope.identityImageArray = data;
+				for (var i in $scope.identityImageArray){
+					var newImg   = { title: '', src: '' , isUserUploaded: false};
+					newImg.title = $scope.identityImageArray[i].image;
+					newImg.src   = urlHostEmpresas + 'uploads/' + $scope.identityImageArray[i].image;
+					$scope.imagesIdentity.push(newImg);
+				}
+				}
+			})
 			
-			// campaignService.GPaletteCampaign(params)
-			// .then(function(data) {
-				// $scope.paletteArray = data;
+			 campaignService.GPaletteCampaign(params)
+			 .then(function(data) {
+				 $scope.paletteArray = data;
 				
-				// var newPaletteO = { id_palette: 10000, color: '#FFFFFF' };
-				// $scope.paletteArray.push(newPaletteO);
+				 /*var newPaletteO = { id_palette: 10000, color: '#FFFFFF' };
+				 $scope.paletteArray.push(newPaletteO);*/
 				
-			// })
+			 })
 			
 			campaignService.GFontsCampaign(params)
 			.then(function(data) {
@@ -427,6 +434,25 @@ angular.module('newApp')
 				$scope.materialArray = data;
 				for (var i in $scope.materialArray){
 					$scope.materialArray[i].style="";
+				}
+			})
+			
+			campaignService.GTextsCampaign(params)
+			.then(function(data) {
+				if(data.length>0){
+					$scope.phrasesArray = data;
+					console.log("asd tom11 carga textos " + $scope.phrasesArray);
+					for (var i in $scope.phrasesArray){
+						var newPhrase   = { id_cgtext: '', date_up: '', date_update: '', fk_campaign: '', status: '', text: ''};
+						
+						newPhrase.id_cgtext = $scope.phrasesArray[i].id_cgtext;
+						newPhrase.date_up = $scope.phrasesArray[i].date_up;
+						newPhrase.date_update = $scope.phrasesArray[i].date_update;
+						newPhrase.status = $scope.phrasesArray[i].status;
+						newPhrase.text = $scope.phrasesArray[i].text;
+						
+						$scope.phrases.push(newPhrase);
+					}
 				}
 			})
 		})
@@ -650,6 +676,7 @@ angular.module('newApp')
 	  $scope.dropImage = function (obj, $event) {
 		// var canvas = CanvasFactory.getCanvas();
 		// $scope.objectsC = canvas._objects;
+		
 		var PosX = undefined,
 			PosY = undefined;
 		if (obj.drop === true) {
@@ -672,6 +699,13 @@ angular.module('newApp')
 			$scope.factory.canvas.renderAll();
 		  // canvas.add(oImg);
 		});
+	  };
+	  
+	  
+	  $scope.dropPhrase = function (obj, $event) {
+		
+		$scope.addText(obj.text);
+		
 	  };
 	  
 	  	//*canvas*//
@@ -973,14 +1007,25 @@ angular.module('newApp')
 				$scope.leftRuler.add(leftLine);
 			}
 		
-			// Numbers
-			for (i = 0; i < 600;  i += (100 * zoomLevel)) {
+			// Numbers for top ruler
+			for (i = 0; i < $scope.factory.canvas.width;  i += (100 * zoomLevel)) {
 				var text = new fabric.Text((Math.round(i / zoomLevel)).toString(), {
 					left: i,
-				  top: 10,
+				  top: 0,
 				  fontSize: 8
 				});
 				$scope.topRuler.add(text);
+			}
+			
+			console.log($scope.factory.canvas.height);
+			// Numbers for left ruler
+			for (i = 0; i < $scope.factory.canvas.height;  i += (100 * zoomLevel)) {
+				var text = new fabric.Text((Math.round(i / zoomLevel)).toString(), {
+					top: i,
+				  left: 0,
+				  fontSize: 8
+				});
+				$scope.leftRuler.add(text);
 			}
 		}
 		
@@ -1002,26 +1047,68 @@ angular.module('newApp')
 	  	});
 		
 		
-		$scope.addText = function () {
-			  
+		$scope.addText = function (textParam) {
+			 
+			console.log("asd tom13 agregando texto al canvas textParam = " + textParam);
 			var random = $scope.getRandomSpan();
 			random = "text" + random;
 			var bkColor = $scope.factory.canvas.backgroundColor;
+	
+			console.log("asd tom13 agregando texto al canvas backgroundColor =" + bkColor);
+			
 			var presetColor = 0;
-			while(bkColor === $scope.paletteArray[presetColor].color  || bkColor === ""){
-				presetColor ++;
-				bkColor = "OK";
-			}				
-			// var canvas = CanvasFactory.getCanvas();
-			var text = "Escribe tu texto..";
-			var fontColor = $scope.paletteArray[presetColor].color;
+			var fontColor = "#000000";
+			var paletteSize = $scope.paletteArray.length;
+			console.log("asd tom15 paletteSize = " + paletteSize);
+			
+			if (paletteSize == 1) {
+				
+				alert("ERROR: No se puede continuar.\nLa campaña solamente cuenta con un color definido, favor de reportarlo al usuario administrador");
+				return;
+			}
+			
+			// Algoritmo para seleccionar el color de letra
+			if(bkColor === "" ) {
+				
+				// el fondo es transparente se busca uno diferente de blanco
+				for(i = 0; i < paletteSize; i++) {
+						
+					if($scope.paletteArray[i].color != "#ffffff") {
+					
+						fontColor = $scope.paletteArray[i].color;
+						break;
+					}
+				}
+				
+			} else {
+				// el fondo tiene color, se busca uno diferente
+				for(i = 0; i < paletteSize; i++) {
+						
+					if($scope.paletteArray[i].color != bkColor) {
+					
+						fontColor = $scope.paletteArray[i].color;
+						break;
+					}
+				}
+			} 
+
+		
+			
+			var text = "";
+			if(textParam === undefined) {
+				text = "Escribe tu texto..";
+			} else {
+				text = textParam;
+			}
+			
+			
 			var fontFamily = "Allerta+Stencil";
 			var textSample = new fabric.IText(text, {
 			  left: 0,
 			  top: 0,
 			  fontFamily: fontFamily,
 			  angle: 0,
-			  fill: $scope.paletteArray[presetColor].color,
+			  fill: fontColor,
 			  scaleX: 3,
 			  scaleY: 3,
 			  fontWeight: '',
@@ -1252,82 +1339,16 @@ angular.module('newApp')
 			
 		}
 		
-		objCampaign.getCampaign()
-		.then(function(data) {
-
-			$scope.CampaignSelected.id_campaign = data.id_campaign;
-			$scope.CampaignSelected.description = data.description;
-			$scope.CampaignSelected.name 		= data.name;
-			$scope.CampaignSelected.date_up 	= data.date_up;
-			$scope.CampaignSelected.date_update = data.date_update;
-			$scope.CampaignSelected.status 		= data.status;			
-
-			var params = {
-				"campaign_p" : ""
+		$scope.isDownloadable = function() {
+			
+			if($scope.CampaignSelected.autorization == 1) {
+				
+				return true;
 			}
-			params.campaign_p = $scope.CampaignSelected.id_campaign;
-			$scope.images = [];
-			$scope.imagesIdentity = [];
 			
-			campaignService.GPackCampaign(params)
-			.then(function(data) {
-				if(data.length>0){
-				$scope.imageArray = data;
-				for (var i in $scope.imageArray){
-					var newImg   = { title: '', src: '' , isUserUploaded: false};
-					newImg.title = $scope.imageArray[i].image;
-					newImg.src   = urlHostEmpresas + 'uploads/' + $scope.imageArray[i].image;
-					$scope.images.push(newImg);
-				}
-				}
-			})
+			return false;
 			
-			campaignService.GPackIdentity(params)
-			.then(function(data) {
-				if(data.length>0){
-				$scope.identityImageArray = data;
-				for (var i in $scope.identityImageArray){
-					var newImg   = { title: '', src: '' , isUserUploaded: false};
-					newImg.title = $scope.identityImageArray[i].image;
-					newImg.src   = urlHostEmpresas + 'uploads/' + $scope.identityImageArray[i].image;
-					$scope.imagesIdentity.push(newImg);
-				}
-				}
-			})
-			
-			campaignService.GPaletteCampaign(params)
-			.then(function(data) {
-				$scope.paletteArray = data;
-				var newPaletteO = { id_palette: 10000, color: '#FFFFFF' };
-				$scope.paletteArray.push(newPaletteO);
-				newPaletteO = { id_palette: 10000, color: '#000000' };
-				$scope.paletteArray.push(newPaletteO);
-				for(var i in $scope.paletteArray){
-					$scope.paletteArrayCopy.push($scope.paletteArray[i]);
-				}
-			})
-			
-			campaignService.GFontsCampaign(params)
-			.then(function(data) {
-				$scope.fontArray = data;
-				for (var i in $scope.fontArray){
-					$scope.fontArray[i].urlcheck = urlHostEmpresas + 'uploads/' + $scope.fontArray[i].font;
-					$scope.fontArray[i].name = $scope.fontArray[i].font.substring(0, $scope.fontArray[i].font.length-4); ;
-				}
-			})
-			
-			campaignService.GTextsCampaign(params)
-			.then(function(data) {
-				$scope.textsCampaign = data;
-			})
-			
-			campaignService.GMaterialsCampaign(params)
-			.then(function(data) {
-				$scope.materialArray = data;
-				for (var i in $scope.materialArray){
-					$scope.materialArray[i].style="";
-				}
-			})
-		})
+		}
+		
 		
   });

@@ -3912,6 +3912,7 @@ $app->post(
 					}
 
 				}
+				$data = null;
 				$data[] = array('returnMessage' => "SUCCESS");	
 				echo json_encode($data);
 			}

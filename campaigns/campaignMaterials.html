@@ -1,16 +1,11 @@
      
 	<div class="header">
-        <h2>DISEÑO <strong>DE LA CAMPAÑA</strong></h2>
+        <div class="row">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">DISEÑO <strong>DE LA CAMPAÑA</strong>:</div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-model="CampaignSelected">{{CampaignSelected.name}}</div>
+		</div>
         <div class="breadcrumb-wrapper">
-            <!-- <ol class="breadcrumb">
-                <li>
-                    <a href="dashboard">Make</a>
-                </li>
-                <li>
-                    <a href="tables">Tables</a>
-                </li>
-                <li class="active">Tables Editable</li>
-            </ol> -->
+        
         </div>
 		
     </div>
@@ -19,8 +14,6 @@
 <div class="wrapper" >
 		
 	    <div class="row panel" style="padding-top:20px; padding-bottom:20px;">
-		<!-- 	<p><font face="verdana" color="green">This is some text!</font></p>
-			<p><font face="Wolf in the City.ttf" color="green">This is some text!</font></p> -->
 			<div class="col-sm-6 form-group">
 				<div class="col-sm-3">
 					<label for="field-2" class="control-label">Escoger material:</label>
@@ -32,8 +25,7 @@
 				</div>
 				<div class="col-sm-2">
 						<button ng-click="materialChange()" class="btn btn-embossed btn-warning m-r-20" style="width:130px;">Seleccionar</button>
-				</div>
-				
+				</div>			
 			</div>
 		</div>
 	    <div class="row panel" style="padding-top:20px; padding-bottom:20px;" ng-show="showCanvasMaterialSelected">
@@ -58,11 +50,12 @@
 							<button data-toggle="modal" data-target="#modal-images" style="width: 130px;     background-color: #44BBFF;" class="btn btn-embossed btn-warning m-r-10"> Imágenes</button>
 						</li>
 						<li> 
-							<button style="width: 130px; background-color: #44BBFF;" ng-click="addText()" class="btn btn-embossed btn-default m-r-10"> <img src="/empresas/images/utils/pencil.png" height="16" width="16"></button>
+							<button style="width: 130px; background-color: #44BBFF;" ng-click="addText()" class="btn btn-embossed btn-default m-r-10"> <img src="images/utils/pencil.png" height="16" width="16"></button>
 						</li>
-						<!-- <li>
-							<jd-fontselect />
-						</li> -->
+						<li> 
+							<button data-toggle="modal" data-target="#modal-phrases" style="width: 130px; background-color: #44BBFF;" ng-click="addPhrase()" class="btn btn-embossed btn-default m-r-10"> <img src="images/utils/textlist16x16.png" height="16" width="16"></button>
+						</li>
+
 						<li style="margin-bottom:10px;">
 							<div class="btn-group">
 							  <button style="width:130px;     background-color: #44BBFF; color:white;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -93,7 +86,7 @@
 						</li>
 						<li>
 							<!-- <button style="z-index:200; background-color: #462446; border-radius: 20px; height: 50px; position: fixed; right: 0; width: 115px; bottom:0;" data-toggle="modal" data-target="#download-formats" class="btn btn-embossed btn-primary m-r-20"> -->
-							<button style="z-index:200; width: 130px;     background-color: #44BBFF;" class="btn btn-embossed btn-warning m-r-10" data-toggle="modal" data-target="#download-formats" class="btn btn-embossed btn-primary m-r-20">
+							<button style="z-index:200; width: 130px;  background-color: #44BBFF;" class="btn btn-embossed btn-warning m-r-10" data-toggle="modal" data-target="#download-formats" class="btn btn-embossed btn-primary m-r-20" ng-show="isDownloadable()">
 								<i style="font-size:25px;" class="fa fa-download"></i>
 								<p style="    margin: 0px 2px 10px;    line-height: 12px;">Descargar</p>
 							</button>
@@ -187,6 +180,53 @@
 										<div style="height:100%; width:100%;">
 											<img data-dismiss="modal" src="{{image.src}}"  style="width:100%; min-height:100%; box-shadow: 6px 6px 7px #888888;">
 										</div>
+								   </li>	
+								</ul>
+							</div>
+							<!-- <div class="col-sm-12">
+								<form callbacks="dzCallbacks" id="dropzoneFrm3" action="upload1.php" class="dropzone" style="height: 300px;    overflow-y: scroll;">
+									<div class="fallback">
+										<input name="file" type="file" multiple />
+									</div>
+								</form>
+							</div> -->
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="modal fade modal-slideright" id="modal-phrases" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" style="width:300px;">
+				<div id="mContent" class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+						<h4 class="modal-title">AGREGA UNA<strong> FRASE PRECARGADA</strong></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row" >
+							<div class="text-right">
+								<div class="btn-group">
+									<div>
+										<!-- HERE -->
+										<!-- <button type="button" class="btn btn-embossed btn-primary m-r-20" ng-click="uploadSticker()"><i class="fa fa-thumb-tack"></i> Agregar imágenes</button> -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<ul ng-drag-drop dropTo="#canvas_board" styles="{{styles}}" on-drag="dragCallback(event)" on-drop="dropCallback(event)" on-over="overCallback(event)" style="list-style: none; max-height: 500px; overflow-y: scroll;">
+								   <li style="text-align: center; margin:15px; " class="item" ng-repeat="phrase in phrases" ng-click="dropPhrase(phrase, $event)">			
+									  
+										<div style="height:100%; width:100%;">
+											<div data-dismiss="modal" style="width:100%; min-height:100%; box-shadow: 1px 1px 1px 1px #888888;"> A {{phrase.text}} </div>
+										</div>
+										<p class="text-info"><small>Fecha creación: {{phrase.date_up}}</small></p>
 								   </li>	
 								</ul>
 							</div>

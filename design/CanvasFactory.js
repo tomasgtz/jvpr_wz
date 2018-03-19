@@ -47,7 +47,12 @@ angular.module('newApp')
 		  }
 		});
 
+		try {
 		factory.restoreCanvas();
+		} catch(err) {
+			console.log("Error en empresas/desing/CanvasFactory.js linea 51 trata de hacer un restoreCanvas() al factory");
+			
+		}
 	  });
 
 	  //Save Canvas State
