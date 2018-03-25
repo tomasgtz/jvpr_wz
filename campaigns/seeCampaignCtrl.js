@@ -323,11 +323,14 @@ angular.module('newApp')
 					dzImages.files.push(mockFile);
 				}	
 			})
-
+			
 			campaignService.GFontsCampaign(params)
 			.then(function(data) {
-				$scope.fontArray = data;	
+				$scope.fontArray = data;
+				console.log("cargando info de campaña 2" + data);
+				
 				for(var i in $scope.fontArray){
+					console.log("font " + $scope.fontArray[i]);
 					$scope.fontArrayCopy.push($scope.fontArray[i]);
 					var mockFile = { name: $scope.fontArray[i].font, size: 12345 };
 					dzFonts.options.addedfile.call(dzFonts, mockFile);

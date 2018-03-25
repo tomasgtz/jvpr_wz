@@ -2650,6 +2650,7 @@ $app->post(
 			
 			//CAMBIAR PARAMETROS
 			$campaign_p = $req->post('campaign_p');
+			$host_p = $req->post('host_p');
 
 				//NO MOVER
 				
@@ -2667,7 +2668,7 @@ $app->post(
 				try
 				{
 						//CAMBIAR PROCEDIMIENTO
-						$data = $cn->query("call uspGet_CampaignFonts('$campaign_p');")->fetchAll(PDO::FETCH_ASSOC);
+						$data = $cn->query("call uspGet_CampaignFonts('$campaign_p','$host_p');")->fetchAll(PDO::FETCH_ASSOC);
 						
 						echo json_encode($data);
 				}

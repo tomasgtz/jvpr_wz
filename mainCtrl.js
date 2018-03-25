@@ -1,5 +1,6 @@
 
 var webServiceUrl = 'https://empresas.wizad.mx/api/serviciosWizad.php/';
+var host		  = 'https://localhost/wizad/empresas/uploads/'
 
 angular.module('newApp').service('userService', function($http,$q){
 	
@@ -405,7 +406,7 @@ angular.module('newApp').service('campaignService', function($http,$q){
 				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
 				return str.join("&");
 			},
-			data: { campaign_p : params.campaign_p}
+			data: { campaign_p : params.campaign_p, host_p : host}
 			})
 			.success(function(data) {
 				if(data[0] !== undefined){

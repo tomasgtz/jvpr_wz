@@ -10,7 +10,7 @@ var urlHost = 'https://localhost/';
 var urlHostEmpresas = 'https://localhost/wizad/empresas/';
  
 angular.module('newApp')
-  .controller('campaignMaterialsCtrl', function ($scope, CanvasFactory, ngDialog, $rootScope, $timeout, ngDragDrop, ImagesFactory, UtilsFactory, AppSettings, campaignService, objCampaign , $location, generalService) {
+  .controller('campaignMaterialsCtrl', function ($scope,  ngDialog, $rootScope, $timeout, ngDragDrop, ImagesFactory, UtilsFactory, AppSettings, campaignService, objCampaign , $location, generalService) {
 
 	$scope.CampaignSelected =  {
 
@@ -22,7 +22,9 @@ angular.module('newApp')
 				"status" 		: "",
 				"autorization"  : ""
 		}
-		
+	$scope.currentFont = "";
+	$scope.currentFontSize = "";
+	
 	$scope.objectsC = [];
 	$scope.factory = {};
 	$scope.canvas = {};
@@ -50,6 +52,7 @@ angular.module('newApp')
 	$scope.zoomActivated = false;
 	$scope.myFontStack = "";
 	$scope.cropStarted = false;
+	$scope.fontsSizeDropdown = [8,9,10,11,12,14,16,18,20,22,24,26,28,36,48,72];
 	
 	$scope.el = {};
 	$scope.object = {};
@@ -63,12 +66,10 @@ angular.module('newApp')
 	$scope.topRuler = new fabric.Canvas('top-ruler');
 	$scope.leftRuler = new fabric.Canvas('left-ruler');
 	
-	/*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*/
-	/*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*/
 	var main = document.getElementById("play_board");
-	var zoom = document.getElementById("zoom");
+	//COMENTADO TOM 20180324 var zoom = document.getElementById("zoom");
 	var ctx = main.getContext("2d")
-	var zoomCtx = zoom.getContext("2d");
+	//COMENTADO TOM 20180324 var zoomCtx = zoom.getContext("2d");
 	
 	// main.addEventListener("mousemove", function(e){
 		// console.log(e);
@@ -86,15 +87,15 @@ angular.module('newApp')
 	// main.addEventListener("mouseout", function(){
 		// zoom.style.display = "none";
 	// });
-	/*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*/
-	/*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*//*ZOOM*/
 		
 	$scope.fontsUploaded = [];
 	generalService.GFonts()
 	.then(function(data) {
 		$scope.fontsUploaded = data;
-		
+		console.log("asd tom carga todas las fuentes, de la campaña y de la compañia ");
+
 	})
+	
 	
 	var accepti = ".png,.jpg";
 	var acceptf = ".ttf,.otf";
@@ -125,26 +126,11 @@ angular.module('newApp')
 	
   
 	$scope.modifyFont = function(){
-		// var activeObject = $scope.factory.canvas.getActiveObject();
-		
 			
-			// var modifyFontFamily = $( "#selectFont" ).val();
-		
-			// if(modifyFontFamily.indexOf("otf") !== -1){
-				// modifyFontFamily = modifyFontFamily.substring(0, modifyFontFamily.length-4);
-			// }
-			// if(modifyFontFamily.indexOf("ttf") !== -1){
-				// modifyFontFamily = modifyFontFamily.substring(0, modifyFontFamily.length-4);
-			// }
-			// activeObject.fontFamily = modifyFontFamily;
-			// var y = 1;	
-			// $scope.factory.canvas.renderAll();
-			
-		console.log($scope.myFontStack);
+		console.log("asd tom21 aplica la font " + $scope.myFontStack);
 		var activeObject = $scope.factory.canvas.getActiveObject();
 		activeObject.fontFamily = $scope.myFontStack;
 		$scope.factory.canvas.renderAll();
-		
 		
 	}
 	
@@ -243,10 +229,33 @@ angular.module('newApp')
 			}
 		}
 		
-		$scope.factory.canvas.clear();
+		if(typeof $scope.newMaterialChange.width_small == 'undefined' || $scope.newMaterialChange.width_small == "" || $scope.newMaterialChange.width_small == 0) {
+			
+			alert("El material ha sido definido incorrectamente\nFavor de contactar al administrador de campaña");
+			return false;
+		}
+		
+		if(typeof $scope.newMaterialChange.height_small == 'undefined' || $scope.newMaterialChange.height_small == "" || $scope.newMaterialChange.height_small == 0) {
+			
+			alert("El material ha sido definido incorrectamente\nFavor de contactar al administrador de campaña");
+			return false;
+		}
+		
+		if(typeof $scope.newMaterialChange.width == 'undefined' || $scope.newMaterialChange.width == "" || $scope.newMaterialChange.width == 0) {
+			
+			alert("El material ha sido definido incorrectamente\nFavor de contactar al administrador de campaña");
+			return false;
+		}
+		
+		if(typeof $scope.newMaterialChange.height == 'undefined' || $scope.newMaterialChange.height == "" || $scope.newMaterialChange.height == 0) {
+			
+			alert("El material ha sido definido incorrectamente\nFavor de contactar al administrador de campaña");
+			return false;
+		}
+		
+		$scope.factory.canvas.clear();	
 		if($scope.currentUser.id_company === "4" && $scope.newMaterialChange.free == 0){
 			
-			console.log("Marca de Agua");
 			var myImg = urlHost + 'materiales/'+$scope.newMaterialChange.thumbnail;
 			fabric.Image.fromURL(myImg, function(oImg) {
 				var l = Math.random() * (500 - 0) + 0;
@@ -264,70 +273,36 @@ angular.module('newApp')
 		
 		$scope.showCanvasMaterialSelected = true;
 		material.style="1px solid black";
-		// $scope.factory.canvas.setWidth($scope.canvasWidth);
-		// $scope.factory.canvas.setHeight($scope.canvasHeight);
-		// $scope.factory.canvas.width  = $scope.canvasWidth;
-		// $scope.factory.canvas.height = $scope.canvasHeight; 
-		// $scope.factory.canvas.style.width  = $scope.canvasWidth + 'px';
-		// $scope.factory.canvas.style.height = $scope.canvasHeight + 'px';
-		// $('#play_board').attr({width:parseInt($scope.canvasWidth),height:parseInt($scope.canvasHeight)}).css({width:$scope.canvasWidth + 'px',height:$scope.canvasHeight + 'px'});
 		
 		
 		$scope.widthMultiplier = $scope.canvasWidth / 800;
 		$scope.heightMultiplier = $scope.canvasHeight / 500;
 		
+		console.log("asd tom materialChange $scope.newMaterialChange.width_small = " + $scope.newMaterialChange.width_small);
 		
-		$("#hero_container").css("width", $scope.newMaterialChange.width_small+"px");
-		$("#hero_container").css("height", $scope.newMaterialChange.height_small+"px");
-		$scope.factory.canvas.setDimensions({width: $scope.newMaterialChange.width_small, height: 
-			parseInt($scope.newMaterialChange.height_small)});
-				
+		// se le suman el ancho de las reglas (20px) y 10px mas de tolerancia
+		const hc_width = parseInt($scope.newMaterialChange.width_small) + 20 + 10;
+		const hc_height = parseInt($scope.newMaterialChange.height_small) + 20 + 10;
+		
+		console.log("asd tom23 establece ancho de hero_container = " + hc_width);
+		
+		$("#hero_container").css("width", hc_width +"px");
+		$("#hero_container").css("height", hc_height +"px");
+		
+		
+		$scope.factory.canvas.setDimensions({
+											width: parseInt($scope.newMaterialChange.width_small), 
+											height: parseInt($scope.newMaterialChange.height_small)});
+							
 		$scope.topRuler.setDimensions({width: $scope.newMaterialChange.width_small, height: 20 });
 		
 		$scope.leftRuler.setDimensions({width: 20, height: parseInt($scope.newMaterialChange.height_small) });
-		// if(parseInt($scope.canvasWidth) > 800){
-			// if(parseInt($scope.canvasHeight) > 500){
-				// // $("#hero_container").css("min-width", "900px");
-				// $("#hero_container").css("width", "800px");
-				// $("#hero_container").css("height", "500px");
-				// // $("#canvas_container").css("width", "900px");
-				// // $("#canvas_container").css("height", "500px");
-				// $scope.factory.canvas.setDimensions({width: 800, height: 500});
-			// }else{
-				// // $("#hero_container").css("min-width", "900px");
-				// $("#hero_container").css("width", "800px");
-				// $("#hero_container").css("height", $scope.canvasHeight +"px");
-				// $scope.factory.canvas.setDimensions({width: 800, height: parseInt($scope.canvasHeight)});
-				// // $("#canvas_container").css("width", "900px");
-				// // $("#canvas_container").css("height", $scope.canvasHeight +"px");
-			// }
-		// }
-		// else{
-			// if(parseInt($scope.canvasHeight) > 500){
-				// // $("#hero_container").css("min-width", $scope.canvasWidth +"px");
-				// $("#hero_container").css("width", $scope.canvasWidth +"px");
-				// $("#hero_container").css("height", "500px");
-				// $scope.factory.canvas.setDimensions({width: parseInt($scope.canvasWidth), height: 500});
-				// // $("#canvas_container").css("width", $scope.canvasWidth +"px");
-				// // $("#canvas_container").css("height", "500px");
-			// }else{
-				// // $("#hero_container").css("min-width", $scope.canvasWidth +"px");
-				// $("#hero_container").css("width", parseInt($scope.canvasWidth));
-				// $("#hero_container").css("height", parseInt($scope.canvasHeight));
-				// $scope.factory.canvas.setDimensions({width: parseInt($scope.canvasWidth), height: parseInt($scope.canvasHeight)});
-				// // $("#canvas_container").css("width", $scope.canvasWidth +"px");
-				// // $("#canvas_container").css("height", $scope.canvasHeight +"px");
-			// }
-		// }
-		
-		// $("#play_board").width(parseInt($scope.canvasWidth)).height(parseInt($scope.canvasHeight));
-		//$scope.exportAs();
 		
 		
-		//$scope.factory.canvas.calcOffset();
-		 $scope.factory.canvas.deactivateAll().renderAll();
-		 $scope.factory.canvas.deactivateAll().renderAll();
-		//$scope.factory.canvas.renderAll();
+		$scope.factory.canvas.deactivateAll().renderAll();
+		$scope.factory.canvas.deactivateAll().renderAll();
+		
+		$scope.redrawRulers();
 	}
 	
 	$scope.setTransparent = function(){
@@ -427,7 +402,74 @@ angular.module('newApp')
 			campaignService.GFontsCampaign(params)
 			.then(function(data) {
 				$scope.fontArray = data;
+				console.log("asd tom18 carga fuentes de la campaña " + $scope.fontArray);
+				
+				$scope.fontsDropdown = [];
+		
+				for(var a = 0; a < $scope.fontArray.length ; a++){
+					
+					$scope.fontsDropdown[a] = {name: $scope.fontArray[a].font.slice(0, -4), url: $scope.fontArray[a].url }
+										
+					var newStyle = document.createElement('style');
+					newStyle.appendChild(document.createTextNode("\
+					@font-face {\
+						font-family: " + $scope.fontsDropdown[a].name + ";\
+						src: url('" + $scope.fontsDropdown[a].url + "');\
+					}\
+					"));
+
+					document.head.appendChild(newStyle);
+				}
+				
+				
 			})
+			
+			$scope.applyFont2 = function(font){
+				console.log("asd tom22 applyfont " + font.name);
+				
+				var activeObject = $scope.factory.canvas.getActiveObject();
+				$scope.currentFont = activeObject.fontFamily;
+				$scope.currentFontSize = activeObject.fontSize;
+	
+				activeObject.fontFamily = font.name;
+				$scope.factory.canvas.renderAll();
+		
+			}
+			
+			$scope.unApplyFont2 = function() {
+				
+				var activeObject = $scope.factory.canvas.getActiveObject();
+				activeObject.fontFamily = $scope.currentFont;
+				$scope.factory.canvas.renderAll();
+			}
+			
+			$scope.unApplyFont2 = function() {
+				
+				var activeObject = $scope.factory.canvas.getActiveObject();
+				activeObject.fontSize = $scope.currentFontSize;
+				$scope.factory.canvas.renderAll();
+			}
+			
+			$scope.applyFontSize22 = function(size) {
+				
+				var activeObject = $scope.factory.canvas.getActiveObject();
+				$scope.currentFontSize = activeObject.fontSize;
+				
+				console.log("asd tom22 apply size " + size + " " + activeObject.fontFamily + " family 1 = " + $scope.fontsDropdown[0].name);
+				
+				if( typeof activeObject.fontFamily == 'undefined' || activeObject.fontFamily == "" || activeObject.fontFamily == "Allerta+Stencil") {
+					
+					activeObject.fontFamily = $scope.fontsDropdown[0].name;
+				}
+				
+				
+				activeObject.fontSize = size;
+				$scope.factory.canvas.renderAll();
+				$scope.factory.canvas.renderAll();
+		
+			
+			}
+			
 			
 			campaignService.getMaterials(params)
 			.then(function(data) {
@@ -484,7 +526,7 @@ angular.module('newApp')
 	  },
 	  'object:removed': function objectRemoved(e) {
 		$scope.$broadcast('objectRemoved', e);
-	  },
+	  },/*
 	  'mouse:move': function MouseMoving(e) {
 		// $scope.$broadcast('mouseMoving', e);
 		if ($scope.zoomActivated){
@@ -505,7 +547,7 @@ angular.module('newApp')
 			zoom.style.display = "none";
 		}
 		
-	  },
+	  },*/
 	  'path:created': function pathCreated(e) {
 		$scope.$broadcast('pathCreated', e);
 	  }
@@ -734,7 +776,7 @@ angular.module('newApp')
 		  $scope.isObjectSelected = true;
 		  $scope.canvasTarget = false;
 		  var activeObject = $scope.factory.canvas.getActiveObject();
-		  
+		  console.log("asd tom crop activeObject.id = " + activeObject.id);
 		  if(activeObject.id.indexOf("circle") !== -1 || activeObject.id.indexOf("triangle") !== -1
 				|| activeObject.id.indexOf("rect") !== -1 || activeObject.id.indexOf("text") !== -1
 				|| activeObject.id.indexOf("line") !== -1){
@@ -820,7 +862,8 @@ angular.module('newApp')
 		 // $scope.savingCanvasWidth = $scope.factory.canvas.width;
 		 // $scope.savingCanvasHeight = $scope.factory.canvas.height;
 
-                 fabric.devicePixelRatio = 1;
+         fabric.devicePixelRatio = 1;
+		 
 		 $("#hero_container").css("width", $scope.newMaterialChange.width+"px");
 		 $("#hero_container").css("height", $scope.newMaterialChange.height+"px");
 		 $scope.factory.canvas.setDimensions({width: $scope.newMaterialChange.width, height: 
@@ -1029,23 +1072,67 @@ angular.module('newApp')
 			}
 		}
 		
-		$scope.redrawRulers();
+		$scope.zoomLevel = 0;
+        $scope.zoomLevelMin = 0;
+        $scope.zoomLevelMax = 5;
 		
 		$('#canvas_board').on('mousewheel', function(e) {
 			
-		    var dir = e.originalEvent.wheelDelta;
-		    if (dir > 0){
-		      var ZoomValue = $scope.factory.canvas.getZoom() * 1.2;		    
-		    
-		    } else {
-		    	var ZoomValue = $scope.factory.canvas.getZoom() * .83333333333333333;
-		    }
+			var delta = e.originalEvent.wheelDelta;
+            if (delta != 0) {
+                var pointer = $scope.factory.canvas.getPointer(e, true);
+                var point = new fabric.Point(pointer.x, pointer.y);
+                if (delta > 0) {
+                    $scope.zoomIn(point);
+                } else if (delta < 0) {
+                    $scope.zoomOut(point);
+                }
+            }
 
  			$scope.redrawRulers();
-		    $scope.factory.canvas.setZoom(ZoomValue, e);
 			e.originalEvent.returnValue = false;
 	  	});
 		
+		$scope.zoomIn = function(point) {
+            if ($scope.zoomLevel < $scope.zoomLevelMax) {
+                $scope.zoomLevel++;
+                $scope.factory.canvas.zoomToPoint(point, Math.pow(2, $scope.zoomLevel));
+                $scope.keepPositionInBounds($scope.factory.canvas);
+            }
+        }
+		
+        $scope.zoomOut = function(point) {
+            if ($scope.zoomLevel > $scope.zoomLevelMin) {
+                $scope.zoomLevel--;
+                $scope.factory.canvas.zoomToPoint(point, Math.pow(2, $scope.zoomLevel));
+                $scope.keepPositionInBounds($scope.factory.canvas);
+            }
+        }
+		
+		$scope.clamp = function(value, min, max) {
+            return Math.max(min, Math.min(value, max));
+        }
+
+        $scope.keepPositionInBounds = function() {
+            var zoom = $scope.factory.canvas.getZoom();
+            var xMin = (2 - zoom) * $scope.factory.canvas.getWidth() / 2;
+            var xMax = zoom * $scope.factory.canvas.getWidth() / 2;
+            var yMin = (2 - zoom) * $scope.factory.canvas.getHeight() / 2;
+            var yMax = zoom * $scope.factory.canvas.getHeight() / 2;
+
+            var point = new fabric.Point($scope.factory.canvas.getWidth() / 2, $scope.factory.canvas.getHeight() / 2);
+            var center = fabric.util.transformPoint(point, $scope.factory.canvas.viewportTransform);
+
+            var clampedCenterX = $scope.clamp(center.x, xMin, xMax);
+            var clampedCenterY = $scope.clamp(center.y, yMin, yMax);
+
+            var diffX = clampedCenterX - center.x;
+            var diffY = clampedCenterY - center.y;
+
+            if (diffX != 0 || diffY != 0) {
+                $scope.factory.canvas.relativePan(new fabric.Point(diffX, diffY));
+            }
+        }
 		
 		$scope.addText = function (textParam) {
 			 
@@ -1102,11 +1189,12 @@ angular.module('newApp')
 			}
 			
 			
-			var fontFamily = "Allerta+Stencil";
+			var fontFamily = $scope.fontsDropdown[0].name;
 			var textSample = new fabric.IText(text, {
 			  left: 0,
 			  top: 0,
 			  fontFamily: fontFamily,
+			  fontSize: 12,
 			  angle: 0,
 			  fill: fontColor,
 			  scaleX: 3,
@@ -1146,6 +1234,7 @@ angular.module('newApp')
 			
 			var random = $scope.getRandomSpan();
 			random = "circle" + random;
+			console.log("asd tom agrega circulo random" + random);
 			var bkColor = $scope.factory.canvas.backgroundColor;
 			var presetColor = 0;
 			while(bkColor === $scope.paletteArray[presetColor].color  || bkColor === ""){
