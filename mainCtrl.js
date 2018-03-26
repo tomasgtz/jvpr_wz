@@ -2224,6 +2224,58 @@ angular.module('newApp').service('generalService', function($http,$q){
 				defered.reject(err)
 			})
 			return promise;
+		},
+		
+		UploadWizFile : function(file){
+			
+			console.log(file);
+			var defered = $q.defer();
+			var promise = defered.promise;
+			
+			$http({
+			method: 'POST',
+			url: 'uploadWiz.php',
+			headers: {'Content-Type': undefined},
+			transformRequest: angular.identity,
+			data: file
+			})
+			.success(function(data) {
+				if(data[0] !== undefined){
+					
+				}
+				
+				defered.resolve(data);		
+			})
+			.error(function(data){
+				defered.reject(err)
+			})
+			return promise;
+			
+		},
+		
+		ReadWizFile : function(file){
+			
+			var defered = $q.defer();
+			var promise = defered.promise;
+			
+			$http({
+			method: 'GET',
+			url: host + 'wizads/' + file,
+			headers: {'Content-Type': undefined}
+
+			})
+			.success(function(data) {
+				if(data[0] !== undefined){
+					
+				}
+				
+				defered.resolve(data);		
+			})
+			.error(function(data){
+				defered.reject(err)
+			})
+			return promise;
+			
 		}
 	}
 })

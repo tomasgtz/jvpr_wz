@@ -23,7 +23,8 @@ var MakeApp = angular
 	'ngDialog',
 	'ngDragDrop',
 	'ngFileSelect',
-	'ngTableToCsv'
+	'ngTableToCsv',
+	'ng-file-input'
   ])
   .config(function ($routeProvider, ngDialogProvider) {
       $routeProvider

@@ -13289,6 +13289,39 @@ select:focus,
 
 
 /********* Canvas Container **********/
+
+.fixtop{
+	
+	margin-top: -10px;
+	
+}
+
+.fixBtnGroup {
+	
+	margin-right: 0px;
+	
+}
+
+.edit_utils_container ul li button, .edit_utils_container ul li div button{
+	
+	background-color: white;
+	padding: 1px 1px 1px 1px;
+	margin: 0px;
+}
+
+.edit_utils_container ul li div button img, .edit_utils_container ul li button img{
+	
+
+	width: 32px;
+}
+
+
+.edit_utils_container ul li {
+	padding: 0px;
+	margin: 0px;
+}
+
+
 /* line 54, stdin */
 #canvas_board {
   height: 100%;
@@ -13296,11 +13329,12 @@ select:focus,
   position: relative; }
   /* line 59, stdin */
   #canvas_board .edit_utils_container {
-    width: 50px;
+    width: 250px;
     position: absolute;
     top: 0px;
     right: -50px;
-    z-index: 999999; }
+    z-index: 999999; 
+	border: 1 solid black;}
     /* line 66, stdin */
     #canvas_board .edit_utils_container ul.horizontal_container {
       margin: 5px;

@@ -10,7 +10,13 @@
 		
     </div>
     
-
+<div class="row">
+		<div ng-class="alertClass" ng-show="alertShow">
+			<h4 class="alert-title">¡Alerta!</h4>
+			<p>{{message}}</p>
+		</div>
+	</div>
+	
 <div class="wrapper" >
 		
 	    <div class="row panel" style="padding-top:20px; padding-bottom:20px;">
@@ -28,74 +34,76 @@
 				</div>			
 			</div>
 		</div>
-	    <div class="row panel" style="padding-top:20px; padding-bottom:20px;" ng-show="showCanvasMaterialSelected">
-			<div class="col-sm-2">
-				<h3 style="font-size:18px;"><b>Herramientas</b></h3>
-				<div class="edit_utils_container">			
-		
-		
+	    <div class="row panel" ng-show="showCanvasMaterialSelected">
+			<div class="col-sm-12">
+				<div class="panel with-nav-tabs panel-default edit_utils_container">		
+					<div class="panel-heading" style="min-height: 40px; max-height: 40px;">
+						<ul class="nav navbar-nav fixtop" >	
+							<li> 
+								<!-- <button ng-if="factory.canvas.getZoom()<4" style="width: 58px; padding: 0; background-color: #5DB6E6;" ng-click="addZoom()" class="btn btn-embossed btn-primary m-r-10">+Zoom</button>
+								<button ng-if="factory.canvas.getZoom() != 1" style="width: 58px; padding: 0; background-color: #5DB6E6;" ng-click="lessZoom()" class="btn btn-embossed btn-primary m-r-10">-Zoom</button> -->
+								<!-- COMENTADO POR TOM 20180325 <button ng-if="!zoomActivated" ng-click="ZoomStatus()" style="width: 130px; padding: 0; background-color: #5DB6E6;" class="btn btn-embossed btn-primary m-r-10">Activar Zoom</button>
+								<button ng-if="zoomActivated" ng-click="ZoomStatus()" style="width: 130px; padding: 0;" class="btn btn-embossed btn-warning m-r-10">Desactivar Zoom</button>-->
+							</li>
+							<li>
+								<button data-dismiss="modal" style="padding: 1px 1px 1px 1px; " ng-show="isObjectSelected" ng-click="deleteSelectedObject()" class="btn btn-xs btn-danger"><img src="images/utils/delete_red32x32.png" ></button>
+							</li>
+							<li> 
+								<button data-toggle="modal" data-target="#modal-canvasoptions" ng-click="canvasIsTargeted()" class="btn btn-xs btn-default"><img src="images/utils/lienzo32x32.png" ></button>
+							</li>
+							<li> 
+								<button data-toggle="modal" data-target="#modal-images" class="btn btn-xs btn-default"><img src="images/utils/gallery32x32.png" ></button>
+							</li>
+							<li> 
+								<button ng-click="addText()" class="btn btn-xs btn-default"> <img src="images/utils/pencil32x32.png" ></button>
+							</li>
+							<li> 
+								<button data-toggle="modal" data-target="#modal-phrases" ng-click="addPhrase()" class="btn btn-xs btn-default"><img src="images/utils/textlist32x32.png" ></button>
+							</li>
 
-				    <ul class="horizontal_container" >	
-						<li> 
-							<!-- <button ng-if="factory.canvas.getZoom()<4" style="width: 58px; padding: 0; background-color: #5DB6E6;" ng-click="addZoom()" class="btn btn-embossed btn-primary m-r-10">+Zoom</button>
-							<button ng-if="factory.canvas.getZoom() != 1" style="width: 58px; padding: 0; background-color: #5DB6E6;" ng-click="lessZoom()" class="btn btn-embossed btn-primary m-r-10">-Zoom</button> -->
-							<button ng-if="!zoomActivated" ng-click="ZoomStatus()" style="width: 130px; padding: 0; background-color: #5DB6E6;" class="btn btn-embossed btn-primary m-r-10">Activar Zoom</button>
-							<button ng-if="zoomActivated" ng-click="ZoomStatus()" style="width: 130px; padding: 0;" class="btn btn-embossed btn-warning m-r-10">Desactivar Zoom</button>
-						</li>
-						<li>
-							<button data-dismiss="modal" style="width: 130px; padding: 7px 15px 9px; background-color: #5DB6E6; color:white;" ng-show="isObjectSelected" ng-click="deleteSelectedObject()" class="btn btn-embossed btn-default m-r-10"> Borrar elemento</button>
-						</li>
-						<li> 
-							<button data-toggle="modal" data-target="#modal-canvasoptions" ng-click="canvasIsTargeted()" class="btn btn-embossed btn-warning m-r-20" style="width:130px; background-color: #44BBFF;">Lienzo <b>+</b></button>
-						</li>
-						<li> 
-							<button data-toggle="modal" data-target="#modal-images" style="width: 130px;     background-color: #44BBFF;" class="btn btn-embossed btn-warning m-r-10"> Imágenes</button>
-						</li>
-						<li> 
-							<button style="width: 130px; background-color: #44BBFF;" ng-click="addText()" class="btn btn-embossed btn-default m-r-10"> <img src="images/utils/pencil.png" height="16" width="16"></button>
-						</li>
-						<li> 
-							<button data-toggle="modal" data-target="#modal-phrases" style="width: 130px; background-color: #44BBFF;" ng-click="addPhrase()" class="btn btn-embossed btn-default m-r-10"> <img src="images/utils/textlist16x16.png" height="16" width="16"></button>
-						</li>
-
-						<li style="margin-bottom:10px;">
-							<div class="btn-group">
-							  <button style="width:130px;     background-color: #44BBFF; color:white;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							  <i class="fa fa-ellipsis-horizontal"></i> Formas <i class="fa fa-angle-down"></i>
-							  </button>
-							  <ul class="dropdown-menu">
-								<li>
-								  <button style="width: 130px;" ng-click="addTriangle()" class="btn btn-embossed btn-default m-r-10"> <i style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);	" class="fa fa-play fa-3x"></i></button>
-								</li>
-								<li>
-								  <button style="width: 130px;" ng-click="addCircle()" class="btn btn-embossed btn-default m-r-10"> <i class="fa fa-circle fa-3x"></i></button>
-								</li>
-								<li>
-								 <button style="width: 130px;" ng-click="addRectangle()" class="btn btn-embossed btn-default m-r-10"> <i class="fa fa-stop fa-3x"></i></button>
-								</li>
-								<li>
-								  <button style="width: 130px;" ng-click="addLine()" class="btn btn-embossed btn-default m-r-10"> <i class="fa fa-minus fa-3x"></i></button>
-								</li>								
-							  </ul>
-							</div>		
-						</li>
-						<li> 
-							<button ng-show="!cropStarted && (formSelected || imageSelected)" class="btn btn-embossed btn-blue m-r-20" style="width:130px; background-color: #44BBFF; color:white;" ng-click="startCrop()">Definir Crop</button>
-							<button ng-show="cropStarted" class="btn btn-embossed btn-blue m-r-20" style="width:130px; background-color: #462446; color:white;" ng-click="crop()">Crop</button>
-						</li>
-						<li> 
-							<button ng-show="formSelected || imageSelected" data-toggle="modal" data-target="#modal-formato" class="btn btn-embossed btn-blue m-r-20" style="width:130px; background-color: #462446; color:white;">Formato</button>
-						</li>
-						<li>
-							<!-- <button style="z-index:200; background-color: #462446; border-radius: 20px; height: 50px; position: fixed; right: 0; width: 115px; bottom:0;" data-toggle="modal" data-target="#download-formats" class="btn btn-embossed btn-primary m-r-20"> -->
-							<button style="z-index:200; width: 130px;  background-color: #44BBFF;" class="btn btn-embossed btn-warning m-r-10" data-toggle="modal" data-target="#download-formats" class="btn btn-embossed btn-primary m-r-20" ng-show="isDownloadable()">
-								<i style="font-size:25px;" class="fa fa-download"></i>
-								<p style="    margin: 0px 2px 10px;    line-height: 12px;">Descargar</p>
-							</button>
-						</li>
-						
-				    </ul>				
-			    </div>
+							<li>
+								<div class="btn-group fixBtnGroup">
+								  <button class="btn btn-default btn-xs" data-toggle="dropdown" aria-expanded="false"><img src="images/utils/shapes32x32.png" ></button>
+								  <ul class="dropdown-menu">
+									<li>
+									  <button ng-click="addTriangle()" class="btn btn-xs btn-default"> <i style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);	" class="fa fa-play fa-3x"></i></button>
+									</li>
+									<li>
+									  <button ng-click="addCircle()" class="btn btn-xs btn-default"> <i class="fa fa-circle fa-3x"></i></button>
+									</li>
+									<li>
+									 <button ng-click="addRectangle()" class="btn btn-xs btn-default"> <i class="fa fa-stop fa-3x"></i></button>
+									</li>
+									<li>
+									  <button ng-click="addLine()" class="btn btn-xs btn-default"> <i class="fa fa-minus fa-3x"></i></button>
+									</li>								
+								  </ul>
+								</div>		
+							</li>
+							<li> 
+								<button ng-show="!cropStarted && (formSelected || imageSelected)" class="btn btn-xs btn-embossed btn-blue"  ng-click="startCrop()"><img src="images/utils/crop32x32.png" ></button>
+								<button ng-show="cropStarted" class="btn btn-xs btn-default m-r-10"  ng-click="crop()"><img src="images/utils/applycrop32x32.png" ></button>
+							</li>
+							<li> 
+								<button ng-show="showFonts" data-toggle="modal" data-target="#modal-formato" class="btn btn-xs btn-default"><img src="images/utils/font32x32.png" ></button>
+							</li>
+							<li> 
+								<button ng-show="formSelected" data-toggle="modal" data-target="#modal-formato" class="btn btn-xs btn-default"><img src="images/utils/color32x32.png" ></button>
+							</li>
+							<li>
+								<button style="z-index:200; " class="btn btn-xs btn-default" data-toggle="modal" data-target="#download-formats" ng-show="isDownloadable()"><img src="images/utils/descargar32x32.png"></button>
+							</li>
+							<li>
+								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="opening()"><img src="images/utils/open32x32.png"><form enctype="multipart/form-data" id="loadWiz" action="uploadWiz.php" method="post"><input id="openWiz" name="wizFile" type="file" style="display: none" ng-model="uploadFileWiz" ng-change="sendingFile()"/></form></button>
+							</li>
+							<li>
+								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="saving()"><img src="images/utils/save32x32.png"></button>
+							</li>
+							
+						</ul>
+					</div>
+				
+					<div class="panel-body">
 				<!-- <h3 style="font-size:18px;"><b>Formato</b></h3>
 				<div class="edit_utils_container">		
 					<li style="margin-bottom:10px;">
@@ -120,26 +128,27 @@
 							</div>		
 						</li>
 				</div> -->
-			</div>
-			<div class="col-sm-10">
+			
 				
 				
-				<div id="hero_container" style="position:static; margin-top: 20px; border:2px solid #ff0000;" >
-				    <div id="canvas_container" >
-						<div id="canvas_board" style="border:2px solid #00ff00;">
-							<table style="border-collapse: collapse;">
-								<tr>
-									<td>&nbsp;</td>
-									<td><canvas id="top-ruler" width="600" height="20"/></td>
-								</tr>
-								<tr>
-									<td><canvas id="left-ruler" width="20" height="400"/></td>
-									<td style="border: 1px solid yellow; padding: 1px; border-collapse: collapse;" valign="top">
-										<canvas id="play_board" style="border:2px solid #000000;"/>
-										<!-- <canvas id="zoom" width="400" height="200" style="position:absolute; top:0; left:0; display:none"></canvas>-->
-									</td>
-								</tr>
-							</table>										
+						<div id="hero_container" style="position:static; margin-top: 20px; " >
+							<div id="canvas_container" >
+								<div id="canvas_board" >
+									<table style="border-collapse: collapse;">
+										<tr>
+											<td>&nbsp;</td>
+											<td><canvas id="top-ruler" width="600" height="20"/></td>
+										</tr>
+										<tr>
+											<td><canvas id="left-ruler" width="20" height="400"/></td>
+											<td style="padding: 1px; border-collapse: collapse;" valign="top">
+												<canvas id="play_board" style="border: 1px solid black;"/>
+												<!-- <canvas id="zoom" width="400" height="200" style="position:absolute; top:0; left:0; display:none"></canvas>-->
+											</td>
+										</tr>
+									</table>										
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -413,7 +422,7 @@
 								<h2 style="margin-top: 40px;" class="c-primary m-b-30">Formato</h2>
 								<div class="row">
 									<div class="col-sm-12">
-										<div class="row" ng-if="formSelected" style="margin-bottom: -10px;">
+										<div class="row" ng-if="formSelected || showFonts" style="margin-bottom: -10px;">
 											<div class="col-sm-12">
 												<div class="form-group">
 													<div class="input-group">
@@ -444,7 +453,7 @@
 												<option ng-repeat="font in fontsUploaded" value="{{font.font}}">{{font.font}}</option>
 											</select> -->
 											
-											<div class="container">
+											<div class="container" ng-show="showFonts">
 												<div class="btn-group">
 													<button type="button" class="btn btn-primary">Fuente</button>
 													<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -469,10 +478,10 @@
 											<!--<jd-fontselect stack="myFontStack"/>-->
 											<br>
 										</div>
-										<div class="text-center"> 
+										<!-- <div class="text-center"> 
 											<h2 style="font-family: {{myFontStack}};">Ejemplo de la fuente</h2>
 											<button ng-click="modifyFont()" type="button" class="btn btn-primary btn-success" data-dismiss="modal">Aplicar Tipografía</button>
-										</div>
+										</div> -->
 										<div class="text-center">
 											<div class="btn-group">
 											  <button style="width:180px; margin-top:20px; margin-left: 10px;    margin-bottom: 8px;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -507,3 +516,4 @@
 			</div>
 		</div>
     </div> 
+</div>

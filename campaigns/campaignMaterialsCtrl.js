@@ -63,6 +63,8 @@ angular.module('newApp')
 	$scope.election_object_left=0;
 	$scope.selection_object_top=0;
 	
+	$scope.uploadFileWiz = "";
+	
 	$scope.topRuler = new fabric.Canvas('top-ruler');
 	$scope.leftRuler = new fabric.Canvas('left-ruler');
 	
@@ -784,6 +786,7 @@ angular.module('newApp')
 				
 				if(activeObject.id.indexOf("text") !== -1){
 					$scope.showFonts = true;
+					$scope.formSelected = false;
 				}
 				else{
 					$scope.showFonts = false;
@@ -976,7 +979,7 @@ angular.module('newApp')
 
 	  //delete selected object
 	  $scope.deleteSelectedObject = function () {
-		var canvas = CanvasFactory.getCanvas();
+		
 		var activeObject = $scope.factory.canvas.getActiveObject();
 		$scope.factory.canvas.remove(activeObject);
 	  };
@@ -1223,221 +1226,304 @@ angular.module('newApp')
 		canvas.clear();
 	  };
 	  
-		$scope.changeCanvasColor = function(pal){
-			$scope.factory.canvas.backgroundColor=pal.color;
-			$scope.factory.canvas.renderAll();
-			//$scope.canvasTarget = false;
-			// $scope.factory.canvas.renderTop();
+	$scope.changeCanvasColor = function(pal){
+		$scope.factory.canvas.backgroundColor=pal.color;
+		$scope.factory.canvas.renderAll();
+		//$scope.canvasTarget = false;
+		// $scope.factory.canvas.renderTop();
+	}
+	
+	$scope.addCircle = function(){
+		
+		var random = $scope.getRandomSpan();
+		random = "circle" + random;
+		console.log("asd tom agrega circulo random" + random);
+		var bkColor = $scope.factory.canvas.backgroundColor;
+		var presetColor = 0;
+		while(bkColor === $scope.paletteArray[presetColor].color  || bkColor === ""){
+			presetColor ++;
+			bkColor = "OK";
+		}	
+		
+		var circle=new fabric.Circle({
+			top: 0,
+			left: 0,
+			radius: 99,
+			fill: $scope.paletteArray[presetColor].color,
+			id: random
+		});
+		$scope.factory.canvas.add(circle);
+		var rectSecondObj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'name', 'overlayImage');
+		$scope.factory.canvas.bringToFront(rectSecondObj);
+	}
+	
+	$scope.addTriangle = function(){
+		
+		var random = $scope.getRandomSpan();
+		random = "triangle" + random;
+		var bkColor = $scope.factory.canvas.backgroundColor;
+		var presetColor = 0;
+		while(bkColor === $scope.paletteArray[presetColor].color || bkColor === ""){
+			presetColor ++;
+			bkColor = "OK";
 		}
 		
-		$scope.addCircle = function(){
+		var triangle=new fabric.Triangle({
+			top: 0,
+			left: 0,
+			radius: 99,
+			fill: $scope.paletteArray[presetColor].color,
+			id: random
+		});
+		$scope.factory.canvas.add(triangle);
+		var rectSecondObj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'name', 'overlayImage');
+		$scope.factory.canvas.bringToFront(rectSecondObj);
+	}
+	
+	$scope.addRectangle = function(){
+		
+		var random = $scope.getRandomSpan();
+		random = "rect" + random;
+		var bkColor = $scope.factory.canvas.backgroundColor;
+		var presetColor = 0;
+		while(bkColor === $scope.paletteArray[presetColor].color  || bkColor === ""){
+			presetColor ++;
+			bkColor = "OK";
+		}		
+		
+		var rectangle=new fabric.Rect({
+			left: 0,
+			top: 0,
+			width: 100,
+			height: 100,
+			fill: $scope.paletteArray[presetColor].color,
+			padding: 10,
+			id:random
+		});
+		$scope.factory.canvas.add(rectangle);
+		var rectSecondObj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'name', 'overlayImage');
+		$scope.factory.canvas.bringToFront(rectSecondObj);
+	}
+	
+	$scope.moveToFront = function(){
+		var activeObject = $scope.factory.canvas.getActiveObject();
+		$scope.factory.canvas.bringToFront(activeObject);
+	}
+	$scope.moveToBack = function(){
+		var activeObject = $scope.factory.canvas.getActiveObject();
+		$scope.factory.canvas.sendToBack(activeObject);
+	}
+	$scope.moveToBackward = function(){
+		var activeObject = $scope.factory.canvas.getActiveObject();
+		$scope.factory.canvas.sendBackwards(activeObject);
+	}
+	$scope.moveToForward = function(){
+		var activeObject = $scope.factory.canvas.getActiveObject();
+		$scope.factory.canvas.bringForward(activeObject);
+	}
+	$scope.saveCanvas = function(){
+		
+	}
+	$scope.exportImg = function(){
+		var objects = $scope.getCanvasObjects();
+		if (objects.length !== 0) {
+		  ngDialog.open({
+			template: 'design/downloadDialog.html',
+			closeByDocument: true,
+			closeByEscape: true,
+			scope: $scope
+		  });
+		} else {
+		  alert("Nothing on sticker board!!");
+		}
+	}
+	
+	$scope.getCanvasObjects = function() {
+		
+		return $scope.factory.canvas.getObjects();
+	}
+		
+	$scope.startCrop = function(){
+		$scope.cropStarted = true;
+		
+		
+		$scope.factory.canvas.remove($scope.el);
+		if($scope.factory.canvas.getActiveObject())
+		{
 			
-			var random = $scope.getRandomSpan();
-			random = "circle" + random;
-			console.log("asd tom agrega circulo random" + random);
-			var bkColor = $scope.factory.canvas.backgroundColor;
-			var presetColor = 0;
-			while(bkColor === $scope.paletteArray[presetColor].color  || bkColor === ""){
-				presetColor ++;
-				bkColor = "OK";
-			}	
+		$scope.object=$scope.factory.canvas.getActiveObject();
+		
+		if($scope.lastActive !== $scope.object)
+		{console.log('different object');}	
+		else{console.log('same object');}
+		if ($scope.lastActive && $scope.lastActive !== $scope.object) 
+		{
+			$scope.lastActive.clipTo = null;
+			 
+		}
 			
-			var circle=new fabric.Circle({
-				top: 0,
-				left: 0,
-				radius: 99,
-				fill: $scope.paletteArray[presetColor].color,
-				id: random
+			
+			
+			$scope.el = new fabric.Rect
+			({
+				fill: 'rgba(0,0,0,0.3)',
+				originX: 'left',
+				originY: 'top',
+				stroke: '#ccc',
+				strokeDashArray: [2, 2],
+				opacity: 1,
+				width: 1,
+				height: 1,
+				borderColor: '#36fd00',
+				cornerColor: 'green',
+				hasRotatingPoint:false
 			});
-			$scope.factory.canvas.add(circle);
-			var rectSecondObj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'name', 'overlayImage');
-			$scope.factory.canvas.bringToFront(rectSecondObj);
-		}
 		
-		$scope.addTriangle = function(){
-			
-			var random = $scope.getRandomSpan();
-			random = "triangle" + random;
-			var bkColor = $scope.factory.canvas.backgroundColor;
-			var presetColor = 0;
-			while(bkColor === $scope.paletteArray[presetColor].color || bkColor === ""){
-				presetColor ++;
-				bkColor = "OK";
-			}
-			
-			var triangle=new fabric.Triangle({
-				top: 0,
-				left: 0,
-				radius: 99,
-				fill: $scope.paletteArray[presetColor].color,
-				id: random
-			});
-			$scope.factory.canvas.add(triangle);
-			var rectSecondObj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'name', 'overlayImage');
-			$scope.factory.canvas.bringToFront(rectSecondObj);
-		}
-		
-		$scope.addRectangle = function(){
-			
-			var random = $scope.getRandomSpan();
-			random = "rect" + random;
-			var bkColor = $scope.factory.canvas.backgroundColor;
-			var presetColor = 0;
-			while(bkColor === $scope.paletteArray[presetColor].color  || bkColor === ""){
-				presetColor ++;
-				bkColor = "OK";
-			}		
-			
-			var rectangle=new fabric.Rect({
-				left: 0,
-				top: 0,
-				width: 100,
-				height: 100,
-				fill: $scope.paletteArray[presetColor].color,
-				padding: 10,
-				id:random
-			});
-			$scope.factory.canvas.add(rectangle);
-			var rectSecondObj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'name', 'overlayImage');
-			$scope.factory.canvas.bringToFront(rectSecondObj);
-		}
-		
-		$scope.moveToFront = function(){
-			var activeObject = $scope.factory.canvas.getActiveObject();
-			$scope.factory.canvas.bringToFront(activeObject);
-		}
-		$scope.moveToBack = function(){
-			var activeObject = $scope.factory.canvas.getActiveObject();
-			$scope.factory.canvas.sendToBack(activeObject);
-		}
-		$scope.moveToBackward = function(){
-			var activeObject = $scope.factory.canvas.getActiveObject();
-			$scope.factory.canvas.sendBackwards(activeObject);
-		}
-		$scope.moveToForward = function(){
-			var activeObject = $scope.factory.canvas.getActiveObject();
-			$scope.factory.canvas.bringForward(activeObject);
-		}
-		$scope.saveCanvas = function(){
-			
-		}
-		$scope.exportImg = function(){
-			var objects = $scope.getCanvasObjects();
-			if (objects.length !== 0) {
-			  ngDialog.open({
-				template: 'design/downloadDialog.html',
-				closeByDocument: true,
-				closeByEscape: true,
-				scope: $scope
-			  });
-			} else {
-			  alert("Nothing on sticker board!!");
-			}
-		}
-		
-		$scope.getCanvasObjects = function() {
-			
-			return $scope.factory.canvas.getObjects();
-		}
-		
-		$scope.startCrop = function(){
-			$scope.cropStarted = true;
+			$scope.el.left=$scope.factory.canvas.getActiveObject().left;
+			$scope.selection_object_left=$scope.factory.canvas.getActiveObject().left;
+			$scope.selection_object_top=$scope.factory.canvas.getActiveObject().top;
+			$scope.el.top=$scope.factory.canvas.getActiveObject().top;
+			$scope.el.width=$scope.factory.canvas.getActiveObject().width*$scope.factory.canvas.getActiveObject().scaleX;
+			$scope.el.height=$scope.factory.canvas.getActiveObject().height*$scope.factory.canvas.getActiveObject().scaleY;
 			
 			
-			$scope.factory.canvas.remove($scope.el);
-			if($scope.factory.canvas.getActiveObject())
-			{
-				
-			$scope.object=$scope.factory.canvas.getActiveObject();
-			
-			if($scope.lastActive !== $scope.object)
-			{console.log('different object');}	
-			else{console.log('same object');}
-			if ($scope.lastActive && $scope.lastActive !== $scope.object) 
-			{
-				$scope.lastActive.clipTo = null;
-				 
-			}
-				
-				
-				
-				$scope.el = new fabric.Rect
-				({
-					fill: 'rgba(0,0,0,0.3)',
-					originX: 'left',
-					originY: 'top',
-					stroke: '#ccc',
-					strokeDashArray: [2, 2],
-					opacity: 1,
-					width: 1,
-					height: 1,
-					borderColor: '#36fd00',
-					cornerColor: 'green',
-					hasRotatingPoint:false
-				});
-			
-				$scope.el.left=$scope.factory.canvas.getActiveObject().left;
-				$scope.selection_object_left=$scope.factory.canvas.getActiveObject().left;
-				$scope.selection_object_top=$scope.factory.canvas.getActiveObject().top;
-				$scope.el.top=$scope.factory.canvas.getActiveObject().top;
-				$scope.el.width=$scope.factory.canvas.getActiveObject().width*$scope.factory.canvas.getActiveObject().scaleX;
-				$scope.el.height=$scope.factory.canvas.getActiveObject().height*$scope.factory.canvas.getActiveObject().scaleY;
-				
-				
-				$scope.factory.canvas.add($scope.el);
-				$scope.factory.canvas.setActiveObject($scope.el);
-				for(var i=0; i<$("#layers li").size();i++)
-					{
-						$scope.factory.canvas.item(i).selectable= false;
-					}
-			}
-			
-			else{
-					alert("Please select an object or layer");
-			}
-		}
-		
-		$scope.crop = function(){
-			$scope.cropStarted = false;
-			var left = $scope.el.left - $scope.object.left;
-			var top = $scope.el.top - $scope.object.top;
-			left *= 1;
-			top *= 1;
-			
-			var width = $scope.el.width * 1;
-			var height = $scope.el.height * 1;
-		    $scope.object.clipTo = function (ctx) 
-			{
-				
-				ctx.rect(-($scope.el.width/2)+left, -($scope.el.height/2)+top, parseInt(width*$scope.el.scaleX), parseInt($scope.el.scaleY*height));
-				
-		 
-			}
-			
-			
-			
+			$scope.factory.canvas.add($scope.el);
+			$scope.factory.canvas.setActiveObject($scope.el);
 			for(var i=0; i<$("#layers li").size();i++)
 				{
-					$scope.factory.canvas.item(i).selectable= true;
+					$scope.factory.canvas.item(i).selectable= false;
 				}
-			disabled = true;
-		   
-			$scope.factory.canvas.remove($scope.factory.canvas.getActiveObject());
-			$scope.lastActive = $scope.object;
+		}
+		
+		else{
+				alert("Please select an object or layer");
+		}
+	}
+		
+	$scope.crop = function(){
+		$scope.cropStarted = false;
+		var left = $scope.el.left - $scope.object.left;
+		var top = $scope.el.top - $scope.object.top;
+		left *= 1;
+		top *= 1;
+		
+		var width = $scope.el.width * 1;
+		var height = $scope.el.height * 1;
+		$scope.object.clipTo = function (ctx) 
+		{
+			
+			ctx.rect(-($scope.el.width/2)+left, -($scope.el.height/2)+top, parseInt(width*$scope.el.scaleX), parseInt($scope.el.scaleY*height));
+			
+	 
+		}
+		
+		
+		
+		for(var i=0; i<$("#layers li").size();i++)
+			{
+				$scope.factory.canvas.item(i).selectable= true;
+			}
+		disabled = true;
+	   
+		$scope.factory.canvas.remove($scope.factory.canvas.getActiveObject());
+		$scope.lastActive = $scope.object;
+		$scope.factory.canvas.renderAll();
+		
+	}
+		
+	$scope.isDownloadable = function() {
+		
+		if($scope.CampaignSelected.autorization == 1) {
+			
+			return true;
+		}
+		
+		return false;
+		
+	}
+		
+	$scope.saving = function() {
+		
+		var content = JSON.stringify($scope.factory.canvas);
+		console.log("asd tom guardando " + content);
+		//var data = $scope.encode( content );
+		var data = content;
+		
+		var blob = new Blob( [ data ], {
+			type: 'application/octet-stream'
+		});
+		
+		var url = URL.createObjectURL( blob );
+	
+		var element = document.createElement('a');
+		element.setAttribute('href', url);
+		element.setAttribute('download', "archivo.wiz");
+		element.style.display = 'none';
+		document.body.appendChild(element);
+		element.click();
+		document.body.removeChild(element);
+		
+		console.log("asd tom guardando " + content);
+	}
+	
+	$scope.encode = function( s ) {
+		var out = [];
+		for ( var i = 0; i < s.length; i++ ) {
+			out[i] = s.charCodeAt(i);
+		}
+		return new Uint8Array( out );
+	}
+	
+	$scope.opening = function() {
+		
+		$timeout(function(){
+			$('#openWiz').trigger("click");
+		}, 200);
+		
+	}
+	
+	$scope.loadingFileIntoCanvas = function(file) {
+		
+		generalService.ReadWizFile(file)
+		.then(function(data) {
+			console.log(data);
+			$scope.factory.canvas.loadFromJSON(data);
 			$scope.factory.canvas.renderAll();
 			
-		}
+		})
+	}
+	
+	
+	$scope.sendingFile = function() {
 		
-		$scope.isDownloadable = function() {
+		
+		var fdata = new FormData();
+		jQuery.each(jQuery('#openWiz')[0].files, function(i, file) {
+			fdata.append('wizFile', file);
+		});
+
+		
+		generalService.UploadWizFile(fdata)
+		.then(function(data) {
 			
-			if($scope.CampaignSelected.autorization == 1) {
+			if(typeof data.error == 'undefined') {
+				$scope.alertClass = "alert alert-success";
+				$scope.message = data.success.msg;
+				$scope.alertShow = true;
+				console.log(data.success.file);
+				$scope.loadingFileIntoCanvas(data.success.file);
+			} else {
 				
-				return true;
+				$scope.alertClass = "alert alert-danger";
+				$scope.alertShow = true;
+				$scope.message = 'Error al cargar archivo ' + data.error.msg;
+				
 			}
+			$('#loadWiz')[0].reset();
 			
-			return false;
 			
-		}
-		
+		})
+	}
+	
 		
   });
