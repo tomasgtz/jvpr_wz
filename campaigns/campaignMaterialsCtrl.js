@@ -10,7 +10,7 @@ var urlHost = 'https://localhost/';
 var urlHostEmpresas = 'https://localhost/wizad/empresas/';
  
 angular.module('newApp')
-  .controller('campaignMaterialsCtrl', function ($scope,  ngDialog, $rootScope, $timeout, ngDragDrop, ImagesFactory, UtilsFactory, AppSettings, campaignService, objCampaign , $location, generalService) {
+  .controller('campaignMaterialsCtrl', function ($scope,  ngDialog, $rootScope, $timeout, ngDragDrop, ImagesFactory, UtilsFactory, AppSettings, campaignService, objCampaign , $location, generalService, $modal) {
 
 	$scope.CampaignSelected =  {
 
@@ -53,6 +53,9 @@ angular.module('newApp')
 	$scope.myFontStack = "";
 	$scope.cropStarted = false;
 	$scope.fontsSizeDropdown = [8,9,10,11,12,14,16,18,20,22,24,26,28,36,48,72];
+	$scope.gridElements = [];
+	$scope.showGrid = true;
+	$scope.oldshowGrid = true;
 	
 	$scope.el = {};
 	$scope.object = {};
@@ -67,6 +70,8 @@ angular.module('newApp')
 	
 	$scope.topRuler = new fabric.Canvas('top-ruler');
 	$scope.leftRuler = new fabric.Canvas('left-ruler');
+	$scope.loading = false;
+	$scope.waitingMessage = "";
 	
 	var main = document.getElementById("play_board");
 	//COMENTADO TOM 20180324 var zoom = document.getElementById("zoom");
@@ -97,6 +102,7 @@ angular.module('newApp')
 		console.log("asd tom carga todas las fuentes, de la campaña y de la compañia ");
 
 	})
+
 	
 	
 	var accepti = ".png,.jpg";
@@ -300,11 +306,76 @@ angular.module('newApp')
 		
 		$scope.leftRuler.setDimensions({width: 20, height: parseInt($scope.newMaterialChange.height_small) });
 		
+		var gridOptions = {width: parseInt($scope.newMaterialChange.width_small), 
+						   height: parseInt($scope.newMaterialChange.height_small), 
+						   distance: 10};
+		
+		if($scope.showGrid)	{
+			$scope.addBackgroundGrid(gridOptions);
+		}
 		
 		$scope.factory.canvas.deactivateAll().renderAll();
 		$scope.factory.canvas.deactivateAll().renderAll();
 		
 		$scope.redrawRulers();
+	}
+	
+	$scope.addBackgroundGrid = function(options) {
+		
+		gridLen = options.width / options.distance;
+		gridHeight = options.height / options.distance;
+		
+		lineStyle = {
+          stroke: '#ebebeb',
+          strokeWidth: 1,
+          selectable: false
+        }
+		
+		for (var i = 0; i < gridHeight; i++) {
+			
+			var distance   = i * options.distance;
+			horizontal = new fabric.Line([ 0, distance, options.width, distance], lineStyle);
+			$scope.gridElements.push(horizontal);
+			$scope.factory.canvas.add(horizontal);
+			
+			if(i%5 === 0){
+				horizontal.set({stroke: '#cccccc'});
+			}
+		}
+		
+		for (var i = 0; i < gridLen; i++) {
+			
+			var distance   = i * options.distance;
+			vertical = new fabric.Line([ distance, 0, distance, options.height], lineStyle);
+			$scope.gridElements.push(vertical);
+			$scope.factory.canvas.add(vertical);
+			
+			if(i%5 === 0){
+				vertical.set({stroke: '#cccccc'});
+		  }
+		}
+	}
+	
+	$scope.toggleGrid = function() {
+	
+		if($scope.showGrid) {
+	  
+			for (let i = 0; i < $scope.gridElements.length; i++) {
+				$scope.factory.canvas.remove($scope.gridElements[i]);
+			}
+			
+			$scope.showGrid = false;
+		
+		} else {
+		
+			for (let i = 0; i < $scope.gridElements.length; i++) {
+				$scope.factory.canvas.add($scope.gridElements[i]);
+				$scope.factory.canvas.sendToBack($scope.gridElements[i]);
+			}
+			
+			$scope.showGrid = true;
+		}
+	  
 	}
 	
 	$scope.setTransparent = function(){
@@ -427,45 +498,70 @@ angular.module('newApp')
 			})
 			
 			$scope.applyFont2 = function(font){
-				console.log("asd tom22 applyfont " + font.name);
+				//console.log("asd tom22 applyfont " + font.name);
 				
 				var activeObject = $scope.factory.canvas.getActiveObject();
+				var style = { };
+				
 				$scope.currentFont = activeObject.fontFamily;
 				$scope.currentFontSize = activeObject.fontSize;
-	
-				activeObject.fontFamily = font.name;
+					
+				if (activeObject.setSelectionStyles && activeObject.isEditing) {
+					
+					style["fontFamily"] = font.name;
+					activeObject.setSelectionStyles(style);
+				} else {
+					activeObject.fontFamily = font.name;
+				}
 				$scope.factory.canvas.renderAll();
 		
 			}
 			
-			$scope.unApplyFont2 = function() {
+			/*$scope.unApplyFont2 = function() {
 				
 				var activeObject = $scope.factory.canvas.getActiveObject();
-				activeObject.fontFamily = $scope.currentFont;
+				var style = { };
+				
+				if (activeObject.setSelectionStyles && activeObject.isEditing) {
+					
+					style["fontFamily"] = $scope.currentFont;
+					activeObject.setSelectionStyles(style);
+				} else {
+					activeObject.fontFamily = $scope.currentFont;
+				}
+				
 				$scope.factory.canvas.renderAll();
-			}
+			}*/
 			
-			$scope.unApplyFont2 = function() {
+			/*$scope.unApplyFontSize2 = function() {
 				
 				var activeObject = $scope.factory.canvas.getActiveObject();
 				activeObject.fontSize = $scope.currentFontSize;
 				$scope.factory.canvas.renderAll();
-			}
+			}*/
 			
 			$scope.applyFontSize22 = function(size) {
 				
 				var activeObject = $scope.factory.canvas.getActiveObject();
+				var style = { };
+				
 				$scope.currentFontSize = activeObject.fontSize;
 				
-				console.log("asd tom22 apply size " + size + " " + activeObject.fontFamily + " family 1 = " + $scope.fontsDropdown[0].name);
+				//console.log("asd tom22 apply size " + size + " " + activeObject.fontFamily + " family 1 = " + $scope.fontsDropdown[0].name);
 				
 				if( typeof activeObject.fontFamily == 'undefined' || activeObject.fontFamily == "" || activeObject.fontFamily == "Allerta+Stencil") {
 					
 					activeObject.fontFamily = $scope.fontsDropdown[0].name;
 				}
 				
+				if (activeObject.setSelectionStyles && activeObject.isEditing) {
+					
+					style["fontSize"] = size;
+					activeObject.setSelectionStyles(style);
+				} else {
+					activeObject.fontSize = size;
+				}
 				
-				activeObject.fontSize = size;
 				$scope.factory.canvas.renderAll();
 				$scope.factory.canvas.renderAll();
 		
@@ -778,7 +874,15 @@ angular.module('newApp')
 		  $scope.isObjectSelected = true;
 		  $scope.canvasTarget = false;
 		  var activeObject = $scope.factory.canvas.getActiveObject();
-		  console.log("asd tom crop activeObject.id = " + activeObject.id);
+		  
+		  
+		  if (typeof activeObject.id == 'undefined') {
+			  
+			  activeObject.id = activeObject.get('type') + $scope.getRandomSpan();
+		  }
+		  
+		  console.log("asd tom crop activeObject.id = " + activeObject.get('type'));
+		  
 		  if(activeObject.id.indexOf("circle") !== -1 || activeObject.id.indexOf("triangle") !== -1
 				|| activeObject.id.indexOf("rect") !== -1 || activeObject.id.indexOf("text") !== -1
 				|| activeObject.id.indexOf("line") !== -1){
@@ -807,14 +911,26 @@ angular.module('newApp')
 	  
 	  $scope.changeFormColor = function(pal){
 			var activeObject = $scope.factory.canvas.getActiveObject();
-			console.log(activeObject.type);
-			if(activeObject.type === "circle" || activeObject.type === "triangle" 
-				|| activeObject.type === "rect" || activeObject.type === "i-text"){
-				activeObject.setFill(pal.color);	
-			}
+			var style = {};
+			//console.log(activeObject.type);
 			
-			if(activeObject.type === "line"){
+			if(activeObject.type === "circle" || activeObject.type === "triangle" 
+				|| activeObject.type === "rect"){
+				activeObject.setFill(pal.color);	
+			} else if(activeObject.type === "line"){
 				activeObject.setStroke(pal.color);	
+			} else if (activeObject.type === "textbox") {
+				
+				if (activeObject.setSelectionStyles && activeObject.isEditing) {
+						console.log("parcial");
+					style["fill"] = pal.color;
+					activeObject.setSelectionStyles(style);
+				} else {
+					
+					activeObject.setFill(pal.color);
+				}
+				
+				
 			}
 			// $scope.formSelected = false;
 			// $scope.factory.canvas.deactivateAll().renderAll();
@@ -827,45 +943,38 @@ angular.module('newApp')
 	  };
 		  
 	  $scope.exportPDF = function(name) {
-		 $scope.factory.canvas.deactivateAll().renderAll();
-		 $scope.factory.canvas.setZoom(1);
-		 console.log($scope.factory.canvas);
-		 console.log($scope.newMaterialChange);
-		 $scope.savingCanvasWidth = $scope.factory.canvas.width;
-		 $scope.savingCanvasHeight = $scope.factory.canvas.height;
-		 console.log($scope.savingCanvasWidth);
-		 console.log($scope.savingCanvasHeight);
-		 $scope.factory.canvas.setDimensions({width: parseInt($scope.newMaterialChange.width), height: parseInt($scope.newMaterialChange.height)});
-		 var imgData = $scope.factory.canvas.toDataURL({       format: 'png'   });
-		 // download($scope.factory.canvas.toDataURL({       format: 'png'   }), 'wizad_design.png');
-		 $scope.factory.canvas.setDimensions({width: parseInt($scope.savingCanvasWidth), height: parseInt($scope.savingCanvasHeight)});
-		 var pdf = new jsPDF();
-		 pdf.addImage(imgData, 'JPEG', 0, 0);
-		 var download = document.getElementById('download');
-		 pdf.save("download.pdf");
-
+		previous_showgrid = $scope.showGrid;
+		$scope.showGrid = true;
+		$scope.toggleGrid();
+		
+		$scope.factory.canvas.deactivateAll().renderAll();
+		$scope.factory.canvas.setZoom(1);
+		console.log($scope.factory.canvas);
+		console.log($scope.newMaterialChange);
+		$scope.savingCanvasWidth = $scope.factory.canvas.width;
+		$scope.savingCanvasHeight = $scope.factory.canvas.height;
+		console.log($scope.savingCanvasWidth);
+		console.log($scope.savingCanvasHeight);
+		$scope.factory.canvas.setDimensions({width: parseInt($scope.newMaterialChange.width), height: parseInt($scope.newMaterialChange.height)});
+		var imgData = $scope.factory.canvas.toDataURL({       format: 'png'   });
+		// download($scope.factory.canvas.toDataURL({       format: 'png'   }), 'wizad_design.png');
+		$scope.factory.canvas.setDimensions({width: parseInt($scope.savingCanvasWidth), height: parseInt($scope.savingCanvasHeight)});
+		var pdf = new jsPDF();
+		pdf.addImage(imgData, 'JPEG', 0, 0);
+		var download = document.getElementById('download');
+		pdf.save("download.pdf");
+		
+		$scope.showGrid = !previous_showgrid;
+		$scope.toggleGrid();		
 	 }
+	 
 	 $scope.exportPNG = function(name) {
 
-		 // $scope.factory.canvas.deactivateAll().renderAll();
-		 // $scope.factory.canvas.setZoom(1);
-		 // console.log($scope.factory.canvas);
-		 // console.log($scope.newMaterialChange);
-		 // $scope.savingCanvasWidth = $scope.factory.canvas.width;
-		 // $scope.savingCanvasHeight = $scope.factory.canvas.height;
-		 // console.log($scope.savingCanvasWidth);
-		 // console.log($scope.savingCanvasHeight);
-		 // $scope.factory.canvas.setDimensions({width: parseInt($scope.newMaterialChange.width), height: parseInt($scope.newMaterialChange.height)});
-		 // var imgData = $scope.factory.canvas.toDataURL({       format: 'png'   });
-		 // download($scope.factory.canvas.toDataURL({       format: 'png'   }), 'wizad_design.png');
-		 // $scope.factory.canvas.setDimensions({width: parseInt($scope.savingCanvasWidth), height: parseInt($scope.savingCanvasHeight)});
-		 
-		 // $scope.factory.canvas.deactivateAll().renderAll();
-		 // $scope.factory.canvas.setZoom(1);
-		 // $scope.savingCanvasWidth = $scope.factory.canvas.width;
-		 // $scope.savingCanvasHeight = $scope.factory.canvas.height;
+		previous_showgrid = $scope.showGrid;
+		$scope.showGrid = true;
+		$scope.toggleGrid();
 
-         fabric.devicePixelRatio = 1;
+        fabric.devicePixelRatio = 1;
 		 
 		 $("#hero_container").css("width", $scope.newMaterialChange.width+"px");
 		 $("#hero_container").css("height", $scope.newMaterialChange.height+"px");
@@ -925,6 +1034,9 @@ angular.module('newApp')
 			}
 			$scope.factory.canvas.renderAll();
 			$scope.factory.canvas.calcOffset();
+		
+		$scope.showGrid = !previous_showgrid;
+		$scope.toggleGrid();
 
 	 }
 	  // $scope.changeFormColor = function(pal){
@@ -1038,7 +1150,8 @@ angular.module('newApp')
 				
 				var topLine = new fabric.Line([i, 10, i, 20], {
 				  stroke: 'black',
-				  strokeWidth: 1
+				  strokeWidth: 1,
+				  selectable: false
 				});
 				
 				$scope.topRuler.add(topLine);
@@ -1047,7 +1160,8 @@ angular.module('newApp')
 			for (i = 0; i < $scope.factory.canvas.height; i += (10 * zoomLevel)) {	
 				var leftLine = new fabric.Line([10, i, 20, i], {
 				  stroke: 'black',
-				  strokeWidth: 1
+				  strokeWidth: 1,
+				  selectable: false
 				});
 				
 				$scope.leftRuler.add(leftLine);
@@ -1058,7 +1172,8 @@ angular.module('newApp')
 				var text = new fabric.Text((Math.round(i / zoomLevel)).toString(), {
 					left: i,
 				  top: 0,
-				  fontSize: 8
+				  fontSize: 8,
+				  selectable: false
 				});
 				$scope.topRuler.add(text);
 			}
@@ -1069,7 +1184,8 @@ angular.module('newApp')
 				var text = new fabric.Text((Math.round(i / zoomLevel)).toString(), {
 					top: i,
 				  left: 0,
-				  fontSize: 8
+				  fontSize: 8,
+				  selectable: false
 				});
 				$scope.leftRuler.add(text);
 			}
@@ -1193,7 +1309,7 @@ angular.module('newApp')
 			
 			
 			var fontFamily = $scope.fontsDropdown[0].name;
-			var textSample = new fabric.IText(text, {
+			var textSample = new fabric.Textbox(text, {
 			  left: 0,
 			  top: 0,
 			  fontFamily: fontFamily,
@@ -1206,6 +1322,7 @@ angular.module('newApp')
 			  hasRotatingPoint: true,
 			  id : random
 			});
+			
 			$scope.factory.canvas.add(textSample);
 			//$scope.factory.canvas.item(canvas.item.length - 1).hasRotatingPoint = true;
 			$scope.factory.canvas.setActiveObject(textSample);
@@ -1213,6 +1330,9 @@ angular.module('newApp')
 			$scope.factory.canvas.bringToFront(rectSecondObj);
 		};
 
+
+
+		
 	  //paint the canvas
 	  $scope.paintBrush = function () {
 		alert("Sorry :( not yet implemented...");
@@ -1443,36 +1563,38 @@ angular.module('newApp')
 	}
 		
 	$scope.saving = function() {
+		$scope.loading = true;
+		$scope.waitingMessage = "Guardando";
 		
-		var content = JSON.stringify($scope.factory.canvas);
-		console.log("asd tom guardando " + content);
-		//var data = $scope.encode( content );
-		var data = content;
+		$scope.oldshowGrid = $scope.showGrid;
+		$scope.showGrid = true;
+		$scope.toggleGrid();
 		
-		var blob = new Blob( [ data ], {
-			type: 'application/octet-stream'
-		});
+		generalService.SaveWizFile($scope.factory.canvas)
+		.then(function(data) {
+			
+			var element = document.createElement('a');
+			element.setAttribute('href', data);
+			element.setAttribute('download', "archivo.wiz");
+			element.style.display = 'none';
+			document.body.appendChild(element);
+			element.click();
+			document.body.removeChild(element);
+			$scope.loading = false;
+			
+			$scope.showGrid = !$scope.oldshowGrid;
+			$scope.toggleGrid();
+			
+		}, function(error){
+			
+			alert('Error al guardar. Mensaje de error: ' + error);
+			$scope.loading = false;
+		})
 		
-		var url = URL.createObjectURL( blob );
-	
-		var element = document.createElement('a');
-		element.setAttribute('href', url);
-		element.setAttribute('download', "archivo.wiz");
-		element.style.display = 'none';
-		document.body.appendChild(element);
-		element.click();
-		document.body.removeChild(element);
-		
-		console.log("asd tom guardando " + content);
+		//console.log("asd tom guardando " + content);
 	}
 	
-	$scope.encode = function( s ) {
-		var out = [];
-		for ( var i = 0; i < s.length; i++ ) {
-			out[i] = s.charCodeAt(i);
-		}
-		return new Uint8Array( out );
-	}
+	
 	
 	$scope.opening = function() {
 		
@@ -1483,14 +1605,25 @@ angular.module('newApp')
 	}
 	
 	$scope.loadingFileIntoCanvas = function(file) {
-		
+		$scope.loading = true;
+		$scope.waitingMessage = "Abriendo archivo";
 		generalService.ReadWizFile(file)
 		.then(function(data) {
-			console.log(data);
-			$scope.factory.canvas.loadFromJSON(data);
-			$scope.factory.canvas.renderAll();
+			
+			
+			$scope.factory.canvas.clear();			
+			$scope.factory.canvas.loadFromJSON(data);		
+			
+			$timeout( function(){
+				$scope.factory.canvas.renderAll();
+			}, 1000 );
+			$scope.loading = false;
 			
 		})
+		
+		
+		
+		
 	}
 	
 	
@@ -1510,7 +1643,7 @@ angular.module('newApp')
 				$scope.alertClass = "alert alert-success";
 				$scope.message = data.success.msg;
 				$scope.alertShow = true;
-				console.log(data.success.file);
+				//console.log(data.success.file);
 				$scope.loadingFileIntoCanvas(data.success.file);
 			} else {
 				
@@ -1525,5 +1658,38 @@ angular.module('newApp')
 		})
 	}
 	
+	$scope.creatingNewFile = function() {
+		var message = "Al crear nuevo documento se perderán los cambios realizados hasta el momento. ¿Desea continuar?";
+		var modalHtml = '<div class="modal-body">' + message + '</div>';
+		modalHtml += '<div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Aceptar</button><button class="btn btn-warning" ng-click="cancel()">Cancelar</button></div>';
+
+		var modalInstance = $modal.open({
+			template: modalHtml,
+			controller: ModalInstanceCtrl
+		});
+
+		modalInstance.result.then(function() {
+			reallyNew();
+		});
 		
+	}
+	
+	reallyNew = function(item) {
+		var grid = $scope.showGrid;
+		$scope.factory.canvas.clear();
+		
+		$scope.showGrid = !grid;
+		$scope.toggleGrid();
+	}
+	
+	var ModalInstanceCtrl = function($scope, $modalInstance) {
+		$scope.ok = function() {
+			$modalInstance.close();
+		};
+
+		$scope.cancel = function() {
+			$modalInstance.dismiss('cancel');
+		};
+	}
+	
   });

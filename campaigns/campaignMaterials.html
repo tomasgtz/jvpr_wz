@@ -12,6 +12,7 @@
     
 <div class="row">
 		<div ng-class="alertClass" ng-show="alertShow">
+			<a class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
 			<h4 class="alert-title">¡Alerta!</h4>
 			<p>{{message}}</p>
 		</div>
@@ -44,6 +45,16 @@
 								<button ng-if="factory.canvas.getZoom() != 1" style="width: 58px; padding: 0; background-color: #5DB6E6;" ng-click="lessZoom()" class="btn btn-embossed btn-primary m-r-10">-Zoom</button> -->
 								<!-- COMENTADO POR TOM 20180325 <button ng-if="!zoomActivated" ng-click="ZoomStatus()" style="width: 130px; padding: 0; background-color: #5DB6E6;" class="btn btn-embossed btn-primary m-r-10">Activar Zoom</button>
 								<button ng-if="zoomActivated" ng-click="ZoomStatus()" style="width: 130px; padding: 0;" class="btn btn-embossed btn-warning m-r-10">Desactivar Zoom</button>-->
+							</li>
+							<li>
+								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="creatingNewFile()"><img src="images/utils/new32x32.png"></button>
+							</li>
+							<li>
+								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="opening()"><img src="images/utils/open32x32.png"></button>
+								<form enctype="multipart/form-data" id="loadWiz" action="uploadWiz.php" method="post"><input id="openWiz" name="wizFile" type="file" style="display: none" ng-model="uploadFileWiz" ng-change="sendingFile()"/></form>
+							</li>
+							<li>
+								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="saving()"><img src="images/utils/save32x32.png"></button>
 							</li>
 							<li>
 								<button data-dismiss="modal" style="padding: 1px 1px 1px 1px; " ng-show="isObjectSelected" ng-click="deleteSelectedObject()" class="btn btn-xs btn-danger"><img src="images/utils/delete_red32x32.png" ></button>
@@ -94,11 +105,9 @@
 								<button style="z-index:200; " class="btn btn-xs btn-default" data-toggle="modal" data-target="#download-formats" ng-show="isDownloadable()"><img src="images/utils/descargar32x32.png"></button>
 							</li>
 							<li>
-								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="opening()"><img src="images/utils/open32x32.png"><form enctype="multipart/form-data" id="loadWiz" action="uploadWiz.php" method="post"><input id="openWiz" name="wizFile" type="file" style="display: none" ng-model="uploadFileWiz" ng-change="sendingFile()"/></form></button>
+								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="toggleGrid()"><img src="images/utils/grid32x32.png"></button>
 							</li>
-							<li>
-								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="saving()"><img src="images/utils/save32x32.png"></button>
-							</li>
+							
 							
 						</ul>
 					</div>
@@ -128,7 +137,9 @@
 							</div>		
 						</li>
 				</div> -->
-			
+						<div ng-show="loading">  
+							<img id="loadingSpinner" src="../images/loading.gif" width="30px" height="30px"/> <p>{{waitingMessage}}</p>
+						</div>
 				
 				
 						<div id="hero_container" style="position:static; margin-top: 20px; " >
@@ -137,12 +148,12 @@
 									<table style="border-collapse: collapse;">
 										<tr>
 											<td>&nbsp;</td>
-											<td><canvas id="top-ruler" width="600" height="20"/></td>
+											<td><canvas id="top-ruler" width="600" height="20" style="box-shadow: 10px 0px 20px #888888"/></td>
 										</tr>
 										<tr>
-											<td><canvas id="left-ruler" width="20" height="400"/></td>
+											<td><canvas id="left-ruler" width="20" height="400" style="box-shadow: 0px 10px 20px #888888"/></td>
 											<td style="padding: 1px; border-collapse: collapse;" valign="top">
-												<canvas id="play_board" style="border: 1px solid black;"/>
+												<canvas id="play_board" style="border: 1px solid black; box-shadow: 5px 10px 20px #888888"/>
 												<!-- <canvas id="zoom" width="400" height="200" style="position:absolute; top:0; left:0; display:none"></canvas>-->
 											</td>
 										</tr>
@@ -393,7 +404,8 @@
 											</div>
 										</div>
 										<div class="row">
-											<div class="col-sm-12" ng-class="alertExpiredClass" ng-show="alertExpiredShow">
+											<div class="col-sm-12 alert" ng-class="alertExpiredClass" ng-show="alertExpiredShow">
+												<a class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
 												<h4 class="alert-title">¡Alerta!</h4>
 												<p>{{alertExpiredMessage}}</p>
 											</div>
@@ -433,15 +445,16 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-sm-12" ng-class="alertExpiredClass" ng-show="alertExpiredShow">
+													<div class="col-sm-12 alert" ng-class="alertExpiredClass" ng-show="alertExpiredShow">
+														<a class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
 														<h4 class="alert-title">¡Alerta!</h4>
 														<p>{{alertExpiredMessage}}</p>
 													</div>
 												</div>
-												<input colorpicker colorpicker-position="bottom" type="text" ng-model="your_model" style="width: 90px;" />
+												<!--<input colorpicker colorpicker-position="bottom" type="text" ng-model="your_model" style="width: 90px;" />
 												<button ng-click="newPalette(your_model)" type="button" class="btn btn-sm btn-primary">
 												<i class="fa fa-plus-square"></i>
-												</button>
+												</button>-->
 											</div>
 										</div>
 										
@@ -460,7 +473,7 @@
 														<span class="caret"></span>
 													</button>
 													<ul class="dropdown-menu" role="menu" style='height:180px; overflow: scroll;'>
-														<li ng-repeat="x in fontsDropdown" ng-click="applyFont2(x)" ng-click="applyFont2(x)" ng-mouseover="applyFont2(x)"  ng-mouseleave="unApplyFont2()"><h3 style="font-family: {{x.name}}">{{x.name}}</h3></li>
+														<li ng-repeat="x in fontsDropdown" ng-click="applyFont2(x)" ng-mouseover="applyFont2(x)"  ><h3 style="font-family: {{x.name}}">{{x.name}}</h3></li>
 													</ul>
 												</div>
 												<div class="btn-group" >

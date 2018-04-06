@@ -2226,9 +2226,44 @@ angular.module('newApp').service('generalService', function($http,$q){
 			return promise;
 		},
 		
+		SaveWizFile : function(canvas) {
+	
+			var defered = $q.defer();
+			var promise = defered.promise;
+			
+			function encode( s ) {
+				var out = [];
+				for ( var i = 0; i < s.length; i++ ) {
+					out[i] = s.charCodeAt(i);
+				}
+				return new Uint8Array( out );
+			}
+			
+			try {
+	
+				var content = JSON.stringify(canvas);
+				//console.log("asd tom guardando " + content);
+				var data = encode( content );
+				var data = content;
+				
+				var blob = new Blob( [ data ], {
+					type: 'application/octet-stream'
+				});
+				
+				var url = URL.createObjectURL( blob );
+				
+				defered.resolve(url);
+			} catch(error) { 
+				defered.reject(error.message)
+			}
+			
+			return promise;
+		},
+		
+		
 		UploadWizFile : function(file){
 			
-			console.log(file);
+			//console.log(file);
 			var defered = $q.defer();
 			var promise = defered.promise;
 			
@@ -2249,6 +2284,7 @@ angular.module('newApp').service('generalService', function($http,$q){
 			.error(function(data){
 				defered.reject(err)
 			})
+			
 			return promise;
 			
 		},
