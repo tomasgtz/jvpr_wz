@@ -473,7 +473,7 @@ angular.module('newApp')
 			}
 			
 			
-			campaignService.getMaterials(params)
+			campaignService.GMaterialsCampaign(params)
 			.then(function(data) {
 				$scope.materialArray = data;
 				for (var i in $scope.materialArray){
