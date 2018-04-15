@@ -1,6 +1,6 @@
 
 var webServiceUrl = 'https://empresas.wizad.mx/api/serviciosWizad.php/';
-var host		  = 'https://localhost/wizad/empresas/uploads/'
+var host		  = 'https://empresas.wizad.mx/uploads/'
 
 angular.module('newApp').service('userService', function($http,$q){
 	
@@ -2278,7 +2278,6 @@ angular.module('newApp').service('generalService', function($http,$q){
 				if(data[0] !== undefined){
 					
 				}
-				
 				defered.resolve(data);		
 			})
 			.error(function(data){
@@ -2296,7 +2295,8 @@ angular.module('newApp').service('generalService', function($http,$q){
 			
 			$http({
 			method: 'GET',
-			url: host + 'wizads/' + file,
+			/*url: host + 'wizads/' + file,*/
+			url: './uploads/wizads/' + file,
 			headers: {'Content-Type': undefined}
 
 			})
@@ -2304,7 +2304,7 @@ angular.module('newApp').service('generalService', function($http,$q){
 				if(data[0] !== undefined){
 					
 				}
-				
+				console.log("tom cargando archivo" + data);
 				defered.resolve(data);		
 			})
 			.error(function(data){
@@ -2615,7 +2615,7 @@ angular.module('newApp').controller('mainCtrl',
 							userService.currentUser()
 							.then(function(data) {
 								$scope.currentUser = data;
-								console.log($scope.currentUser);
+								//console.log($scope.currentUser);
 								
 								
 								var payload = {

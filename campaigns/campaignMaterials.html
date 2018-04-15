@@ -47,34 +47,34 @@
 								<button ng-if="zoomActivated" ng-click="ZoomStatus()" style="width: 130px; padding: 0;" class="btn btn-embossed btn-warning m-r-10">Desactivar Zoom</button>-->
 							</li>
 							<li>
-								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="creatingNewFile()"><img src="images/utils/new32x32.png"></button>
+								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="creatingNewFile()"><img src="images/utils/{{icon_folder}}/new32x32.png"></button>
 							</li>
 							<li>
-								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="opening()"><img src="images/utils/open32x32.png"></button>
+								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="opening()"><img src="images/utils/{{icon_folder}}/open32x32.png"></button>
 								<form enctype="multipart/form-data" id="loadWiz" action="uploadWiz.php" method="post"><input id="openWiz" name="wizFile" type="file" style="display: none" ng-model="uploadFileWiz" ng-change="sendingFile()"/></form>
 							</li>
 							<li>
-								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="saving()"><img src="images/utils/save32x32.png"></button>
+								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="saving()"><img src="images/utils/{{icon_folder}}/save32x32.png"></button>
 							</li>
 							<li>
-								<button data-dismiss="modal" style="padding: 1px 1px 1px 1px; " ng-show="isObjectSelected" ng-click="deleteSelectedObject()" class="btn btn-xs btn-danger"><img src="images/utils/delete_red32x32.png" ></button>
+								<button data-dismiss="modal" style="padding: 1px 1px 1px 1px; " ng-show="isObjectSelected" ng-click="deleteSelectedObject()" class="btn btn-xs btn-danger"><img src="images/utils/{{icon_folder}}/delete_red32x32.png" ></button>
 							</li>
 							<li> 
-								<button data-toggle="modal" data-target="#modal-canvasoptions" ng-click="canvasIsTargeted()" class="btn btn-xs btn-default"><img src="images/utils/lienzo32x32.png" ></button>
+								<button data-toggle="modal" data-target="#modal-canvasoptions" ng-click="canvasIsTargeted()" class="btn btn-xs btn-default"><img src="images/utils/{{icon_folder}}/lienzo32x32.png" ></button>
 							</li>
 							<li> 
-								<button data-toggle="modal" data-target="#modal-images" class="btn btn-xs btn-default"><img src="images/utils/gallery32x32.png" ></button>
+								<button data-toggle="modal" data-target="#modal-images" class="btn btn-xs btn-default"><img src="images/utils/{{icon_folder}}/gallery32x32.png" ></button>
 							</li>
 							<li> 
-								<button ng-click="addText()" class="btn btn-xs btn-default"> <img src="images/utils/pencil32x32.png" ></button>
+								<button ng-click="addText()" class="btn btn-xs btn-default"> <img src="images/utils/{{icon_folder}}/pencil32x32.png" ></button>
 							</li>
 							<li> 
-								<button data-toggle="modal" data-target="#modal-phrases" ng-click="addPhrase()" class="btn btn-xs btn-default"><img src="images/utils/textlist32x32.png" ></button>
+								<button data-toggle="modal" data-target="#modal-phrases" ng-click="addPhrase()" class="btn btn-xs btn-default"><img src="images/utils/{{icon_folder}}/textlist32x32.png" ></button>
 							</li>
 
 							<li>
 								<div class="btn-group fixBtnGroup">
-								  <button class="btn btn-default btn-xs" data-toggle="dropdown" aria-expanded="false"><img src="images/utils/shapes32x32.png" ></button>
+								  <button class="btn btn-default btn-xs" data-toggle="dropdown" aria-expanded="false"><img src="images/utils/{{icon_folder}}/shapes32x32.png" ></button>
 								  <ul class="dropdown-menu">
 									<li>
 									  <button ng-click="addTriangle()" class="btn btn-xs btn-default"> <i style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);	" class="fa fa-play fa-3x"></i></button>
@@ -92,20 +92,20 @@
 								</div>		
 							</li>
 							<li> 
-								<button ng-show="!cropStarted && (formSelected || imageSelected)" class="btn btn-xs btn-embossed btn-blue"  ng-click="startCrop()"><img src="images/utils/crop32x32.png" ></button>
-								<button ng-show="cropStarted" class="btn btn-xs btn-default m-r-10"  ng-click="crop()"><img src="images/utils/applycrop32x32.png" ></button>
+								<button ng-show="!cropStarted && (formSelected || imageSelected)" class="btn btn-xs btn-embossed btn-blue"  ng-click="startCrop()"><img src="images/utils/{{icon_folder}}/crop32x32.png" ></button>
+								<button ng-show="cropStarted" class="btn btn-xs btn-default m-r-10"  ng-click="crop()"><img src="images/utils/{{icon_folder}}/applycrop32x32.png" ></button>
 							</li>
 							<li> 
-								<button ng-show="showFonts" data-toggle="modal" data-target="#modal-formato" class="btn btn-xs btn-default"><img src="images/utils/font32x32.png" ></button>
+								<button ng-show="showFonts" data-toggle="modal" data-target="#modal-formato" class="btn btn-xs btn-default"><img src="images/utils/{{icon_folder}}/font32x32.png" ></button>
 							</li>
 							<li> 
-								<button ng-show="formSelected" data-toggle="modal" data-target="#modal-formato" class="btn btn-xs btn-default"><img src="images/utils/color32x32.png" ></button>
+								<button ng-show="formSelected" data-toggle="modal" data-target="#modal-formato" class="btn btn-xs btn-default"><img src="images/utils/{{icon_folder}}/color32x32.png" ></button>
 							</li>
 							<li>
-								<button style="z-index:200; " class="btn btn-xs btn-default" data-toggle="modal" data-target="#download-formats" ng-show="isDownloadable()"><img src="images/utils/descargar32x32.png"></button>
+								<button style="z-index:200; " class="btn btn-xs btn-default" data-toggle="modal" data-target="#download-formats" ng-show="isDownloadable()"><img src="images/utils/{{icon_folder}}/descargar32x32.png"></button>
 							</li>
 							<li>
-								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="toggleGrid()"><img src="images/utils/grid32x32.png"></button>
+								<button style="z-index:200; " class="btn btn-xs btn-default" ng-click="toggleGrid()"><img src="images/utils/{{icon_folder}}/grid32x32.png"></button>
 							</li>
 							
 							

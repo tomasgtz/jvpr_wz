@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set ( 'America/Monterrey' );
+
 $ds = DIRECTORY_SEPARATOR;
 $storeFolder = 'uploads/wizads';
 $filename = date('YmdHis').'-'.rand(0,10000).'.wiz';
@@ -11,6 +13,7 @@ if (!empty($_FILES)) {
 		$targetFile =  $targetPath . $filename;
 
 		move_uploaded_file($tempFile, $targetFile);
+		chmod ( $targetFile , 0777 );
 		
 		echo json_encode(array(
 						'success' => array(

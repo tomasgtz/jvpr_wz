@@ -11,7 +11,7 @@ var urlHostEmpresas = 'https://localhost/wizad/empresas/';
  
 angular.module('newApp')
   .controller('campaignMaterialsCtrl', function ($scope,  ngDialog, $rootScope, $timeout, ngDragDrop, ImagesFactory, UtilsFactory, AppSettings, campaignService, objCampaign , $location, generalService, $modal) {
-
+	$scope.icon_folder = 'Opcion2';
 	$scope.CampaignSelected =  {
 
 				"id_campaign" 	: "",
@@ -54,6 +54,10 @@ angular.module('newApp')
 	$scope.cropStarted = false;
 	$scope.fontsSizeDropdown = [8,9,10,11,12,14,16,18,20,22,24,26,28,36,48,72];
 	$scope.gridElements = [];
+	$scope.clipToFunctions = [];
+	$scope.clipToFunctionsValues = [];
+	$scope.clipToFunctionsFcs = [];
+	
 	$scope.showGrid = true;
 	$scope.oldshowGrid = true;
 	
@@ -99,7 +103,7 @@ angular.module('newApp')
 	generalService.GFonts()
 	.then(function(data) {
 		$scope.fontsUploaded = data;
-		console.log("asd tom carga todas las fuentes, de la campaña y de la compañia ");
+		//console.log("asd tom carga todas las fuentes, de la campaña y de la compañia ");
 
 	})
 
@@ -135,7 +139,7 @@ angular.module('newApp')
   
 	$scope.modifyFont = function(){
 			
-		console.log("asd tom21 aplica la font " + $scope.myFontStack);
+		//console.log("asd tom21 aplica la font " + $scope.myFontStack);
 		var activeObject = $scope.factory.canvas.getActiveObject();
 		activeObject.fontFamily = $scope.myFontStack;
 		$scope.factory.canvas.renderAll();
@@ -199,7 +203,7 @@ angular.module('newApp')
 	}
 	
 	$scope.newPalette = function(newColor){
-		console.log("asd tom14 agregando color a la paleta " + newColor);
+		//console.log("asd tom14 agregando color a la paleta " + newColor);
 		$scope.your_model = "";
 		if(newColor === undefined || newColor === ""){
 			$scope.alertExpiredClass = "alert alert-warning";
@@ -286,13 +290,13 @@ angular.module('newApp')
 		$scope.widthMultiplier = $scope.canvasWidth / 800;
 		$scope.heightMultiplier = $scope.canvasHeight / 500;
 		
-		console.log("asd tom materialChange $scope.newMaterialChange.width_small = " + $scope.newMaterialChange.width_small);
+		//console.log("asd tom materialChange $scope.newMaterialChange.width_small = " + $scope.newMaterialChange.width_small);
 		
 		// se le suman el ancho de las reglas (20px) y 10px mas de tolerancia
 		const hc_width = parseInt($scope.newMaterialChange.width_small) + 20 + 10;
 		const hc_height = parseInt($scope.newMaterialChange.height_small) + 20 + 10;
 		
-		console.log("asd tom23 establece ancho de hero_container = " + hc_width);
+		//console.log("asd tom23 establece ancho de hero_container = " + hc_width);
 		
 		$("#hero_container").css("width", hc_width +"px");
 		$("#hero_container").css("height", hc_height +"px");
@@ -406,7 +410,7 @@ angular.module('newApp')
 		$scope.showImagesIdentity = 0;
 	}
 	$scope.seeFonts = function(){
-		console.log("onFonts");
+		//console.log("onFonts");
 		$scope.showFontsCampaign = 1;
 	}
 	$scope.hideFonts = function(){
@@ -424,9 +428,9 @@ angular.module('newApp')
 			$scope.CampaignSelected.status 		= data.status;	
 			$scope.CampaignSelected.autorization = data.download;		
 		
-			console.log("asd tom9 carga datos de campaña description= " + $scope.CampaignSelected.description);			
-			console.log("asd tom9 carga datos de campaña autorization= " + $scope.CampaignSelected.autorization);				
-			console.log("asd tom9 carga datos de campaña name= " + $scope.CampaignSelected.name);				
+			//console.log("asd tom9 carga datos de campaña description= " + $scope.CampaignSelected.description);			
+			//console.log("asd tom9 carga datos de campaña autorization= " + $scope.CampaignSelected.autorization);				
+			//console.log("asd tom9 carga datos de campaña name= " + $scope.CampaignSelected.name);				
 
 			var params = {
 				"campaign_p" : ""
@@ -475,7 +479,7 @@ angular.module('newApp')
 			campaignService.GFontsCampaign(params)
 			.then(function(data) {
 				$scope.fontArray = data;
-				console.log("asd tom18 carga fuentes de la campaña " + $scope.fontArray);
+				//console.log("asd tom18 carga fuentes de la campaña " + $scope.fontArray);
 				
 				$scope.fontsDropdown = [];
 		
@@ -581,7 +585,7 @@ angular.module('newApp')
 			.then(function(data) {
 				if(data.length>0){
 					$scope.phrasesArray = data;
-					console.log("asd tom11 carga textos " + $scope.phrasesArray);
+					//console.log("asd tom11 carga textos " + $scope.phrasesArray);
 					for (var i in $scope.phrasesArray){
 						var newPhrase   = { id_cgtext: '', date_up: '', date_update: '', fk_campaign: '', status: '', text: ''};
 						
@@ -703,7 +707,7 @@ angular.module('newApp')
 
 	  //Drag Drop Events Callbacks
 	  $scope.dragCallback = function (event) {
-		console.log("Dragging", event);
+		//console.log("Dragging", event);
 		var rectSecondObj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'name', 'overlayImage');
 		$scope.factory.canvas.bringToFront(rectSecondObj);
 	  };
@@ -716,11 +720,11 @@ angular.module('newApp')
 		  drop: true
 		};
 		$scope.dropImage(object, event);
-		console.log("Dropped", event);
+		//console.log("Dropped", event);
 	  };
 
 	  $scope.overCallback = function (event) {
-		console.log("Drag Over", event);
+		//console.log("Drag Over", event);
 	  };
 
 	  //Delete Sticker
@@ -754,9 +758,9 @@ angular.module('newApp')
 		
 		$scope.images.push(image);
 		// ImagesFactory.savePhotoImage(image);
-		console.log($scope.images);
-		console.log("preview");
-		console.log($scope.previewImages);
+		//console.log($scope.images);
+		//console.log("preview");
+		//console.log($scope.previewImages);
 		// UtilsFactory.resetUsedFileStorageSpace(); //Reset the $rootScope file storage for header data update
 		$scope.previewImages = [];
 		var sticker = {
@@ -881,7 +885,7 @@ angular.module('newApp')
 			  activeObject.id = activeObject.get('type') + $scope.getRandomSpan();
 		  }
 		  
-		  console.log("asd tom crop activeObject.id = " + activeObject.get('type'));
+		  //console.log("asd tom crop activeObject.id = " + activeObject.get('type'));
 		  
 		  if(activeObject.id.indexOf("circle") !== -1 || activeObject.id.indexOf("triangle") !== -1
 				|| activeObject.id.indexOf("rect") !== -1 || activeObject.id.indexOf("text") !== -1
@@ -922,7 +926,7 @@ angular.module('newApp')
 			} else if (activeObject.type === "textbox") {
 				
 				if (activeObject.setSelectionStyles && activeObject.isEditing) {
-						console.log("parcial");
+						//console.log("parcial");
 					style["fill"] = pal.color;
 					activeObject.setSelectionStyles(style);
 				} else {
@@ -949,12 +953,12 @@ angular.module('newApp')
 		
 		$scope.factory.canvas.deactivateAll().renderAll();
 		$scope.factory.canvas.setZoom(1);
-		console.log($scope.factory.canvas);
-		console.log($scope.newMaterialChange);
+		//console.log($scope.factory.canvas);
+		//console.log($scope.newMaterialChange);
 		$scope.savingCanvasWidth = $scope.factory.canvas.width;
 		$scope.savingCanvasHeight = $scope.factory.canvas.height;
-		console.log($scope.savingCanvasWidth);
-		console.log($scope.savingCanvasHeight);
+		//console.log($scope.savingCanvasWidth);
+		//console.log($scope.savingCanvasHeight);
 		$scope.factory.canvas.setDimensions({width: parseInt($scope.newMaterialChange.width), height: parseInt($scope.newMaterialChange.height)});
 		var imgData = $scope.factory.canvas.toDataURL({       format: 'png'   });
 		// download($scope.factory.canvas.toDataURL({       format: 'png'   }), 'wizad_design.png');
@@ -1059,7 +1063,7 @@ angular.module('newApp')
 		  var activeObject = $scope.factory.canvas.getActiveObject();
 		  activeObject.fontFamily = font.font;
 		  $scope.factory.canvas.renderAll();
-		  console.log(font.font);
+		  //console.log(font.font);
 		  // var text = "Escribe tu texto..";
 		  // var fontColor = $scope.paletteArray[0].color;
 		  // var textSample = new fabric.IText(text, {
@@ -1117,7 +1121,7 @@ angular.module('newApp')
 				strokeWidth: 5,
 				id: random
 			});
-			console.log("addline");
+			//console.log("addline");
 			$scope.factory.canvas.add(lineSample);
 			var rectSecondObj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'name', 'overlayImage');
 			$scope.factory.canvas.bringToFront(rectSecondObj);
@@ -1178,7 +1182,7 @@ angular.module('newApp')
 				$scope.topRuler.add(text);
 			}
 			
-			console.log($scope.factory.canvas.height);
+			//console.log($scope.factory.canvas.height);
 			// Numbers for left ruler
 			for (i = 0; i < $scope.factory.canvas.height;  i += (100 * zoomLevel)) {
 				var text = new fabric.Text((Math.round(i / zoomLevel)).toString(), {
@@ -1255,17 +1259,17 @@ angular.module('newApp')
 		
 		$scope.addText = function (textParam) {
 			 
-			console.log("asd tom13 agregando texto al canvas textParam = " + textParam);
+			//console.log("asd tom13 agregando texto al canvas textParam = " + textParam);
 			var random = $scope.getRandomSpan();
 			random = "text" + random;
 			var bkColor = $scope.factory.canvas.backgroundColor;
 	
-			console.log("asd tom13 agregando texto al canvas backgroundColor =" + bkColor);
+			//console.log("asd tom13 agregando texto al canvas backgroundColor =" + bkColor);
 			
 			var presetColor = 0;
 			var fontColor = "#000000";
 			var paletteSize = $scope.paletteArray.length;
-			console.log("asd tom15 paletteSize = " + paletteSize);
+			//console.log("asd tom15 paletteSize = " + paletteSize);
 			
 			if (paletteSize == 1) {
 				
@@ -1357,7 +1361,7 @@ angular.module('newApp')
 		
 		var random = $scope.getRandomSpan();
 		random = "circle" + random;
-		console.log("asd tom agrega circulo random" + random);
+		//console.log("asd tom agrega circulo random" + random);
 		var bkColor = $scope.factory.canvas.backgroundColor;
 		var presetColor = 0;
 		while(bkColor === $scope.paletteArray[presetColor].color  || bkColor === ""){
@@ -1466,23 +1470,23 @@ angular.module('newApp')
 	$scope.startCrop = function(){
 		$scope.cropStarted = true;
 		
-		
 		$scope.factory.canvas.remove($scope.el);
 		if($scope.factory.canvas.getActiveObject())
 		{
+			$scope.object = $scope.factory.canvas.getActiveObject();
 			
-		$scope.object=$scope.factory.canvas.getActiveObject();
-		
-		if($scope.lastActive !== $scope.object)
-		{console.log('different object');}	
-		else{console.log('same object');}
-		if ($scope.lastActive && $scope.lastActive !== $scope.object) 
-		{
-			$scope.lastActive.clipTo = null;
-			 
-		}
+			if($scope.lastActive !== $scope.object) {
+				//console.log('different object');
+			} else {
+				//console.log('same object');
+			}
 			
+			/*if ($scope.lastActive && $scope.lastActive !== $scope.object) {
+				$scope.lastActive.clipTo = null;
+			}*/	
 			
+			var random = $scope.getRandomSpan();
+			random = "rect" + random;
 			
 			$scope.el = new fabric.Rect
 			({
@@ -1496,7 +1500,8 @@ angular.module('newApp')
 				height: 1,
 				borderColor: '#36fd00',
 				cornerColor: 'green',
-				hasRotatingPoint:false
+				hasRotatingPoint:false,
+				id: random
 			});
 		
 			$scope.el.left=$scope.factory.canvas.getActiveObject().left;
@@ -1509,10 +1514,9 @@ angular.module('newApp')
 			
 			$scope.factory.canvas.add($scope.el);
 			$scope.factory.canvas.setActiveObject($scope.el);
-			for(var i=0; i<$("#layers li").size();i++)
-				{
-					$scope.factory.canvas.item(i).selectable= false;
-				}
+			for(var i=0; i<$("#layers li").size();i++) {
+				$scope.factory.canvas.item(i).selectable= false;
+			}
 		}
 		
 		else{
@@ -1521,28 +1525,43 @@ angular.module('newApp')
 	}
 		
 	$scope.crop = function(){
+		
 		$scope.cropStarted = false;
 		var left = $scope.el.left - $scope.object.left;
 		var top = $scope.el.top - $scope.object.top;
+		var scaleX = $scope.el.scaleX;
+		var scaleY = $scope.el.scaleY;
 		left *= 1;
 		top *= 1;
 		
 		var width = $scope.el.width * 1;
 		var height = $scope.el.height * 1;
-		$scope.object.clipTo = function (ctx) 
-		{
+		
+		$scope.clipToFunctionsValues.push(
+		
+			{
+				id: $scope.object.id,
+				width: width,
+				left: left,
+				height: height,
+				top: top,
+				scaleX: scaleX,
+				scaleY: scaleY
+			}
+		
+		);
+		var func = function (ctx) {
 			
-			ctx.rect(-($scope.el.width/2)+left, -($scope.el.height/2)+top, parseInt(width*$scope.el.scaleX), parseInt($scope.el.scaleY*height));
+			ctx.rect(-(width/2)+left, -(height/2)+top, parseInt(width*scaleX), parseInt(scaleY*height));
 			
-	 
 		}
 		
+		$scope.object.clipTo = func;
+		$scope.clipToFunctionsFcs.push({id: $scope.object.id, func: $scope.object.clipTo});
 		
-		
-		for(var i=0; i<$("#layers li").size();i++)
-			{
-				$scope.factory.canvas.item(i).selectable= true;
-			}
+		for(var i=0; i<$("#layers li").size();i++) {
+			$scope.factory.canvas.item(i).selectable= true;
+		}
 		disabled = true;
 	   
 		$scope.factory.canvas.remove($scope.factory.canvas.getActiveObject());
@@ -1569,6 +1588,7 @@ angular.module('newApp')
 		$scope.oldshowGrid = $scope.showGrid;
 		$scope.showGrid = true;
 		$scope.toggleGrid();
+		$scope.prepareClipToFunctions();
 		
 		generalService.SaveWizFile($scope.factory.canvas)
 		.then(function(data) {
@@ -1577,6 +1597,7 @@ angular.module('newApp')
 			element.setAttribute('href', data);
 			element.setAttribute('download', "archivo.wiz");
 			element.style.display = 'none';
+			$scope.fixClipToFunctions();
 			document.body.appendChild(element);
 			element.click();
 			document.body.removeChild(element);
@@ -1604,37 +1625,106 @@ angular.module('newApp')
 		
 	}
 	
+	$scope.prepareClipToFunctions = function() {
+		
+		for(i = 0; i < $scope.clipToFunctionsValues.length; i++) {
+			
+			objId = $scope.clipToFunctionsValues[i].id;
+			obj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'id', objId);
+			
+			var str = JSON.stringify( $scope.clipToFunctionsValues[i] );
+			obj.clipTo = str;
+		}
+		
+	}
+	
+	$scope.fixClipToFunctions = function() {
+		
+		for(i = 0; i < $scope.clipToFunctionsFcs.length; i++) {
+			
+			objId = $scope.clipToFunctionsFcs[i].id;
+			obj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'id', objId);
+			
+			obj.clipTo = $scope.clipToFunctionsFcs[i].func;
+			
+			
+		}
+	}
+	
+	$scope.removeClipToFunctions = function(data) {
+		
+		for(i = 0; i < data.objects.length; i++) {
+						
+			if( data.objects[i].clipTo && data.objects[i].clipTo !== "" ) {
+				
+				var props = JSON.parse(data.objects[i].clipTo);
+				
+				clipToF = {id: props.id, 
+						   func: data.objects[i].clipTo};
+				
+				$scope.clipToFunctions.push(clipToF);
+				data.objects[i].clipTo = null;
+				data.objects[i].id = props.id;
+				
+			}
+			
+		}
+		return data;
+	}
+	
+	$scope.restoreClipToFunctions = function() {
+		
+		for(i = 0; i < $scope.clipToFunctions.length; i++) {
+			
+			objId = $scope.clipToFunctions[i].id;
+			obj = $scope.findObjectWithPropertyValue($scope.factory.canvas, 'id', objId);
+			props = JSON.parse($scope.clipToFunctions[i].func);
+			
+			$scope.factory.canvas.setActiveObject(obj);
+			$scope.startCrop();
+			$scope.el.width = props.width;
+			$scope.el.left = props.left + obj.left;
+			$scope.el.height = props.height;
+			$scope.el.top = props.top + obj.top;
+			$scope.el.scaleX = props.scaleX;
+			$scope.el.scaleY = props.scaleY;
+			$scope.crop();
+			
+		}
+		
+	}
+	
 	$scope.loadingFileIntoCanvas = function(file) {
 		$scope.loading = true;
+		$scope.clipToFunctions = [];
+		$scope.clipToFunctionsValues = [];
+		$scope.clipToFunctionsFcs = [];
 		$scope.waitingMessage = "Abriendo archivo";
 		generalService.ReadWizFile(file)
 		.then(function(data) {
 			
-			
+			$scope.removeClipToFunctions(data);
 			$scope.factory.canvas.clear();			
 			$scope.factory.canvas.loadFromJSON(data);		
 			
 			$timeout( function(){
+				$scope.restoreClipToFunctions();
 				$scope.factory.canvas.renderAll();
+				
 			}, 1000 );
 			$scope.loading = false;
 			
 		})
-		
-		
-		
 		
 	}
 	
 	
 	$scope.sendingFile = function() {
 		
-		
 		var fdata = new FormData();
 		jQuery.each(jQuery('#openWiz')[0].files, function(i, file) {
 			fdata.append('wizFile', file);
 		});
-
 		
 		generalService.UploadWizFile(fdata)
 		.then(function(data) {
@@ -1643,7 +1733,6 @@ angular.module('newApp')
 				$scope.alertClass = "alert alert-success";
 				$scope.message = data.success.msg;
 				$scope.alertShow = true;
-				//console.log(data.success.file);
 				$scope.loadingFileIntoCanvas(data.success.file);
 			} else {
 				

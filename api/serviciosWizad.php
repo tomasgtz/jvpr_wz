@@ -55,9 +55,9 @@ $app->post(
 				$cn=new PDO($dsn, $user, $pass);
 				$cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 				try
-				{
-						$data = $cn->query("call uspGet_LoggedUser  ('$email_p', '$password_p');")->fetchAll(PDO::FETCH_ASSOC);
-						
+				{ 
+						$data = $cn->query("call uspGet_LoggedUser('$email_p', '$password_p');")->fetchAll(PDO::FETCH_ASSOC);
+					
 						echo json_encode($data);
 				}
 				
@@ -65,7 +65,6 @@ $app->post(
 						echo $e->getMessage();
 				}			
 				
-					
 			}
 );
 
